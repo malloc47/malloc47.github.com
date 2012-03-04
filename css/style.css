@@ -1,0 +1,150 @@
+/* Fonts */
+
+@font-face {
+    font-family: 'ExistenceStencilLight';
+    src: url('../font/Existence-StencilLight-webfont.eot');
+    src: url('../font/Existence-StencilLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/Existence-StencilLight-webfont.woff') format('woff'),
+         url('../font/Existence-StencilLight-webfont.ttf') format('truetype'),
+         url('../font/Existence-StencilLight-webfont.svg#ExistenceStencilLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GudeaRegular';
+    src: url('../font/Gudea-Regular-webfont.eot');
+    src: url('../font/Gudea-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/Gudea-Regular-webfont.woff') format('woff'),
+         url('../font/Gudea-Regular-webfont.ttf') format('truetype'),
+         url('../font/Gudea-Regular-webfont.svg#GudeaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GudeaItalic';
+    src: url('../font/Gudea-Italic-webfont.eot');
+    src: url('../font/Gudea-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/Gudea-Italic-webfont.woff') format('woff'),
+         url('../font/Gudea-Italic-webfont.ttf') format('truetype'),
+         url('../font/Gudea-Italic-webfont.svg#GudeaItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GudeaBold';
+    src: url('../font/Gudea-Bold-webfont.eot');
+    src: url('../font/Gudea-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/Gudea-Bold-webfont.woff') format('woff'),
+         url('../font/Gudea-Bold-webfont.ttf') format('truetype'),
+         url('../font/Gudea-Bold-webfont.svg#GudeaBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InconsolataMedium';
+    src: url('../font/Inconsolata-webfont.eot');
+    src: url('../font/Inconsolata-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/Inconsolata-webfont.woff') format('woff'),
+         url('../font/Inconsolata-webfont.ttf') format('truetype'),
+         url('../font/Inconsolata-webfont.svg#InconsolataMedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Main site components */
+body {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAQ0lEQVQYV2P8+untfwYo+Pb9O5jFxckJE2JghCkAScIkkNlgBcgCyKaBNDC+fvnkP7KRcLOBDJBGwgoIWkGUI/F5EwCz90Jp4ZBkJAAAAABJRU5ErkJggg==);
+    /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAQklEQVQYV2Pk4uL6zwAFXFycYNa3b99hQgyMMAUgSZgEMhusAFkA2TSQBkYREeH/yEbCzQYyQBoJKyBoBVGOxOdNAIsMLStImT48AAAAAElFTkSuQmCC); */
+    background-position: left top;
+    background-repeat: repeat;
+    font-size: 13pt;
+    font-family: 'GudeaRegular';
+}
+
+footer {
+    color: #FFFFFF;
+    background-color: #8A8A8F;
+    padding: 10px;
+}
+
+#main-header {
+    /* width: 940px; */
+    padding: 10px;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 30pt;
+    font-family: 'ExistenceStencilLight';
+}
+
+#container {
+    width: 960px;
+    margin: 0px auto;
+}
+
+/* Individual content elements */
+
+#contents {
+    color: #000000;
+    background-color: #FFFFFF;
+    padding: 0px 50px 0px 50px;
+    text-align: justify;
+    -moz-box-shadow:    0px 0px 10px 0px #ccc;
+    -webkit-box-shadow: 0px 0px 10px 0px #ccc;
+    box-shadow:         0px 0px 10px 0px #ccc;
+}
+
+.content {
+    border-bottom: 1px;
+    padding: 25px 100px 25px 100px;
+    border-style: dotted;
+}
+
+.content:first-child {
+   padding: 50px 0px 25px 0px;
+}
+
+.content:last-child {
+    border-style: none;
+}
+
+.content header+p:first-letter {
+    float: left;
+    /* color: #903;  */
+    font-size: 75px;
+    line-height: 60px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+}
+
+.content header {
+    -webkit-column-span:all;
+    column-span: all;
+    text-align: center;
+    font-size: 30pt;
+    font-family: 'ExistenceStencilLight';
+}
+
+.content p {
+    padding-bottom: 0.5em;
+}
+
+/* Content options */
+
+.columns {
+    -moz-column-count: 2;
+    -moz-column-gap: 50px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 50px;
+    column-count: 2;
+    column-gap: 50px;
+    padding: 25px 0px 25px 0px;
+}
+
+.left {
+    padding: 25px 150px 25px 0px;
+}
