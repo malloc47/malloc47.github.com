@@ -99,19 +99,23 @@ footer {
 
 .content {
     border-bottom: 1px;
-    padding: 25px 100px 25px 100px;
+    padding: 25px 0px 25px 0px;
     border-style: dotted;
 }
 
+.content-body {
+    padding: 25px 100px 25px 100px;
+}
+
 .content:first-child {
-   padding: 50px 0px 25px 0px;
+   padding-top: 50px;
 }
 
 .content:last-child {
     border-style: none;
 }
 
-.content header+p:first-letter {
+.content-body p:first-child:first-letter {
     float: left;
     /* color: #903;  */
     font-size: 75px;
@@ -122,8 +126,8 @@ footer {
 }
 
 .content header {
-    -webkit-column-span:all;
-    column-span: all;
+    /* -webkit-column-span:all; */
+    /* column-span: all; */
     text-align: center;
     font-size: 30pt;
     font-family: 'ExistenceStencilLight';
