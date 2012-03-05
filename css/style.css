@@ -69,6 +69,11 @@ footer {
     color: #FFFFFF;
     background-color: #8A8A8F;
     padding: 10px;
+    -moz-box-shadow:    0px 0px 10px 0px #ccc;
+    -webkit-box-shadow: 0px 0px 10px 0px #ccc;
+    box-shadow:         0px 0px 10px 0px #ccc;
+    text-align: center;
+    font-size: 12px;
 }
 
 #main-header {
@@ -81,34 +86,37 @@ footer {
 }
 
 #container {
-    width: 960px;
-    margin: 0px auto;
+    max-width: 720px;
+    padding: 15px;
+    margin: 10px auto;
 }
 
 /* Individual content elements */
 
 #contents {
     color: #000000;
-    background-color: #FFFFFF;
-    padding: 0px 50px 0px 50px;
+
+    /* padding: 0px 50px 0px 50px; */
     text-align: justify;
+
+}
+
+.content {
+    background-color: #FFFFFF;
+
+    padding: 25px 50px 25px 50px;
+    /* padding: 25px 0px 25px 0px; */
+    /* margin: 0px 50px 0px 50px; */
+    margin-bottom: 20px;
+    /* border-bottom: 1px; */
+    /* border-style: dotted; */
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
     box-shadow:         0px 0px 10px 0px #ccc;
 }
 
-.content {
-    border-bottom: 1px;
-    padding: 25px 0px 25px 0px;
-    border-style: dotted;
-}
-
 .content-body {
-    padding: 25px 100px 25px 100px;
-}
-
-.content:first-child {
-   padding-top: 50px;
+    /* padding: 25px 100px 25px 100px; */
 }
 
 .content:last-child {
@@ -133,10 +141,6 @@ footer {
     font-family: 'ExistenceStencilLight';
 }
 
-.content p {
-    padding-bottom: 0.5em;
-}
-
 /* Content options */
 
 .columns {
@@ -151,4 +155,92 @@ footer {
 
 .left {
     padding: 25px 150px 25px 0px;
+}
+
+/* navigation */
+
+nav {
+    float: center;
+    text-align: center;
+    font-family: 'InconsolataMedium';
+}
+
+nav ul {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+    -moz-box-shadow:    0px 0px 10px 0px #ccc;
+    -webkit-box-shadow: 0px 0px 10px 0px #ccc;
+    box-shadow:         0px 0px 10px 0px #ccc;
+}
+ 
+nav ul li { 
+    display: inline; 
+    border-left: 2px solid;
+    padding-left: 0.3em;
+}
+
+nav ol li { 
+    display: inline; 
+    border-left: 2px solid;
+    padding-left: 0.3em;
+}
+
+nav ul li:first-child {
+    border-left: 0px none;
+}
+
+/* content styles */
+
+.content>*>* {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.content p {
+}
+
+.content ul, ol{
+    margin-left: 3em;
+}
+
+.content ul {
+    list-style-type: circle;
+}
+
+.content ol {
+    list-style-type: decimal;
+}
+
+.content ol li, ul li {
+}
+
+.content em {
+    font-family: 'GudeaItalic';
+}
+
+.content strong {
+    font-family: 'GudeaBold';
+}
+
+.content code {
+    font-family: 'InconsolataMedium';
+    background-color: #EBE9E4;
+}
+
+.content pre {
+    margin-left:3em;
+    margin-right:3em;
+    background-color: #EBE9E4;
+}
+
+.content pre code {
+}
+
+.content blockquote {
+    margin-left: 2.5em;
+    border-left: 1px solid;
+    padding-left: 0.5em;
 }
