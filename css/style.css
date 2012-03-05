@@ -1,14 +1,15 @@
 /* Fonts */
 
 @font-face {
-    font-family: 'ExistenceStencilLight';
-    src: url('../font/Existence-StencilLight-webfont.eot');
-    src: url('../font/Existence-StencilLight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Existence-StencilLight-webfont.woff') format('woff'),
-         url('../font/Existence-StencilLight-webfont.ttf') format('truetype'),
-         url('../font/Existence-StencilLight-webfont.svg#ExistenceStencilLight') format('svg');
+    font-family: 'ExistenceLight';
+    src: url('../font/Existence-Light-webfont.eot');
+    src: url('../font/Existence-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/Existence-Light-webfont.woff') format('woff'),
+         url('../font/Existence-Light-webfont.ttf') format('truetype'),
+         url('../font/Existence-Light-webfont.svg#ExistenceLight') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 @font-face {
@@ -67,7 +68,8 @@ body {
 
 footer {
     color: #FFFFFF;
-    background-color: #8A8A8F;
+    background-color: #222;
+    /* background-color: #8A8A8F; */
     /* background-color: #BEC0CF; */
     padding: 10px;
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
@@ -82,8 +84,11 @@ footer {
     padding: 10px;
     margin: 0px auto;
     text-align: center;
-    font-size: 30pt;
-    font-family: 'ExistenceStencilLight';
+    font-size: 48pt;
+    font-family: 'ExistenceLight';
+    text-shadow: 1px 1px 4px #000000;
+    /* background-color: rgba(1,1,1,0.1); */
+    /* text-shadow: 0px 2px 3px #FFF; */
 }
 
 #container {
@@ -130,8 +135,18 @@ footer {
 
 .content header {
     text-align: center;
-    font-size: 30pt;
-    font-family: 'ExistenceStencilLight';
+    font-size: 28pt;
+    font-family: 'ExistenceLight';
+}
+
+.content header:before {
+    content: "\227A";
+    color: #CCC;
+}
+
+.content header:after {
+    content: "\227B";
+    color: #CCC;
 }
 
 /* Content options */
@@ -171,15 +186,15 @@ nav ul {
  
 nav ul li { 
     display: inline; 
-    border-left: 2px solid;
+    /* border-left: 2px solid; */
     /* border-right: 2px solid; */
-    padding-left: 0.5em;
+    /* padding-left: 0.5em; */
 }
 
-nav ol li { 
-    display: inline; 
-    border-left: 2px solid;
-    padding-left: 0.3em;
+nav ul li:before{
+    content: "/";
+    color: #AAA;
+    /* margin-left: -1em; */
 }
 
 nav ul li:first-child {
@@ -258,14 +273,33 @@ a {
     -o-transition:.2s linear;
 }
 
-a:hover {
-    color: #c00;
-}    
-
-::selection {
-     background: #a8d1ff;
+a:before {
+    content: "/";
+    color: #DDD;
+    /* margin-right:-0.25em; */
 }
 
-::-moz-selection {
-     background: #a8d1ff;
+/* a:after { */
+/*     content: "/"; */
+/*     color: #DDD; */
+/* } */
+
+/* a:visited {color: #000;} */
+a:hover {color: #ccc;}
+
+h1, h2, h3, h4, h5, h6 {font-family: 'ExistenceLight';}
+h1 {font-size: 24pt;}
+h2 {font-size: 20pt;}
+h3 {font-size: 18pt;}
+h4 {font-size: 16pt;}
+h5 {font-size: 14pt;}
+h6 {font-size: 12pt;}
+
+h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
+    content: "\227A ";
+    color: #AAA;
+    margin-left: -1em;
 }
+
+::selection {background: #a8d1ff;}
+::-moz-selection {background: #a8d1ff;}
