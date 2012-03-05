@@ -68,6 +68,7 @@ body {
 footer {
     color: #FFFFFF;
     background-color: #8A8A8F;
+    /* background-color: #BEC0CF; */
     padding: 10px;
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
@@ -95,8 +96,6 @@ footer {
 
 #contents {
     color: #000000;
-
-    /* padding: 0px 50px 0px 50px; */
     text-align: justify;
 
 }
@@ -105,11 +104,7 @@ footer {
     background-color: #FFFFFF;
 
     padding: 25px 50px 25px 50px;
-    /* padding: 25px 0px 25px 0px; */
-    /* margin: 0px 50px 0px 50px; */
     margin-bottom: 20px;
-    /* border-bottom: 1px; */
-    /* border-style: dotted; */
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
     box-shadow:         0px 0px 10px 0px #ccc;
@@ -134,8 +129,6 @@ footer {
 }
 
 .content header {
-    /* -webkit-column-span:all; */
-    /* column-span: all; */
     text-align: center;
     font-size: 30pt;
     font-family: 'ExistenceStencilLight';
@@ -179,7 +172,8 @@ nav ul {
 nav ul li { 
     display: inline; 
     border-left: 2px solid;
-    padding-left: 0.3em;
+    /* border-right: 2px solid; */
+    padding-left: 0.5em;
 }
 
 nav ol li { 
@@ -199,7 +193,8 @@ nav ul li:first-child {
     padding-bottom: 0.5em;
 }
 
-.content p {
+p {
+
 }
 
 .content ul, ol{
@@ -214,33 +209,63 @@ nav ul li:first-child {
     list-style-type: decimal;
 }
 
-.content ol li, ul li {
+.content ol li, .content ul li {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
-.content em {
+.content ol li:first-child, .content ul li:first-child {
+    padding-top: 0em;
+}
+
+.content ol li:last-child, .content ul li:last-child {
+    padding-bottom: 0em;
+}
+
+em {
     font-family: 'GudeaItalic';
 }
 
-.content strong {
+strong {
     font-family: 'GudeaBold';
 }
 
-.content code {
+code {
     font-family: 'InconsolataMedium';
     background-color: #EBE9E4;
 }
 
-.content pre {
+pre {
     margin-left:3em;
     margin-right:3em;
     background-color: #EBE9E4;
 }
 
-.content pre code {
+pre code {
+
 }
 
-.content blockquote {
+blockquote {
     margin-left: 2.5em;
-    border-left: 1px solid;
+    border-left: 2px solid;
     padding-left: 0.5em;
+}
+
+a {
+    color: #FDE8A5;
+    -moz-transition:.2s linear;
+    -webkit-transition:.2s linear;
+    -o-transition:.2s linear;
+}
+
+a:hover {
+    color: #c00;
+}    
+
+::selection {
+     background: #a8d1ff;
+}
+
+::-moz-selection {
+     background: #a8d1ff;
 }
