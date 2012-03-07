@@ -4,9 +4,9 @@
     font-family: 'ExistenceLight';
     src: url('../font/Existence-Light-webfont.eot');
     src: url('../font/Existence-Light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Existence-Light-webfont.woff') format('woff'),
-         url('../font/Existence-Light-webfont.ttf') format('truetype'),
-         url('../font/Existence-Light-webfont.svg#ExistenceLight') format('svg');
+    url('../font/Existence-Light-webfont.woff') format('woff'),
+    url('../font/Existence-Light-webfont.ttf') format('truetype'),
+    url('../font/Existence-Light-webfont.svg#ExistenceLight') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -16,9 +16,9 @@
     font-family: 'GudeaRegular';
     src: url('../font/Gudea-Regular-webfont.eot');
     src: url('../font/Gudea-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Gudea-Regular-webfont.woff') format('woff'),
-         url('../font/Gudea-Regular-webfont.ttf') format('truetype'),
-         url('../font/Gudea-Regular-webfont.svg#GudeaRegular') format('svg');
+    url('../font/Gudea-Regular-webfont.woff') format('woff'),
+    url('../font/Gudea-Regular-webfont.ttf') format('truetype'),
+    url('../font/Gudea-Regular-webfont.svg#GudeaRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -27,9 +27,9 @@
     font-family: 'GudeaItalic';
     src: url('../font/Gudea-Italic-webfont.eot');
     src: url('../font/Gudea-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Gudea-Italic-webfont.woff') format('woff'),
-         url('../font/Gudea-Italic-webfont.ttf') format('truetype'),
-         url('../font/Gudea-Italic-webfont.svg#GudeaItalic') format('svg');
+    url('../font/Gudea-Italic-webfont.woff') format('woff'),
+    url('../font/Gudea-Italic-webfont.ttf') format('truetype'),
+    url('../font/Gudea-Italic-webfont.svg#GudeaItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -38,9 +38,9 @@
     font-family: 'GudeaBold';
     src: url('../font/Gudea-Bold-webfont.eot');
     src: url('../font/Gudea-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Gudea-Bold-webfont.woff') format('woff'),
-         url('../font/Gudea-Bold-webfont.ttf') format('truetype'),
-         url('../font/Gudea-Bold-webfont.svg#GudeaBold') format('svg');
+    url('../font/Gudea-Bold-webfont.woff') format('woff'),
+    url('../font/Gudea-Bold-webfont.ttf') format('truetype'),
+    url('../font/Gudea-Bold-webfont.svg#GudeaBold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -49,9 +49,9 @@
     font-family: 'InconsolataMedium';
     src: url('../font/Inconsolata-webfont.eot');
     src: url('../font/Inconsolata-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Inconsolata-webfont.woff') format('woff'),
-         url('../font/Inconsolata-webfont.ttf') format('truetype'),
-         url('../font/Inconsolata-webfont.svg#InconsolataMedium') format('svg');
+    url('../font/Inconsolata-webfont.woff') format('woff'),
+    url('../font/Inconsolata-webfont.ttf') format('truetype'),
+    url('../font/Inconsolata-webfont.svg#InconsolataMedium') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -87,8 +87,8 @@ footer {
     font-size: 48pt;
     font-family: 'ExistenceLight';
     text-shadow: 1px 1px 4px #000000;
-    /* background-color: rgba(1,1,1,0.1); */
-    /* text-shadow: 0px 2px 3px #FFF; */
+/* background-color: rgba(1,1,1,0.1); */
+/* text-shadow: 0px 2px 3px #FFF; */
 }
 
 #container {
@@ -102,21 +102,25 @@ footer {
 #contents {
     color: #000000;
     text-align: justify;
-
 }
 
 .content {
     background-color: #FFFFFF;
-
-    padding: 25px 50px 25px 50px;
+    /* max-width: 500px; */
+    padding: 25px 10px 25px 10px;
     margin-bottom: 20px;
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
     box-shadow:         0px 0px 10px 0px #ccc;
 }
 
+.content-wrap {
+    max-width: 620px;
+    margin: 0px auto;
+}
+
 .content-body {
-    /* padding: 25px 100px 25px 100px; */
+/* padding: 25px 100px 25px 100px; */
 }
 
 .content:last-child {
@@ -183,18 +187,18 @@ nav ul {
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
     box-shadow:         0px 0px 10px 0px #ccc;
 }
- 
+
 nav ul li { 
     display: inline; 
-    /* border-left: 2px solid; */
-    /* border-right: 2px solid; */
-    /* padding-left: 0.5em; */
+/* border-left: 2px solid; */
+/* border-right: 2px solid; */
+/* padding-left: 0.5em; */
 }
 
 nav ul li:before{
     content: "/";
     color: #AAA;
-    /* margin-left: -1em; */
+/* margin-left: -1em; */
 }
 
 nav ul li:first-child {
@@ -276,7 +280,7 @@ a {
 a:before {
     content: "/";
     color: #DDD;
-    /* margin-right:-0.25em; */
+/* margin-right:-0.25em; */
 }
 
 /* a:after { */
