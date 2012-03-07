@@ -129,7 +129,7 @@ footer {
 
 .content-body p:first-child:first-letter {
     float: left;
-    /* color: #903;  */
+    color: #333;
     font-size: 75px;
     line-height: 60px;
     padding-top: 4px;
@@ -207,7 +207,7 @@ nav ul li:first-child {
 
 /* content styles */
 
-.content>*>* {
+.content>*>*>* {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
@@ -302,7 +302,7 @@ h6 {font-size: 12pt;}
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     content: "\227A ";
     color: #AAA;
-    margin-left: -1em;
+    /* margin-left: -1em; */
 }
 
 ::selection {background: #a8d1ff;}
