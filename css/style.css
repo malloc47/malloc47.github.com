@@ -133,7 +133,7 @@ footer {
     border-style: none;
 }
 
-.content-body p:first-child:first-letter {
+.content-body>p:first-child:first-letter {
     float: left;
     color: #333;
     font-size: 75px;
