@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/day.css">
     <script src="js/mini-clock.js" type="text/javascript"></script>
     <!-- todo: -->
     <!--[if lt IE 9]>
@@ -19,7 +20,10 @@
   <body onload="drawClock()">
     <canvas id="miniclock" width="50" height="50"></canvas>
     <div id="container">
-      <header id="main-header">47</header>
+      <header id="main-header">
+	<p>malloc(<span class="header-number">47</span>)</p>
+	<p class="header-name">&mdash;Jarrell Waggoner&mdash;</p>
+      </header>
       <nav>
       	<ul>
       	  <li>Home</li>
