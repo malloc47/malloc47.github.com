@@ -196,15 +196,11 @@ nav ul {
 
 nav ul li { 
     display: inline; 
-/* border-left: 2px solid; */
-/* border-right: 2px solid; */
-/* padding-left: 0.5em; */
 }
 
 nav ul li:before{
     content: "/";
     color: #AAA;
-/* margin-left: -1em; */
 }
 
 nav ul li:first-child {
@@ -286,13 +282,7 @@ a {
 a:before {
     content: "/";
     color: #DDD;
-/* margin-right:-0.25em; */
 }
-
-/* a:after { */
-/*     content: "/"; */
-/*     color: #DDD; */
-/* } */
 
 /* a:visited {color: #000;} */
 a:hover {color: #ccc;}
