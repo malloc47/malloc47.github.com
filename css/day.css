@@ -1,6 +1,5 @@
 body {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAQ0lEQVQYV2P8+untfwYo+Pb9O5jFxckJE2JghCkAScIkkNlgBcgCyKaBNDC+fvnkP7KRcLOBDJBGwgoIWkGUI/F5EwCz90Jp4ZBkJAAAAABJRU5ErkJggg==);
-    /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAQklEQVQYV2Pk4uL6zwAFXFycYNa3b99hQgyMMAUgSZgEMhusAFkA2TSQBkYREeH/yEbCzQYyQBoJKyBoBVGOxOdNAIsMLStImT48AAAAAElFTkSuQmCC); */
 }
 
 footer {
@@ -27,38 +26,22 @@ footer {
     -o-transition: text-shadow .4s ease;
 }
 
-#main-header .header-number:hover {
-    text-shadow: 3px 3px 1px #666;
+#main-header .header-number:hover {text-shadow: 3px 3px 1px #666;}
 
-}
+#main-header .header-name {color: #000;}
 
-#main-header .header-name {
-    color: #000;
-}
-
-#contents {
-    color: #000000;
-}
-
+#contents {color: #000;}
 .content {
     background-color: #FFFFFF;
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
     box-shadow:         0px 0px 10px 0px #ccc;
 }
+.content-body>p:first-child:first-letter {color: #333;}
+.content header:before {color: #CCC;}
+.content header:after {color: #CCC;}
 
-
-.content-body>p:first-child:first-letter {
-    color: #333;
-}
-
-.content header:before {
-    color: #CCC;
-}
-
-.content header:after {
-    color: #CCC;
-}
+nav {color: #AAA;}
 
 nav ul {
     background-color: #FFFFFF;
@@ -67,31 +50,21 @@ nav ul {
     box-shadow:         0px 0px 10px 0px #ccc;
 }
 
-nav ul li:before{
-    color: #AAA;
-}
+nav ul li:before{color: #AAA;}
 
-code {
-    background-color: #EBE9E4;
-}
-
-pre {
-    background-color: #EBE9E4;
-}
+code {background-color: #EBE9E4;}
+pre {background-color: #EBE9E4;}
 
 a {
-    color: #FDE8A5;
+    color: #66B37F;
     -moz-transition: color .2s linear;
     -webkit-transition: color .2s linear;
     -o-transition: color .2s linear;
 }
 
-a:before {
-    color: #DDD;
-}
-
-/* a:visited {color: #000;} */
-a:hover {color: #ccc;}
+.content-body a:before {color: #CCC;}
+a:visited {color: #A7C0A5;}
+a:hover {color: #DE9724;}
 
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     color: #AAA;

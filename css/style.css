@@ -263,7 +263,7 @@ blockquote {
     padding-left: 0.5em;
 }
 
-a:before {
+.content-body a:before {
     content: "/";
 }
 
