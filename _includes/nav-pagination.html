@@ -1,0 +1,10 @@
+{% if paginator.previous_page or paginator.next_page %}
+  <nav id="pagination">
+    {% if paginator.previous_page %}
+    <a href={% if paginator.previous_page == 1%}"/"{% else %}"/page{{ paginator.previous_page }}/"{% endif %} title="Newer">&#8826; Newer</a>
+    {% endif %}
+    {% if paginator.next_page %} 
+    <a href="/page{{ paginator.next_page }}/" title="Older">Older &#8827;</a>
+    {% endif %} 
+  </nav>
+{% endif %}

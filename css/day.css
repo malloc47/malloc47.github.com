@@ -41,19 +41,24 @@ footer {
 .content header:before {color: #CCC;}
 .content header:after {color: #CCC;}
 
-nav {color: #AAA;}
-
-nav ul {
+nav {
+    color: #AAA;
     background-color: #FFFFFF;
     -moz-box-shadow:    0px 0px 10px 0px #ccc;
     -webkit-box-shadow: 0px 0px 10px 0px #ccc;
     box-shadow:         0px 0px 10px 0px #ccc;
 }
 
+nav ul {
+
+}
+
 nav ul li:before{color: #AAA;}
 
-code {background-color: #EBE9E4;}
-pre {background-color: #EBE9E4;}
+/* code {background-color: #EBE9E4;} */
+/* pre {background-color: #EBE9E4;} */
+code {background-color: #F3F1EC;}
+pre {background-color: #F3F1EC;}
 
 a {
     color: #66B37F;
