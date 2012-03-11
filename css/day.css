@@ -57,8 +57,10 @@ nav ul {
 
 nav ul li:before{color: #AAA;}
 
-code {background-color: #EBE9E4;}
-pre {background-color: #EBE9E4;}
+code {background-color: #EEECE7;}
+pre {background-color: #EEECE7;}
+/* code {background-color: #EBE9E4;} */
+/* pre {background-color: #EBE9E4;} */
 /* code {background-color: #F3F1EC;} */
 /* pre {background-color: #F3F1EC;} */
 

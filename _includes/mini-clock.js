@@ -18,7 +18,7 @@ function drawClock(cselect) {
     }
 
     var e = document.getElementById('miniclock');
-    if(e.getContext) {
+    if(e && e.getContext) {
 	var c = e.getContext('2d');
 	w = e.width;
 	h = e.height;
