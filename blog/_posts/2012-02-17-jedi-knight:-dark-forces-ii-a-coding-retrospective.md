@@ -44,16 +44,16 @@ and event types (e.g., messages). Have a look:
     activated:
     if (GetSenderRef() == upsuf1)
     {
-	player = GetLocalPlayerThing();
-	TeleportThing(player, ghosttel1);
-	return;
+	    player = GetLocalPlayerThing();
+	    TeleportThing(player, ghosttel1);
+	    return;
     }
     
     if (GetSenderRef() == downsect)
     {
-	player = GetLocalPlayerThing();
-	TeleportThing(player, ghosttel2);
-	return;
+	    player = GetLocalPlayerThing();
+	    TeleportThing(player, ghosttel2);
+	    return;
     }
     return;
 

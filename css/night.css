@@ -32,14 +32,16 @@ footer {
 
 #contents {color: #FFF;}
 .content {
-    background-color: #111;
+    background-color: #222;
     -moz-box-shadow:    0px 0px 10px 0px #000;
     -webkit-box-shadow: 0px 0px 10px 0px #000;
     box-shadow:         0px 0px 10px 0px #000;
 }
-.content-body>p:first-child:first-letter {color: #C7EE68;}
-.content header:before {color: #333;}
-.content header:after {color: #333;}
+/* .content-body>p:first-child:first-letter {color: #C7EE68;} */
+.content header:before {color: #666;}
+.content header:after {color: #666;}
+
+.content p:last-child:after {color: #444;}
 
 nav {
     color: #AAA;
@@ -55,23 +57,25 @@ nav ul {
 
 nav ul li:before{color: #FFF;}
 
-code {background-color: #222;}
-pre {background-color: #222;}
+code {background-color: #333;}
+pre {background-color: #333;}
 
 a {
-    color: #C7DD68;
+    color: #9EE329;
     -moz-transition: color .2s linear;
     -webkit-transition: color .2s linear;
     -o-transition: color .2s linear;
 }
 
-.content-body a:before {color: #333;}
-a:visited {color: #C7CC68;}
-a:hover {color: #C7FF68;}
+/* .content-body a:before {color: #444;} */
+a:visited {color: #84AA42;}
+a:hover {color: #BAFF5D;}
 
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
-    color: #333;
+    color: #666;
 }
 
-::selection {background: #a8d1ff;}
-::-moz-selection {background: #a8d1ff;}
+::-moz-selection {background: #C9F185;}
+::-webkit-selection {background: #C9F185;}
+::selection {background: #C9F185;}
+
