@@ -62,9 +62,9 @@ pre {background-color: #333;}
 
 a {
     color: #9EE329;
-    -moz-transition: color .2s linear;
-    -webkit-transition: color .2s linear;
-    -o-transition: color .2s linear;
+    -moz-transition: .2s linear;
+    -webkit-transition: .2s linear;
+    -o-transition: .2s linear;
 }
 
 /* .content-body a:before {color: #444;} */
@@ -75,7 +75,18 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     color: #666;
 }
 
-::-moz-selection {background: #C9F185;}
-::-webkit-selection {background: #C9F185;}
-::selection {background: #C9F185;}
+::-moz-selection {
+    background: #C9F185;
+    color: #000;
+}
+
+::-webkit-selection {
+    background: #C9F185;
+    color: #000;
+}
+
+::selection {
+    background: #C9F185;
+    color: #000;
+}
 

@@ -70,13 +70,23 @@ a {
 }
 
 /* .content-body a:before {color: #AAA;} */
-a:visited {color: #A63E00;}
+a:visited {color: #FF3E00;}
 a:hover {color: #A61700;}
 
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     color: #AAA;
 }
 
-::-moz-selection {background: #FFB573;}
-::-webkit-selection {background: #FFB573;}
-::selection {background: #FFB573;}
+::-moz-selection {
+    background: #FFB573;
+    color: #000;
+}
+
+::-webkit-selection {
+    background: #FFB573;
+    color: #000;
+}
+::selection {
+    background: #FFB573;
+    color: #000;
+}

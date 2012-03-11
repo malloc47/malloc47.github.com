@@ -47,16 +47,15 @@ I've been working with computer systems over the last 1.5 decades, and have larg
 
 I love question marks. Not so much semantically as stylistically. I would have opted for the ever-reliable <a class="external" href="http://en.wikipedia.org/wiki/Palatino">Palatino</a> font for the content of this site---and I almost did---but I was won over by <a class="external" href="http://www.josbuivenga.demon.nl/calluna.html">Calluna</a>, created by Jos Buivenga of the <a class="external" href="http://www.josbuivenga.demon.nl">exljbris Font Foundry</a>. It was the question mark that sold me. See? So very stroke-like and asymmetrical, yet not so much as a script. Not quite convinced on the "I" yet, but it is hardly intolerable. The <a class="external" href="http://kingdesk.com/projects/wp-typography/">wp-typography</a> plugin rounds out the content area with flush and hyphenated-when-needed character kerning.
 
-<a class="external"
-href="http://kottke.org/plus/type/silkscreen/">Silkscreen</a> 
-makes an appearance in my customized right popup info box and other
+[Silkscreen](http://kottke.org/plus/type/silkscreen/) makes an
+appearance in my customized right popup info box and other
 marginalized areas on the site. Debated having anything on the right
 at all, but thanks to the small pixel font, it stays somewhat readable
 while still remaining unobtrusive.
 
 For some of the more interactive features of this site, I owe several javascript code snippets and wordpress plugins. Javascript-wise, Steven Chipman's <a class="external" href="http://slayeroffice.com/code/imageCrossFade/xfade2.html">image cross fader</a> controls the title banner on the <a href="http://www.malloc47.com">home page</a>, Remy Sharp's <a class="external" href="http://remysharp.com/2007/05/18/add-twitter-to-your-blog-step-by-step/">twitter</a> javascript loader also appears the same page, Dunstan Orchard's <a class="external" href="http://www.1976design.com/blog/archive/2003/11/21/nice-titles/">modification</a> of Stuart Langridge's "<a class="external" href="http://www.kryogenix.org/code/browser/nicetitle/">nice title</a>" mouseover script pops up on some of my <a title="See?" href="http://www.malloc47.com/about">links</a>, and the code for the fading info box in the upper right corner was shamelessly adapted from the <a class="external" href="http://www.switchonthecode.com/tutorials/javascript-tutorial-simple-fade-animation">Switch On The Code</a> blog since I was too lazy to write it from scratch. Plugin-wise, I employ <a class="external" href="http://wordpress.org/extend/plugins/syntaxhighlighter/">SyntaxHighlighter Evolved</a>, <a class="external" href="http://kingdesk.com/projects/wp-typography/">wp-typography</a>, <a class="external" href="http://wordpress.org/extend/plugins/wp-latex/">WP LaTeX</a>, and <a class="external" href="http://wordpress.org/extend/plugins/wp-no-category-base/">WP No Category Base</a>, among many others.
 
-There is much more left to appear on this site, as I continue to find ways to adapt Wordpress to do my bidding. Stay 
+There is much more left to appear on this site, as I continue to find ways to adapt Wordpress to do my bidding. Stay tuned.  Or whatever the web equivalent of "tuned" is... "bookmarked," perhaps...
 
 [1]: http://www.malloc47.com/research/ "You can find my CV here too."
 [2]: http://www.facebook.com/malloc47
