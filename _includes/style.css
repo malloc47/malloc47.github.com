@@ -136,6 +136,7 @@ footer {
     text-align: center;
     font-size: 24pt;
     font-family: 'ExistenceLight';
+    margin: 0px auto;
     margin-bottom: 0.5em;
 }
 
@@ -147,6 +148,23 @@ footer {
 .content header:after {
     content: "\00A7";
     margin-left: 0.1em;
+}
+
+.date {
+    margin:0px;
+    float: left;
+    font-family: 'ExistenceLight';
+    font-size: 9pt;
+    width: 2.5em;
+}
+
+.social {
+    float: right;
+    text-align: center;
+    font-family: 'GudeaBold';
+    font-size: 9pt;
+    width: 1em;
+    padding-left: 1.5em;
 }
 
 /* Content options */

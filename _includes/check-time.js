@@ -34,6 +34,8 @@ function check_time() {
     drawClock(light);
 }
 
+// check_time();
+
 // Doing this prevents loading the rest of the page before getting the
 // appropriate style (which would previously lead to flickering)
 if(lightp()) {

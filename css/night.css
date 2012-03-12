@@ -40,6 +40,16 @@ footer {
 /* .content-body>p:first-child:first-letter {color: #C7EE68;} */
 .content header:before {color: #666;}
 .content header:after {color: #666;}
+.date {color: #AAA;}
+.date-dark {color: #666;}
+.social a, .social a:visited {
+    color: #6F81D6;
+    text-decoration: none;
+}
+.social a:hover {
+    color: #ACB7EB;
+    text-shadow: 1px 1px 2px #ACB7EB;
+}
 
 .content p:last-child:after {color: #444;}
 
@@ -49,10 +59,6 @@ nav {
     -moz-box-shadow:    0px 0px 10px 0px #000;
     -webkit-box-shadow: 0px 0px 10px 0px #000;
     box-shadow:         0px 0px 10px 0px #000;
-}
-
-nav ul {
-
 }
 
 nav ul li:before{color: #FFF;}

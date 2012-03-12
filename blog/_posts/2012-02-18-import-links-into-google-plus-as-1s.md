@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Import Links into Google Plus (as +1s)
+title: Import Links into Google Plus as +1s
 ---
 
 I've been accumulating helpful and interesting articles for a number

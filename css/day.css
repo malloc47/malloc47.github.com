@@ -40,6 +40,16 @@ footer {
 /* .content-body>p:first-child:first-letter {color: #333;} */
 .content header:before {color: #AAA;}
 .content header:after {color: #AAA;}
+.date {color: #666;}
+.date-dark {color:#AAA;}
+.social a, .social a:visited {
+    color: #6771A1;
+    text-decoration: none;
+}
+.social a:hover {
+    color: #ACB7EB;
+    text-shadow: 1px 1px 2px #ACB7EB;
+}
 
 .content p:last-child:after {color: #AAA;}
 
@@ -49,10 +59,6 @@ nav {
     -moz-box-shadow:    0px 0px 10px 0px #777;
     -webkit-box-shadow: 0px 0px 10px 0px #777;
     box-shadow:         0px 0px 10px 0px #777;
-}
-
-nav ul {
-
 }
 
 nav ul li:before{color: #AAA;}
