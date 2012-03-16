@@ -66,9 +66,12 @@ body {
 }
 
 footer {
-    padding: 10px;
     text-align: center;
     font-size: 12px;
+}
+
+.footer-padding {
+    padding: 10px;
 }
 
 #miniclock {
@@ -76,6 +79,44 @@ footer {
     float: left;
     top: 10px;
     left: 10px;
+}
+
+.icons {
+    position:relative;
+    top:4px;
+    right:4px;
+    /* padding-top:10px; */
+    /* padding-right:8px; */
+    float:right;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.icons a {
+    display: block;
+    float:right;
+    padding-right:2px;
+    padding-bottom:2px;
+}
+
+.transparent {
+    zoom: 1;
+    filter: alpha(opacity=75);
+    opacity: 0.75;
+    -moz-transition: opacity .4s ease;
+    -webkit-transition: opacity .4s ease;
+    -o-transition: opacity .4s ease;
+}
+
+.transparent:hover{
+    zoom: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
 }
 
 #main-header {
@@ -98,6 +139,12 @@ footer {
 #main-header .header-number {
     font-family: 'GudeaRegular';
 }
+
+#main-header a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 #main-header .header-name {
     font-size: 12pt;
@@ -140,15 +187,15 @@ footer {
     margin-bottom: 0.5em;
 }
 
-.content header:before {
-    content: "\00A7";
-    margin-right: 0.1em;
-}
+/* .content header:before { */
+/*     content: "\00A7"; */
+/*     margin-right: 0.1em; */
+/* } */
 
-.content header:after {
-    content: "\00A7";
-    margin-left: 0.1em;
-}
+/* .content header:after { */
+/*     content: "\00A7"; */
+/*     margin-left: 0.1em; */
+/* } */
 
 .date {
     margin:0px;

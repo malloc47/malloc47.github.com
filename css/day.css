@@ -1,3 +1,6 @@
+---
+---
+
 body {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAQ0lEQVQYV2P8+untfwYo+Pb9O5jFxckJE2JghCkAScIkkNlgBcgCyKaBNDC+fvnkP7KRcLOBDJBGwgoIWkGUI/F5EwCz90Jp4ZBkJAAAAABJRU5ErkJggg==);
 }
@@ -5,7 +8,6 @@ body {
 footer {
     color: #FFFFFF;
     background-color: #222;
-    padding: 10px;
     -moz-box-shadow:    0px 0px 10px 0px #777;
     -webkit-box-shadow: 0px 0px 10px 0px #777;
     box-shadow:         0px 0px 10px 0px #777;
@@ -98,3 +100,5 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     background: #FFB573;
     color: #000;
 }
+
+{% include img-day.css %}
