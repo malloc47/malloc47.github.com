@@ -13,10 +13,10 @@ composer, digital modeler/animator, image editor, video editor, film
 director, graphics designer, web developer, typesetter, and writer
 (technical and nontechnical), and probably other things as well. I
 love being a computing generalist, but more recently I have focused
-specifically on research and backend development.
+specifically on research and software development.
 
-I love working on interesting problems, especially those that involve
-novel algorithms or large datasets.  Feel free to
+I love working on interesting problems, especially those that require
+specialized algorithms or involve large datasets.  Feel free to
 [email](mailto:malloc47@gmail.com) me to discuss anything that might
 vaguely fit into one of those categories.
 
@@ -34,7 +34,7 @@ I've been working with computer systems and software development over
 the last 1.5 decades.  [Arch Linux](http://www.archlinux.org/) is my
 primary operating system, so many examples here will be targeted at
 this platform.  I blog with code, and a large majority of what appears
-here will be problem or code-driven.  
+here is problem or code-driven.  
 
 ## Why malloc47?
 
@@ -43,7 +43,7 @@ quite simply, from the standard C command,
 [malloc](http://en.wikipedia.org/wiki/Malloc), and my favorite number,
 [47](http://www.47.net/47society/).  Back in the dark ages before
 compilers were a common component of computer systems, I longed for a
-`C/C++` compiler so I could move beyond the simple QBASIC applications
-I was used to coding, so I adopted the moniker largely out of the hope
-that I would get my hands on such a compiler.  I did, and the name has
-stuck ever since.
+`C/C++` compiler with which I could move beyond the simple QBASIC
+applications I had been coding, so I adopted the moniker largely out
+of the hope that I would get my hands on such a compiler.  I did, and
+the name has stuck ever since.
