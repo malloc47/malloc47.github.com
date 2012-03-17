@@ -1,22 +1,25 @@
-function drawClock(cselect) {
-    if(cselect) {
-	var colors = light_colors();
-    }
-    else {
-	var colors = dark_colors();
-    }
+function drawClock() {
+    var colors = window.theme ? light_colors() : dark_colors();
 
     var d = new Date();
 
-    if((d.getHours() < 19 && d.getHours() > 6) && !cselect) {
+    // Swap from day to night or night to day
+    if((d.getHours() < 19 && 
+	d.getHours() > 6) && 
+       !window.theme && 
+       !window.theme_override) {
 	check_time();
 	return;
     }
-    else if(!(d.getHours() < 19 && d.getHours() > 6) && cselect) {
+    else if(!(d.getHours() < 19 && 
+	      d.getHours() > 6) && 
+	    window.theme &&
+	    !window.theme_override) {
 	check_time();
 	return;
     }
 
+    // Draw clock
     var e = document.getElementById('miniclock');
     if(e && e.getContext) {
 	var c = e.getContext('2d');
@@ -24,8 +27,10 @@ function drawClock(cselect) {
 	h = e.height;
 	c.clearRect(0,0,w,h);
 
-	// afternoon
-	if(d.getHours()>11) {
+
+	// if(d.getHours()>11) {
+	if(window.theme) {
+	    // afternoon
 	    drawPie(c,w/2,h/2,w/2,hr(12),hr(7),colors.dark);
 	    drawPie(c,w/2,h/2,w/2,hr(7),hr(12),colors.light);
 	}
@@ -44,7 +49,7 @@ function drawClock(cselect) {
 
 	// circle to cover up the center
 	drawCircle(c,w/2,h/2,w/25,colors.center);
-	setTimeout("drawClock("+cselect+")",1000);
+	setTimeout("drawClock()",500);
     }
 }
 
