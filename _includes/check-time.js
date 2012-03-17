@@ -64,7 +64,6 @@ window.theme = window.theme_override ? cookie2 : lightp()
 // appropriate style (which would previously lead to flickering)
 if(window.theme) {
     document.write('<link rel="stylesheet" id="day-css" href="/css/day.css">');
-
 }
 else {
     document.write('<link rel="stylesheet" id="night-css" href="/css/night.css">');

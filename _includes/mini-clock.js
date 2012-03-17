@@ -28,8 +28,7 @@ function drawClock() {
 	c.clearRect(0,0,w,h);
 
 
-	// if(d.getHours()>11) {
-	if(window.theme) {
+	if(d.getHours()>11) {
 	    // afternoon
 	    drawPie(c,w/2,h/2,w/2,hr(12),hr(7),colors.dark);
 	    drawPie(c,w/2,h/2,w/2,hr(7),hr(12),colors.light);
