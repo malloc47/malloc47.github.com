@@ -85,8 +85,6 @@ footer {
     position:relative;
     top:4px;
     right:4px;
-    /* padding-top:10px; */
-    /* padding-right:8px; */
     float:right;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -97,11 +95,23 @@ footer {
     user-select: none;
 }
 
+.icons-inline {
+    position:relative;
+    text-align:center;
+}
+
 .icons a {
     display: block;
     float:right;
     padding-right:2px;
     padding-bottom:2px;
+}
+
+.icons-inline a {
+    display: inline-block;
+    width:25px;
+    height:25px;
+    padding-right:2px;
 }
 
 .transparent {

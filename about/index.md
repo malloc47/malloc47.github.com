@@ -3,6 +3,14 @@ layout: page
 title: About
 ---
 
+<div class="icons-inline">
+<a href="mailto:malloc47@gmail.com" class="transparent gmail"> </a> 
+<a href="https://plus.google.com/113712188424853568731" class="transparent googleplus"> </a>
+<a href="http://www.facebook.com/malloc47" class="transparent facebook"> </a>
+<a href="http://www.twitter.com/malloc47" class="transparent twitter"> </a>
+<a href="http://www.github.com/malloc47" class="transparent github"> </a>
+</div>
+
 My name is Jarrell Waggoner (ʤɛɹәl wægәnɹ̩).  I'm a developer and
 (presently) graduate student in Computer Science.  I thrive on backend
 problems with an emphasis on big data and and algorithms.
