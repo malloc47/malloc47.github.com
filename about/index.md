@@ -50,8 +50,8 @@ here is problem or code-driven.
 quite simply, from the standard C command,
 [malloc](http://en.wikipedia.org/wiki/Malloc), and my favorite number,
 [47](http://www.47.net/47society/).  Back in the dark ages before
-compilers were a common component of computer systems, I longed for a
-`C/C++` compiler with which I could move beyond the simple QBASIC
-applications I had been coding, so I adopted the moniker largely out
-of the hope that I would get my hands on such a compiler.  I did, and
-the name has stuck ever since.
+compilers were as widely-distributed, I longed for a `C/C++` compiler
+with which I could move beyond the simple QBASIC applications I had
+been coding, so I adopted the moniker largely out of the hope that I
+would get my hands on such a compiler.  I did, and the name has stuck
+ever since.
