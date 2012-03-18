@@ -23,8 +23,8 @@ function drawClock() {
     var e = document.getElementById('miniclock');
     if(e && e.getContext) {
 	var c = e.getContext('2d');
-	w = e.width;
-	h = e.height;
+	var w = e.width;
+	var h = e.height;
 	c.clearRect(0,0,w,h);
 
 
@@ -40,7 +40,7 @@ function drawClock() {
 	}
 
 	// 43200 = (24*60*60)/2
-	p = ((d.getHours()*3600+d.getMinutes()*60+d.getSeconds())%43200.0)/43200.0;
+	var p = ((d.getHours()*3600+d.getMinutes()*60+d.getSeconds())%43200.0)/43200.0;
 
 	drawLine(c,w/2,h/2,w/3,cp(p),w/66,colors.hour);
 	drawLine(c,w/2,h/2,w/2.25,cp(d.getMinutes()/60),w/66,colors.minute);
@@ -48,7 +48,7 @@ function drawClock() {
 
 	// circle to cover up the center
 	drawCircle(c,w/2,h/2,w/25,colors.center);
-	setTimeout("drawClock()",500);
+	setTimeout(function (){drawClock();},500);
     }
 }
 

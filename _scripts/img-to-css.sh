@@ -6,7 +6,7 @@ for i in `ls ../img/*$1.png` ; do
 	height:$(identify $i | awk '{print $3}' | awk -Fx '{print $2}')px;
 	background-repeat: no-repeat;	
 	background-image: url(data:image/png;base64," >> $2
-	../img/_base64.sh $i >> $2
+	base64.sh $i >> $2
 	echo -n ");
 }
 " >> $2

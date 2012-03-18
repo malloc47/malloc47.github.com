@@ -36,6 +36,22 @@ function check_time() {
     drawClock();
 }
 
+function clock_button() {
+    window.theme_override = false;
+    window.theme = lightp();
+    create_cookie('theme_override', window.theme_override, 7);
+    create_cookie('theme', window.theme, 7);
+    check_time();
+}
+
+function toggle_button() {
+    window.theme_override = true;
+    window.theme = !window.theme;
+    create_cookie('theme_override', window.theme_override, 7);
+    create_cookie('theme', window.theme, 7);
+    check_time();
+}
+
 function day_button() {
     // reset override if its already active
     window.theme_override = !(window.theme && window.theme_override);
@@ -53,8 +69,8 @@ function night_button() {
     check_time();
 }
 
-cookie1 = read_cookie('theme_override')==null ? false : read_cookie('theme_override') == "true";
-cookie2 = read_cookie('theme')==null ? false : read_cookie('theme') == "true";
+var cookie1 = read_cookie('theme_override')==null ? false : read_cookie('theme_override') == "true";
+var cookie2 = read_cookie('theme')==null ? false : read_cookie('theme') == "true";
 
 window.theme_override = cookie1;
 

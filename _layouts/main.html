@@ -3,11 +3,10 @@
 <!doctype html>
 <html lang="en">
   {% include head.html %}
-  <body onload="drawClock(lightp());">
+  <body>
     <div class="icons-left">
       <canvas id="miniclock" width="50" height="50"></canvas>
-      <span onclick="day_button()" class="transparent-light day"></span>
-      <span onclick="night_button()" class="transparent-light night"></span>
+      <span id="toggle" class="transparent-light toggle"></span>
     </div>
     {% include social.html %}
     <div id="container">
