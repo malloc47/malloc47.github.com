@@ -40,8 +40,6 @@ footer {
     box-shadow:         0px 0px 10px 0px #000;
 }
 /* .content-body>p:first-child:first-letter {color: #C7EE68;} */
-.content header:before {color: #666;}
-.content header:after {color: #666;}
 .date {color: #AAA;}
 .date-dark {color: #666;}
 .social a, .social a:visited {

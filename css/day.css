@@ -40,8 +40,6 @@ footer {
     box-shadow:         0px 0px 10px 0px #777;
 }
 /* .content-body>p:first-child:first-letter {color: #333;} */
-.content header:before {color: #AAA;}
-.content header:after {color: #AAA;}
 .date {color: #666;}
 .date-dark {color:#AAA;}
 .social a, .social a:visited {
@@ -67,10 +65,6 @@ nav ul li:before{color: #AAA;}
 
 code {background-color: #EEECE7;}
 pre {background-color: #EEECE7;}
-/* code {background-color: #EBE9E4;} */
-/* pre {background-color: #EBE9E4;} */
-/* code {background-color: #F3F1EC;} */
-/* pre {background-color: #F3F1EC;} */
 
 a {
     color: #FF5F00;
