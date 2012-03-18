@@ -229,16 +229,6 @@ footer {
     margin-bottom: 0.5em;
 }
 
-/* .content header:before { */
-/*     content: "\00A7"; */
-/*     margin-right: 0.1em; */
-/* } */
-
-/* .content header:after { */
-/*     content: "\00A7"; */
-/*     margin-left: 0.1em; */
-/* } */
-
 .date {
     margin:0px;
     float: left;
@@ -260,17 +250,17 @@ footer {
 
 .columns {
     -moz-column-count: 2;
-    -moz-column-gap: 20px;
+    -moz-column-gap: 10px;
     -webkit-column-count: 2;
-    -webkit-column-gap: 20px;
+    -webkit-column-gap: 10px;
     column-count: 2;
-    column-gap: 20px;
+    column-gap: 10px;
     /* padding: 25px 0px 25px 0px; */
 }
 
 .columns img {
-    padding-bottom:5px;
-    padding-top:5px;
+    display:block;
+    margin:5px auto;
 }
 
 .centered>* {
@@ -336,6 +326,17 @@ nav ul li:first-child {
 
 .content-body>p:last-child:after {
     content: " \2318";
+}
+
+.content img {
+    border-style:none;
+    border-width:0px;
+    -webkit-border-top-left-radius: 25px;
+    -webkit-border-bottom-right-radius: 25px;
+    -moz-border-radius-topleft: 25px;
+    -moz-border-radius-bottomright: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .content ul, ol{
@@ -404,4 +405,8 @@ h6 {font-size: 12pt;}
 
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     content: "\00A7";
+}
+
+.selectable {
+    cursor:pointer;
 }
