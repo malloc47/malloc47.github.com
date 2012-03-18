@@ -115,7 +115,7 @@ game, according to its own system requirements analyzer:
 
 <div class="centered">
 
-<a href="/img/posts/jk/jk-analyzer.png"><img src="/img/posts/jk/thumb/jk-analyzer.jpg" alt="Analyzer" /></a>
+<a href="/img/posts/jk/jk-analyzer.png"><img src="/img/posts/jk/thumb/jk-analyzer.jpg" alt="Analyzer" width="280" height="242" /></a>
 <p>Though it was incorrect about the "Windows 95" part.</p>
 
 </div>
@@ -126,7 +126,7 @@ install it on a 64-bit Windows (virtual) machine.
 
 <div class="centered">
 
-<a href="/img/posts/jk/jk-screenshot.png"><img src="/img/posts/jk/thumb/jk-screenshot.jpg" alt="Cinematic Screenshot"/></a>
+<a href="/img/posts/jk/jk-screenshot.png"><img src="/img/posts/jk/thumb/jk-screenshot.jpg" alt="Cinematic Screenshot" width="280" height="132" /></a>
 <p>Ah, nostalgia.</p>
 
 </div>
@@ -135,33 +135,33 @@ Getting any new level up and running is typically as simple as placing the .gob 
 
 <div class="columns">
 
-<a href="/img/posts/jk/002.png"><img src="/img/posts/jk/thumb/002.jpg" alt="Screenshot 1" /></a>
+<a href="/img/posts/jk/002.png"><img src="/img/posts/jk/thumb/002.jpg" alt="Screenshot 1" width="280" height="175" /></a>
 <p>Completely forgot about the in-game menu system (so you could bypass
 the rather dry "Story" cutscene I included, among other things).</p>
 
-<a href="/img/posts/jk/007.png"><img src="/img/posts/jk/thumb/007.jpg" alt="Screenshot 2" /></a>
+<a href="/img/posts/jk/007.png"><img src="/img/posts/jk/thumb/007.jpg" alt="Screenshot 2" width="280" height="175" /></a>
 <p>A planetarium. On a star destroyer, for some reason.</p>
 
-<a href="/img/posts/jk/008.png"><img src="/img/posts/jk/thumb/008.jpg" alt="Screenshot 3" /></a>
+<a href="/img/posts/jk/008.png"><img src="/img/posts/jk/thumb/008.jpg" alt="Screenshot 3" width="280" height="175" /></a>
 <p>The aforementioned zoo.</p>
 
-<a href="/img/posts/jk/011.png"><img src="/img/posts/jk/thumb/011.jpg" alt="Screenshot 4" /></a>
+<a href="/img/posts/jk/011.png"><img src="/img/posts/jk/thumb/011.jpg" alt="Screenshot 4" width="280" height="175" /></a>
 <p>Oddly, I also included a kitchen. Complete with an oven you have to
 crawl into to complete a mission objective.</p>
 
-<a href="/img/posts/jk/019.png"><img src="/img/posts/jk/thumb/019.jpg" alt="Screenshot 5" /></a>
+<a href="/img/posts/jk/019.png"><img src="/img/posts/jk/thumb/019.jpg" alt="Screenshot 5" width="280" height="175" /></a>
 <p>The obligatory "dress up as the enemy to get through a checkpoint"
 plot point.</p>
 
-<a href="/img/posts/jk/024.png"><img src="/img/posts/jk/thumb/024.jpg" alt="Screenshot 6" /></a>
+<a href="/img/posts/jk/024.png"><img src="/img/posts/jk/thumb/024.jpg" alt="Screenshot 6" width="280" height="175" /></a>
 <p>A sewer at the bottom of a detention center. Even star destroyers have
 to take care of their waste somehow.</p>
 
-<a href="/img/posts/jk/027.png"><img src="/img/posts/jk/thumb/027.jpg" alt="Screenshot 7" /></a>
+<a href="/img/posts/jk/027.png"><img src="/img/posts/jk/thumb/027.jpg" alt="Screenshot 7" width="280" height="175" /></a>
 <p>Grand Admiral Thrawn himself, wielding a phaser. And fairly deadly at
 that--I died a dozen times or so before beating him.</p>
 
-<a href="/img/posts/jk/035.png"><img src="/img/posts/jk/thumb/035.jpg" alt="Screenshot 8" /></a>
+<a href="/img/posts/jk/035.png"><img src="/img/posts/jk/thumb/035.jpg" alt="Screenshot 8" width="280" height="175" /></a>
 <p>Barney makes an appearance. And yes, you can obliterate him.</p>
 
 </div>
