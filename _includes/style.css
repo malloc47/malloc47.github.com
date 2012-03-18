@@ -260,12 +260,25 @@ footer {
 
 .columns {
     -moz-column-count: 2;
-    -moz-column-gap: 50px;
+    -moz-column-gap: 20px;
     -webkit-column-count: 2;
-    -webkit-column-gap: 50px;
+    -webkit-column-gap: 20px;
     column-count: 2;
-    column-gap: 50px;
-    padding: 25px 0px 25px 0px;
+    column-gap: 20px;
+    /* padding: 25px 0px 25px 0px; */
+}
+
+.columns img {
+    padding-bottom:5px;
+    padding-top:5px;
+}
+
+.centered>* {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    width:300px;
+    text-align:center;
 }
 
 .left {
@@ -321,7 +334,7 @@ nav ul li:first-child {
     padding-bottom: 0.5em;
 }
 
-.content p:last-child:after {
+.content-body>p:last-child:after {
     content: " \2318";
 }
 
