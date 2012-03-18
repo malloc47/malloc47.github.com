@@ -4,8 +4,8 @@ title: ! 'Jedi Knight: Dark Forces II -- A coding retrospective'
 ---
 
 Years ago, before I got my hands on a real compiler, I satisfied my
-coding compulsion by modding *Jedi Knight: Dark Forces II*
-(which, yes, has the subtitle backwards from normal). As detailed
+coding compulsion by modding *Jedi Knight: Dark Forces II* (which,
+yes, has the subtitle backwards from normal). As detailed
 [elsewhere][1], Jedi Knight (abbreviated JK) is one of the earlier
 examples of a game that used a simple scripting language to handle
 interaction with the game engine. COG script, as it was called was, in
@@ -83,7 +83,7 @@ the characters react (simple artificial intelligence), *.gob* files
 which are essentially .zip files for storing all the various resources
 in a level, and many many more file types I'm probably forgetting.
 
-But it was always the COGs that were most interesting to me, despite the fact that I wrote some ugly and embarrassing code in it. <a href="https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/cog/forcefield_goal.cog">Really embarrassing</a>.
+But it was always the COGs that were most interesting to me, despite the fact that I wrote some ugly and embarrassing code in it. [Really embarrassing][7].
 
 And I won't even get started on my very unrefined sense of aesthetic
 design in the level I ended up building. Yes, I built an entire level,
@@ -113,56 +113,58 @@ On my nostalgic adventure, I decided to actually get Jedi Knight up
 and running again. I think my PC was perfectly adequate to run the
 game, according to its own system requirements analyzer:
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/jk-analyzer.png"><img class="alignnone size-medium wp-image-1044" title="jk-analyzer" src="http://www.malloc47.com/wp-content/uploads/2012/02/jk-analyzer-300x259.png" alt="" width="300" height="259" /></a>
+<div class="centered">
 
-Though it was incorrect about the "Windows 95" part.
+<a href="/img/posts/jk/jk-analyzer.png"><img src="/img/posts/jk/thumb/jk-analyzer.jpg" alt="Analyzer" /></a>
+<p>Though it was incorrect about the "Windows 95" part.</p>
+
+</div>
 
 Thankfully, a kind soul rewrote the 16-bit installer ([here][6]) so,
 if you happen to have the Jedi Knight CDs on hand, you can actually
 install it on a 64-bit Windows (virtual) machine.
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/jk-screenshot.png"><img class="alignnone  wp-image-1050" title="jk-screenshot" src="http://www.malloc47.com/wp-content/uploads/2012/02/jk-screenshot.png" alt="" width="572" height="269" /></a>
+<div class="centered">
 
-Ah, nostalgia.
+<a href="/img/posts/jk/jk-screenshot.png"><img src="/img/posts/jk/thumb/jk-screenshot.jpg" alt="Cinematic Screenshot"/></a>
+<p>Ah, nostalgia.</p>
+
+</div>
 
 Getting any new level up and running is typically as simple as placing the .gob file in the EPISODES folder. So, of course, I loaded up my old creation. I definitely had a lot of fun as a kid.
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/002.png"><img class="size-medium wp-image-1057 alignnone" title="jk-menu" src="http://www.malloc47.com/wp-content/uploads/2012/02/002-300x187.png" alt="" width="300" height="187" /></a>
+<div class="columns">
 
-Completely forgot about the in-game menu system (so you could bypass
-the rather dry "Story" cutscene I included, among other things).
+<a href="/img/posts/jk/002.png"><img src="/img/posts/jk/thumb/002.jpg" alt="Screenshot 1" /></a>
+<p>Completely forgot about the in-game menu system (so you could bypass
+the rather dry "Story" cutscene I included, among other things).</p>
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/007.png"><img class="alignnone size-medium wp-image-1058" title="jk-ss1" src="http://www.malloc47.com/wp-content/uploads/2012/02/007-300x187.png" alt="" width="300" height="187" /></a>
+<a href="/img/posts/jk/007.png"><img src="/img/posts/jk/thumb/007.jpg" alt="Screenshot 2" /></a>
+<p>A planetarium. On a star destroyer, for some reason.</p>
 
-A planetarium. On a star destroyer, for some reason.
+<a href="/img/posts/jk/008.png"><img src="/img/posts/jk/thumb/008.jpg" alt="Screenshot 3" /></a>
+<p>The aforementioned zoo.</p>
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/008.png"><img class="alignnone size-medium wp-image-1059" title="jk-ss2" src="http://www.malloc47.com/wp-content/uploads/2012/02/008-300x187.png" alt="" width="300" height="187" /></a>
+<a href="/img/posts/jk/011.png"><img src="/img/posts/jk/thumb/011.jpg" alt="Screenshot 4" /></a>
+<p>Oddly, I also included a kitchen. Complete with an oven you have to
+crawl into to complete a mission objective.</p>
 
-The aforementioned zoo.
+<a href="/img/posts/jk/019.png"><img src="/img/posts/jk/thumb/019.jpg" alt="Screenshot 5" /></a>
+<p>The obligatory "dress up as the enemy to get through a checkpoint"
+plot point.</p>
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/011.png"><img class="alignnone size-medium wp-image-1060" title="jk-ss3" src="http://www.malloc47.com/wp-content/uploads/2012/02/011-300x187.png" alt="" width="300" height="187" /></a>
+<a href="/img/posts/jk/024.png"><img src="/img/posts/jk/thumb/024.jpg" alt="Screenshot 6" /></a>
+<p>A sewer at the bottom of a detention center. Even star destroyers have
+to take care of their waste somehow.</p>
 
-Oddly, I also included a kitchen. Complete with an oven you have to
-crawl into to complete a mission objective.
+<a href="/img/posts/jk/027.png"><img src="/img/posts/jk/thumb/027.jpg" alt="Screenshot 7" /></a>
+<p>Grand Admiral Thrawn himself, wielding a phaser. And fairly deadly at
+that--I died a dozen times or so before beating him.</p>
 
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/019.png"><img class="alignnone size-medium wp-image-1062" title="jk-ss5" src="http://www.malloc47.com/wp-content/uploads/2012/02/019-300x187.png" alt="" width="300" height="187" /></a>
+<a href="/img/posts/jk/035.png"><img src="/img/posts/jk/thumb/035.jpg" alt="Screenshot 8" /></a>
+<p>Barney makes an appearance. And yes, you can obliterate him.</p>
 
-The obligatory "dress up as the enemy to get through a checkpoint"
-plot point.
-
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/024.png"><img class="alignnone size-medium wp-image-1063" title="jk-ss6" src="http://www.malloc47.com/wp-content/uploads/2012/02/024-300x187.png" alt="" width="300" height="187" /></a>
-
-A sewer at the bottom of a detention center. Even star destroyers have
-to take care of their waste somehow.
-
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/027.png"><img class="alignnone size-medium wp-image-1064" title="jk-ss7" src="http://www.malloc47.com/wp-content/uploads/2012/02/027-300x187.png" alt="" width="300" height="187" /></a>
-
-Grand Admiral Thrawn himself, wielding a phaser. And fairly deadly at
-that--I died a dozen times or so before beating him.
-
-<a href="http://www.malloc47.com/wp-content/uploads/2012/02/035.png"><img class="alignnone size-medium wp-image-1065" title="jk-ss8" src="http://www.malloc47.com/wp-content/uploads/2012/02/035-300x187.png" alt="" width="300" height="187" /></a>
-
-Barney makes an appearance. And yes, you can obliterate him.
+</div>
 
 While my handiwork hasn't aged well (and neither has JK, for that
 matter), I've placed the entire monstrosity on my github for
@@ -184,3 +186,4 @@ ecosystem. It was an IDE. And it was fun.
 [4]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/readme.txt
 [5]: http://tacc.massassi.net/levels/review.php?id=41
 [6]: http://code.google.com/p/starwarsjediknightaltinstall/
+[7]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/cog/forcefield_goal.co
