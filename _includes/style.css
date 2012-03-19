@@ -341,6 +341,7 @@ nav ul li:first-child {
 
 .content ul, ol{
     margin-left: 3em;
+    margin-right: 3em;
 }
 
 .content ul {
@@ -387,6 +388,7 @@ pre code {
 
 blockquote {
     margin-left: 2.5em;
+    margin-right: 2.5em;
     border-left: 2px solid;
     padding-left: 0.5em;
 }
