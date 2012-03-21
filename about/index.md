@@ -13,16 +13,16 @@ title: About
 
 My name is Jarrell Waggoner (ʤɛɹәl wægәnɹ̩, in
 [IPA](http://en.wikipedia.org/wiki/IPA)).  I'm a developer and
-(presently) graduate student in Computer Science.  I thrive on backend
-problems with an emphasis on big data and and algorithms.
+(presently) graduate student in Computer Science.  I thrive on back end
+problems with an emphasis on big data and algorithms.
 
 Over the years, I've been known as a programmer, developer, system
 administrator, researcher, student, instructor, tutor, film score
 composer, digital modeler/animator, image editor, video editor, film
 director, graphics designer, web developer, typesetter, and writer
-(technical and nontechnical), and probably other things as well. I
-love being a computing generalist, but more recently I have focused
-specifically on research and software development.
+(technical and nontechnical), "The Oracle", and probably other things
+as well. I love being a computing generalist, but more recently I have
+focused specifically on research and software development.
 
 I love working on interesting problems, especially those that require
 specialized algorithms or involve large datasets.  Feel free to
@@ -52,7 +52,7 @@ quite simply, from the standard C command,
 [malloc](http://en.wikipedia.org/wiki/Malloc), and my favorite number,
 [47](http://www.47.net/47society/).  Back in the dark ages before
 compilers were as widely-distributed, I longed for a `C/C++` compiler
-with which I could move beyond the simple QBASIC applications I had
+with which I could move beyond the simple QBasic applications I had
 been coding, so I adopted the moniker largely out of the hope that I
 would get my hands on such a compiler.  I did, and the name has stuck
 ever since.

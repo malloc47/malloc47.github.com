@@ -8,14 +8,14 @@ I study [computer vision][1] with an emphasis on [image segmentation][2], [docum
 # Code
 
 - I maintain [Ratio Contour][16], a graph-driven contour grouping
-  altorithm developed at the computer vision lab.
+  algorithm developed at the computer vision lab.
   
 - An old version of my dissertation work on materials volume
   segmentation is available [here][17].  A much cleaner version is
   forthcoming.
   
 - Some of my work on [Sapheos][18], a document image analysis project
-  for acient manuscripts, is available [here][19].
+  for ancient manuscripts, is available [here][19].
 
 # Papers
 
