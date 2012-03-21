@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Flirting with the Frontend
+title: Flirting with the Front End
 ---
 
 Every few years, when I'm not teaching introductory web programming, I
-revisit frontend development, oftentimes in the form of retooling my
+revisit front end development, oftentimes in the form of retooling my
 site.  Last time, it was a Wordpress-driven theme with
 cobbled-together JavaScript snippets for random bits of functionality:
 
-[<img src="/img/posts/flirting-with-the-frontend/thumb/old-site.jpg" alt="Old Site" width="280" height="183" />](/img/posts/flirting-with-the-frontend/old-site.png)
+[<img src="/img/posts/flirting-with-the-front-end/thumb/old-site.jpg" alt="Old Site" width="280" height="183" />](/img/posts/flirting-with-the-front-end/old-site.png)
 
 Servicable, at least.
 
@@ -17,7 +17,7 @@ I don't recall.  Rolling back all the way to the mid-90s, I had a
 [fortunecity][1] site, which was--as typical of sites in the
 90s--equal parts bland and garrish:
 
-[<img src="/img/posts/flirting-with-the-frontend/thumb/older-site.jpg" alt="Old Site" width="280" height="210" />](/img/posts/flirting-with-the-frontend/older-site.png)
+[<img src="/img/posts/flirting-with-the-front-end/thumb/older-site.jpg" alt="Old Site" width="280" height="210" />](/img/posts/flirting-with-the-front-end/older-site.png)
 
 Yes, it had a Christmas theme for the title page. And yes, the header,
 navigation bar, and footer (on individual pages) are all java applets.
@@ -29,8 +29,8 @@ And now, I've transitioned to [Jekyll][2], for a few reasons:
 - [Github][3] can handle more traffic than the shared hosting I was
   using previously.
 - A Jekyll deploy on github can't use external plugins.  Which is, by
-  most accounts, a downside, but it forces me to find frontend
-  solutions for what I want rather than turning to the backend for
+  most accounts, a downside, but it forces me to find front-end
+  solutions for what I want rather than turning to the back end for
   everything.
 - I wanted to build everything from scratch.  The limited [Liquid][4]
   DSL used by Jekyll is leaner than full-blown `PHP`, and more
