@@ -11,7 +11,8 @@ title: About
 <a href="http://www.github.com/malloc47" class="transparent github"> </a>
 </div>
 
-My name is Jarrell Waggoner (ʤɛɹәl wægәnɹ̩).  I'm a developer and
+My name is Jarrell Waggoner (ʤɛɹәl wægәnɹ̩, in
+[IPA](http://en.wikipedia.org/wiki/IPA)).  I'm a developer and
 (presently) graduate student in Computer Science.  I thrive on backend
 problems with an emphasis on big data and and algorithms.
 
