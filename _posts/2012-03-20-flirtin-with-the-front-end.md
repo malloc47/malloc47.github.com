@@ -10,12 +10,12 @@ cobbled-together JavaScript snippets for random bits of functionality:
 
 [<img src="/img/posts/flirting-with-the-front-end/thumb/old-site.jpg" alt="Old Site" width="280" height="183" />](/img/posts/flirting-with-the-front-end/old-site.png)
 
-Servicable, at least.
+Serviceable, at least.
 
-Before this, I used a generic wordpress theme, the specifics of which
+Before this, I used a generic Wordpress theme, the specifics of which
 I don't recall.  Rolling back all the way to the mid-90s, I had a
 [fortunecity][1] site, which was--as typical of sites in the
-90s--equal parts bland and garrish:
+90s--equal parts bland and garish:
 
 [<img src="/img/posts/flirting-with-the-front-end/thumb/older-site.jpg" alt="Old Site" width="280" height="210" />](/img/posts/flirting-with-the-front-end/older-site.png)
 
@@ -38,10 +38,10 @@ And now, I've transitioned to [Jekyll][2], for a few reasons:
   started from--at minimum--a skeleton theme, just to cover the
   essentials needed by Wordpress).
 - Having everything in a git repo is both satisfying for my current
-  workflow and avoids the pain of database backups.
+  work flow and avoids the pain of database backups.
 
 So [here][5] it is.  I avoided `jQuery` (convenient as it is) to keep
-things lean and loading quickly, and rampantly bludgened the site with
+things lean and loading quickly, and rampantly bludgeoned the site with
 `HTML5/CSS3` without much regard for backwards compatibility.  To
 further optimize queries, I used Liquid `include`s to aggregate all
 the `js` and `css` into single files.  For `JavaScript`:
@@ -64,7 +64,7 @@ about indentation issues, and if you don't add event handlers with
 JavaScript (e.g. you use the `onclick` or `onload` events in your
 `HTML` tags), you may run into scope issues as well.  All of this
 together provided a nearly 20-point speed bump on
-[google page speed][7].
+[Google page speed][7].
 
 I opted for a dual-themed site, determined by the time of day.  The
 clock drawn in the HTML5 Canvas element in the upper-left shows when
