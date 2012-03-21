@@ -44,7 +44,7 @@ So [here][5] it is.  I avoided `jQuery` (convenient as it is) to keep
 things lean and loading quickly, and rampantly bludgened the site with
 `HTML5/CSS3` without much regard for backwards compatibility.  To
 further optimize queries, I used Liquid `include`s to aggregate all
-the `js` and `css` into single files. For `JavaScript`:
+the `js` and `css` into single files.  For `JavaScript`:
 
 {% highlight javascript %}
 ---
@@ -62,7 +62,9 @@ you can wrap everything with `"use strict"` to get some extra
 exception goodness.  Doing this may cause [JSLint][6] to complain
 about indentation issues, and if you don't add event handlers with
 JavaScript (e.g. you use the `onclick` or `onload` events in your
-`HTML` tags), you may run into scope issues as well.
+`HTML` tags), you may run into scope issues as well.  All of this
+together provided a nearly 20-point speed bump on
+[google page speed][7].
 
 I opted for a dual-themed site, determined by the time of day.  The
 clock drawn in the HTML5 Canvas element in the upper-left shows when
@@ -77,3 +79,4 @@ All in all, a good transition so far.
 [4]: http://liquidmarkup.org/
 [5]: https://github.com/malloc47/malloc47.github.com
 [6]: http://www.jslint.com/
+[7]: https://developers.google.com/pagespeed/
