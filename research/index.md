@@ -14,8 +14,8 @@ I study [computer vision][1] with an emphasis on [image segmentation][2], [docum
   segmentation is available [here][17].  A much cleaner version is
   forthcoming.
   
-- Some of my work on [Sapheos][18], an document image analysis project for
-  acient manuscripts, is available [here][19].
+- Some of my work on [Sapheos][18], a document image analysis project
+  for acient manuscripts, is available [here][19].
 
 # Papers
 
@@ -42,7 +42,7 @@ Conference on Computer Vision and Pattern Recognition*, pages
 
 # Links
 
-[Lab][4] &rarr; [Department][12] &rarr; [College][13] &rarr; [University][14]
+[University][14] &rarr; [College][13] &rarr; [Department][12] &rarr; [Lab][4]
 
 [1]:  http://en.wikipedia.org/wiki/Computer_vision
 [2]:  http://en.wikipedia.org/wiki/Segmentation_%28image_processing%29
