@@ -6,4 +6,5 @@
 {% include mini-clock.js %}
 {% include check-time.js %}
 {% include event-handler.js %}
+{% include google-analytics.js %}
 }());
