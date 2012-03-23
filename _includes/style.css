@@ -61,7 +61,7 @@ body {
     background-position: left top;
     background-repeat: repeat;
     font-size: 13pt;
-    font-family: 'GudeaRegular';
+    font-family: 'GudeaRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #777;
 }
 
@@ -166,7 +166,7 @@ footer {
     margin: 0px auto;
     text-align: center;
     font-size: 28pt;
-    font-family: 'ExistenceLight';
+    font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
     text-shadow: 1px 1px 4px #000000;
     cursor: default;
     -webkit-touch-callout: none;
@@ -179,7 +179,7 @@ footer {
 }
 
 #main-header .header-number {
-    font-family: 'GudeaRegular';
+    font-family: 'GudeaRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #main-header a {
@@ -224,7 +224,7 @@ footer {
 .content header {
     text-align: center;
     font-size: 24pt;
-    font-family: 'ExistenceLight';
+    font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
     margin: 0px auto;
     margin-bottom: 0.5em;
 }
@@ -232,7 +232,7 @@ footer {
 .date {
     margin:0px;
     float: left;
-    font-family: 'ExistenceLight';
+    font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
     font-size: 9pt;
     width: 2.5em;
 }
@@ -240,7 +240,7 @@ footer {
 .social {
     float: right;
     text-align: center;
-    font-family: 'GudeaBold';
+    font-family: 'GudeaBold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 9pt;
     width: 1em;
     padding-left: 1.5em;
@@ -280,7 +280,7 @@ footer {
 nav {
     float: center;
     text-align: center;
-    font-family: 'InconsolataMedium';
+    font-family: 'InconsolataMedium', Consolas, 'Lucida Console', Monaco, monospace;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -369,15 +369,15 @@ nav ul li:first-child {
 }
 
 em {
-    font-family: 'GudeaItalic';
+    font-family: 'GudeaItalic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 strong {
-    font-family: 'GudeaBold';
+    font-family: 'GudeaBold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 code {
-    font-family: 'InconsolataMedium';
+    font-family: 'InconsolataMedium', Consolas, 'Lucida Console', Monaco, monospace;
 }
 
 pre {
@@ -400,7 +400,7 @@ blockquote {
 /*     content: "/"; */
 /* } */
 
-h1, h2, h3, h4, h5, h6 {font-family: 'ExistenceLight';}
+h1, h2, h3, h4, h5, h6 {font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;}
 h1 {font-size: 24pt;}
 h2 {font-size: 20pt;}
 h3 {font-size: 18pt;}
