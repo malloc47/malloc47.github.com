@@ -278,7 +278,6 @@ footer {
 /* navigation */
 
 nav {
-    float: center;
     text-align: center;
     font-family: 'InconsolataMedium', Consolas, 'Lucida Console', Monaco, monospace;
     padding-top: 10px;
