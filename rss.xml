@@ -4,10 +4,10 @@ layout: nil
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>malloc47.com</title>
+    <title>malloc47 -- Jarrell Waggoner</title>
     <link>http://malloc47.com/</link>
     <atom:link href="http://malloc47.com/rss.xml" rel="self" type="application/rss+xml" />
-    <description>stuff from coyled</description>
+    <description>Blog of Jarrell W. Waggoner, computer scientist and software developer</description>
     <language>en-us</language>
     <pubDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
     <lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
