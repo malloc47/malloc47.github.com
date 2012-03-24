@@ -2,6 +2,7 @@
 layout: post
 title: Man Page Readability
 permalink: /blog/man-page-readability/
+date: 2012-02-11 00:00:00
 ---
 
 Man pages are one of the staples of a healthy \*nix diet, but having

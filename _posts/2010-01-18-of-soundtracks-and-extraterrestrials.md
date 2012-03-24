@@ -3,6 +3,7 @@ layout: post
 title: of soundtracks and extraterrestrials
 source: http://mrpond47.wordpress.com/2010/01/18/of-soundtracks-and-extraterrestrials/
 permalink: /blog/of-soundtracks-and-extraterrestrials/
+date: 2010-01-18 00:00:00
 ---
 
 It has always been the aliens.

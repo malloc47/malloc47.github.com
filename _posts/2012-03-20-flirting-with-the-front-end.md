@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Flirting with the Front End
+date: 2012-03-20 00:00:00
 ---
 
 Every few years, when I'm not teaching introductory web programming, I
