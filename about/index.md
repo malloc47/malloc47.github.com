@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+img: /img/profile.png
 ---
 
 <div class="icons-inline">
@@ -10,6 +11,8 @@ title: About
 <a href="http://www.twitter.com/malloc47" class="transparent twitter"> </a>
 <a href="http://www.github.com/malloc47" class="transparent github"> </a>
 </div>
+
+<img src="/img/profile.png" alt="Profile Pic" style="float:right; margin-left:20px;" />
 
 My name is Jarrell Waggoner (ʤɛɹәl wægәnɹ̩, in
 [IPA](http://en.wikipedia.org/wiki/IPA)).  I'm a developer and
