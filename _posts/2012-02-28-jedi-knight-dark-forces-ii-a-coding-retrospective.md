@@ -3,6 +3,7 @@ layout: post
 title: ! 'Jedi Knight: Dark Forces II -- A coding retrospective'
 permalink: /blog/jedi-knight-dark-forces-ii-a-coding-retrospective/
 date: 2012-02-28 00:00:00
+img: /img/posts/jk/thumb/jk-screenshot.jpg
 ---
 
 Years ago, before I got my hands on a real compiler, I satisfied my
