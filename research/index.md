@@ -3,7 +3,7 @@ layout: page
 title: Research
 ---
 
-I study [computer vision][1] with an emphasis on [image segmentation][2], [document image analysis][3], and video event recognition. Currently, I do research (and manage the network) at the [Computer Vision Lab][4]. I've been funded by graduate teaching assistantships, [NSF][5], [NEH][6], [DARPA][7], and [AFOSR][15], as detailed in my [CV](/cv.pdf).
+I study [computer vision][1] with an emphasis on [image segmentation][2], [document image analysis][3], and video event recognition. Currently, I do research (and manage the network) at the [Computer Vision Lab][4]. I've been funded by graduate teaching assistantships, [NSF][5], [NEH][6], [DARPA][7], and [AFOSR][15], as detailed in my [CV](https://raw.github.com/malloc47/cv/master/cv.pdf).
 
 # Code
 
