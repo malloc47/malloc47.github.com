@@ -275,6 +275,11 @@ footer {
     padding: 25px 150px 25px 0px;
 }
 
+.share {
+    max-width: 640px;
+    margin: 0px auto;
+}
+
 /* navigation */
 
 nav {
@@ -327,7 +332,7 @@ nav ul li:first-child {
     content: " \2318";
 }
 
-.content img {
+.content-body img {
     border-style:none;
     border-width:0px;
     -webkit-border-top-left-radius: 25px;
