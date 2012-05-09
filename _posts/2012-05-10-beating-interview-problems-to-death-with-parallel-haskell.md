@@ -51,16 +51,17 @@ rleReduce a b
 {% endhighlight %}
 
 This is less standard (I haven't spotted this particular bit of code
-anywhere), but no less straightforward: simply join two RLE'd lists
+anywhere), but no less straightforward: simply join two `RLE`'d lists
 together if their tail and head are not the same character, otherwise
 update the number and merge the adjoining tuple.
 
-Now, it's just a matter of splitting the RLE target into pices,
+Now, it's just a matter of splitting the RLE target into pieces,
 `map`ing over pieces, and `reducing` them back into a cohesive
-RLE-encoded document.
+`RLE`-encoded document.
 
 And this is where we first encounter problems.  As expected, doing
-this in plain standard `Haskell` doesn't buy us any improvements
+this in standard `Haskell` doesn't buy us any improvements vs. not
+splitting at all:
 
 {% highlight haskell %}
 parallelRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s
@@ -74,12 +75,12 @@ improvement:
 parallelRLE n s = foldl rleReduce [] $ (parMap rdeepseq) rleMap $ chunkn n s
 {% endhighlight %}
 
-But, unfortunately, the bookkeeping and garbage collecting overwhelm
+But, unfortunately, the bookkeeping and garbage collection overwhelm
 the problem very quickly.  I grabbed a few multi-megabyte text files
-(some with more redundancy than others) and tried it out, and no
-amount of coaxing could make the parallelized version do any better.
-While we could have written an RLE in plain `C` without much more
-trouble and not have encountered such performance obstacles, you
+(some with more redundancy than others) to trt it out, and no amount
+of coaxing could make the parallelized version do any better.  While
+we could have written our `RLE` algorithm in plain `C` without much
+more trouble and not have encountered such performance obstacles, you
 simply cannot parallelize C by swapping in a `parMap` either (see
 [this][7]).  So, we have to deep-dive into some `Haskell` optimization
 to get a performant version.
@@ -88,12 +89,12 @@ There is one painful bottleneck: `Haskell` list monads are not ideal
 for handling bulk data of the sort we need, especially since
 `Haskell`'s `String` type is really just a `[Char]`.  Since there's no
 reason to use a linked list just to scan over characters, we instead
-turn to `Data.ByteString` for reading files/stdin and, and to
+turn to `Data.ByteString` for reading files/stdin and to
 `Data.Sequence` to handle the RLE-encoded tuples.  `Data.Sequence`
 specifically removes the large penalty when concatenating the lists
 together in the `reduce` step, as adding to either end of a `Seq` is a
-constant time operation, unlike standard `Haskell` lists, where only
-adding an element to a list head is constant time.  Importing these
+constant time operation, unlike `[]`, where only adding an element to
+a list head is constant time.  Importing these
 
 {% highlight haskell %}
 import Data.ByteString.Lazy.Char8 as BL 
@@ -133,9 +134,9 @@ rleReduce a b = rleReduce' (viewr a) (viewl b)
                          | otherwise = a >< b
 {% endhighlight %}
 
-Optionally, `Data.Sequence` has views, which is `ViewPatterns` was
-made for.  Rewriting with these in mind make new `reduce` resemble the
-old one fairly closely:
+Optionally, `Data.Sequence` has views, which is what `ViewPatterns`
+was made for.  Rewriting with these in mind makes the new `reduce`
+resemble the old one fairly closely:
 
 {% highlight haskell %}
 {-# LANGUAGE ViewPatterns #-}
