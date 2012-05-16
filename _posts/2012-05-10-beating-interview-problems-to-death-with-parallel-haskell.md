@@ -69,7 +69,15 @@ parallelRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s
 `n` even-sized pices--see gist below) As expected, splitting the list
 apart and recombining is needless overhead without parallelization:
 
-    [show runtimes here]
+    # No splitting (parallelRLE n s = rleMap s)
+    > ghc -O2 prle --make
+    > /usr/bin/time -f '%E' ./prle huge.txt 1>/dev/null
+    0:05.89
+
+    # Nonparallel splitting (parallelRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s)
+    > ghc -O2 prle --make
+    > /usr/bin/time -f '%E' ./prle huge.txt 1>/dev/null
+    0:08.11
 
 If we parallelize it using a simple `parMap`, we might expect some
 improvement:
