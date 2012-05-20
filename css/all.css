@@ -2,4 +2,3 @@
 ---
 {% include reset.css %}
 {% include style.css %}
-{% include pygments.css %}
