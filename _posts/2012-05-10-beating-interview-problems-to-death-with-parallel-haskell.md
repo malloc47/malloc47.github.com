@@ -2,7 +2,7 @@
 layout: post
 title: Beating Interview Problems to Death with Parallel Haskell
 date: 2012-05-10 00:00:00
-published: false
+published: true
 ---
 
 Like anyone for whom graduation is becoming more immanent, I've been
@@ -34,7 +34,7 @@ function has type
 rleMap :: (Eq a) => [a] -> [(a, Int)]
 {% endhighlight %}
 
-Simple and easy.  But where's the fun in calling it quits now?  
+Simple and easy.  But where's the fun in calling it quits now? 
 Let's [MapReduce][5] our `RLE` algorithm to make it easier to parallelize
 and, potentially [Hadoop][6]-friendly.  We've already got our `map`
 function, so lets create a `reduce`:
@@ -50,46 +50,61 @@ rleReduce a b
           | otherwise = a ++ b
 {% endhighlight %}
 
-This is a less standard compnent of RLE implementations (I haven't
-spotted this particular bit of code anywhere else), but no less
-straightforward: simply join two `RLE`'d lists together if their tail
-and head are not the same character; if they are, merge the head and
-tail tuple (updating the count) and combine the rest of the list as
-normal.
+This is a less common compnent of RLE implementations (I haven't
+spotted this particular bit of code anywhere else, so it certainly can
+be improved), but no less straightforward: simply join two `RLE`'d
+lists together if their tail and head are not the same character; if
+they are, merge the head and tail tuple (updating the count) and
+combine the rest of the list as normal.
 
-Now, it's just a matter of splitting the RLE target into pieces,
+Now, it's simply a matter of splitting the RLE target into pieces,
 `map`ing over pieces, and `reducing` them back into a cohesive
 `RLE`-encoded document:
 
 {% highlight haskell %}
-parallelRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s
+splitRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s
 {% endhighlight %}
 
 (`chunkn` is a simple hand-rolled routine that splits a string into
 `n` even-sized pices--see gist below) As expected, splitting the list
 apart and recombining is needless overhead without parallelization:
 
-    # No splitting (parallelRLE n s = rleMap s)
+    # No splitting (rleMap s)
     > ghc -O2 prle --make
     > /usr/bin/time -f '%E' ./prle huge.txt 1>/dev/null
     0:05.89
 
-    # Nonparallel splitting (parallelRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s)
+    # Nonparallel splitting (foldl rleReduce [] $ map rleMap $ chunkn n s)
     > ghc -O2 prle --make
     > /usr/bin/time -f '%E' ./prle huge.txt 1>/dev/null
     0:08.11
 
-If we parallelize it using a simple `parMap`, we might expect some
-improvement:
+If we parallelize it using a simple `parMap`,
 
 {% highlight haskell %}
 parallelRLE n s = foldl rleReduce [] $ (parMap rdeepseq) rleMap $ chunkn n s
 {% endhighlight %}
 
-But, unfortunately, the bookkeeping and garbage collection overwhelm
-the problem very quickly.  
+we might expect some improvement:
 
-    [show lack of improvement]
+	# parallelRLE n s = foldl rleReduce [] $ (parMap rdeepseq) rleMap $ chunkn n s
+	> ghc -O2 prle --make -threaded -rtsopts
+	
+    # Parallel map 1 core
+	> /usr/bin/time -f '%E' ./prle huge.txt +RTS -N1 1>/dev/null
+	0:14.84
+	
+	# Parallel map 2 cores 
+	> /usr/bin/time -f '%E' ./prle huge.txt +RTS -N2 1>/dev/null
+	0:11.58
+	
+	# Parallel map 4 coress 
+	/usr/bin/time -f '%E' ./prle huge.txt +RTS -N4 1>/dev/null
+	0:15.89
+
+Unfortunately, the bookkeeping and garbage collection overwhelm the
+problem very quickly, never achieving better peformance. 
+
 
 I'm running the above on a few multi-megabyte text files (some with
 more redundancy than others) to try it out, and no amount of coaxing
@@ -97,19 +112,19 @@ could make the parallelized version do any better.  While we could
 have written our `RLE` algorithm in plain `C` without much more
 trouble and not have encountered such performance obstacles, one does
 not [simplly parallelize C][8] by swapping in a `parMap` either (see
-[this][7]).  So, we have to deep-dive into some `Haskell` optimization
+also: [this][7]).  Thus, we deep-dive into some `Haskell` optimization
 to get a performant version.
 
-There is one painful bottleneck: `Haskell` list monads are not ideal
-for handling bulk data of the sort we need, especially since
-`Haskell`'s `String` type is really just a `[Char]`.  Since there's no
-reason to use a boxed linked list just to scan over characters, we
+There is one particularly painful bottleneck: `Haskell` list monads
+are not ideal for handling bulk data of the sort we need because
+`Haskell`'s `String` type is represented as a `[Char]`.  Since there's
+no reason to use a boxed linked list just to scan over characters, we
 instead turn to `Data.ByteString` for reading the input, and to
 `Data.Sequence` to handle the RLE-encoded tuples.  `Data.Sequence`
 specifically removes the large penalty when concatenating the lists
 together in the `reduce` step, as adding to either end of a `Seq` is a
-constant time operation, unlike `[]`, where only adding an element to
-a list head is constant time.  Importing these
+constant time operation. This is in contrast to `[]`, where only
+adding an element to a list head is constant time.  Importing these
 
 {% highlight haskell %}
 import Data.ByteString.Lazy.Char8 as BL 
@@ -149,9 +164,9 @@ rleReduce a b = rleReduce' (viewr a) (viewl b)
                          | otherwise = a >< b
 {% endhighlight %}
 
-Optionally, `Data.Sequence` has views, which is what `ViewPatterns`
-was made for.  Rewriting with these in mind makes the new `reduce`
-resemble the old one fairly closely:
+Optionally, `Data.Sequence` can be expressed with `ViewPatterns`.
+Rewriting with these in mind allows the new `reduce` resemble the old
+one fairly closely:
 
 {% highlight haskell %}
 {-# LANGUAGE ViewPatterns #-}
@@ -164,7 +179,7 @@ rleReduce a@(viewr -> (rs :> r)) b@(viewl -> (l :< ls))
            | otherwise = a >< b
 {% endhighlight %}
 
-Now we just define a new `parallelRLE`
+Now we finally define a new `parallelRLE`
 
 {% highlight haskell %}
 parallelRLE :: Int -> BL.ByteString -> Seq (Char, Int)
@@ -184,20 +199,23 @@ main = do
 With an improved algorithm and `IO` wrapper, it's time for a more
 complete benchmark:
 
-    [img here]
+[<img src="/img/posts/beating-interview-problems-to-death-with-parallel-haskell/prle-plot.jpg" alt="Performance Plot" width="600" height="400" />](/img/posts/beating-interview-problems-to-death-with-parallel-haskell/prle-plot.png)
 
-Between 2 and 3 processors, we get a nicely ramped speedup.  After 7
+Between 2 and 5 processors, we get a nicely ramped speedup.  After 5
 processors, the bookkeeping overhead rears its ugly head again
-reversing the trend, and after about 41 processors, the
-parallelization ends up with a worse running time than the
-nonparallelized version, with a few other spikes before this.
+reversing the trend, and around 48 processors (my system maximum), the
+parallelization ends up running as slowly as the unparallelized
+version.
+
+There's a lot more to explore, of course.  Creating a single chunk of
+work (called a `spark` in the `Haskell` threading model) for each
+processor could certainly be tweaked to potentially exploit the cores
+even more.
 
 While I'm no `Haskell` expert, parallelization which costs no more
 than swapping in a `parMap` and paying homage to the Big O gods is a
 very compelling reason to hammer out any other toy interview questions
 with `Haskell` in the future.
-
-    [gist here]
 
 [1]: http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
 [2]: http://en.wikipedia.org/wiki/Run-length_encoding
