@@ -2,7 +2,7 @@
 layout: post
 title: Beating Interview Problems to Death with Parallel Haskell
 date: 2012-07-08 00:00:00
-published: false
+published: true
 ---
 
 Like anyone for whom graduation is becoming more immanent, I've been
@@ -11,15 +11,15 @@ process.  While many of the [Fizz Buzz][1]es being thrown around
 aren't exactly exciting highlights of problem solving... well, you can
 always just beat them to death.
 
-The [Run Length Encoding][2] algorithm is a nice, compact, and fairly
-real-world interview problem that has been making the rounds for [years][3] 
-now.  The basic idea being that "runs" of data,
+The [Run Length Encoding][2] algorithm is a nice, compact, and
+slightly real-world interview problem that has been making the rounds
+for [years][3] now.  The basic idea being that "runs" of data,
 e.g. `aaaabbbbbbb`, are compressed into tuples, e.g. `4a7b`, which may
 be a smaller representation if there is a large amount of adjacent
-repeated information.  While the real-world use cases for such a naïve
+repeated information.  While real-world use cases for such a naïve
 compression scheme aren't abundant, the algorithm is straightforward
 and can be implemented in a dozen lines or so in most [languages][4].
-If you've got regexes or library functions at your disposal, you can
+If you've got regexes or similar libraries at your disposal, you can
 manage even fewer lines.  In `Haskell`'s case, one:
 
 {% highlight haskell %}
@@ -36,7 +36,7 @@ rleMap :: (Eq a) => [a] -> [(a, Int)]
 
 Simple and easy.  But where's the fun in calling it quits now? 
 Let's [MapReduce][5] our `RLE` algorithm to make it easier to parallelize
-and, potentially [Hadoop][6]-friendly.  We've already got our `map`
+and potentially [Hadoop][6]-friendly.  We've already got our `map`
 function, so lets create a `reduce`:
 
 {% highlight haskell %}
@@ -50,12 +50,12 @@ rleReduce a b
           | otherwise = a ++ b
 {% endhighlight %}
 
-This is a less common compnent of RLE implementations (I haven't
-spotted this particular bit of code anywhere else, so it certainly can
-be improved), but no less straightforward: simply join two `RLE`'d
-lists together if their tail and head are not the same character; if
-they are, merge the head and tail tuple (updating the count) and
-combine the rest of the list as normal.
+This is a less common component of RLE implementations (I haven't
+spotted this particular bit of code anywhere else, so there's likely
+room for improvement), but no less straightforward: simply join two
+`RLE`'d lists together if their tail and head are not the same
+character; if they are, merge the head and tail tuple (updating the
+count) and combine the rest of the list as normal.
 
 Now, it's simply a matter of splitting the RLE target into pieces,
 `map`ing over pieces, and `reducing` them back into a cohesive
@@ -66,18 +66,18 @@ splitRLE n s = foldl rleReduce [] $ map rleMap $ chunkn n s
 {% endhighlight %}
 
 (`chunkn` is a simple hand-rolled routine that splits a string into
-`n` even-sized pices--see gist below) As expected, splitting the list
-apart and recombining is needless overhead without parallelization:
+`n` similar-sized pieces) As expected, splitting the list apart and
+recombining is needless overhead without parallelization:
 
     # No splitting (rleMap s)
     > ghc -O2 prle --make
-    > /usr/bin/time -f '%E' ./prle huge.txt 1>/dev/null
-    0:05.89
+    > /usr/bin/time -f '%E' ./prle large.txt 1>/dev/null
+	0:02.68
 
     # Nonparallel splitting (foldl rleReduce [] $ map rleMap $ chunkn n s)
     > ghc -O2 prle --make
-    > /usr/bin/time -f '%E' ./prle huge.txt 1>/dev/null
-    0:08.11
+    > /usr/bin/time -f '%E' ./prle large.txt 1>/dev/null
+	0:06.51
 
 If we parallelize it using a simple `parMap`,
 
@@ -91,29 +91,27 @@ we might expect some improvement:
 	> ghc -O2 prle --make -threaded -rtsopts
 	
     # Parallel map 1 core
-	> /usr/bin/time -f '%E' ./prle huge.txt +RTS -N1 1>/dev/null
-	0:14.84
+	> /usr/bin/time -f '%E' ./prle large.txt +RTS -N1 1>/dev/null
+	0:06.31
 	
 	# Parallel map 2 cores 
-	> /usr/bin/time -f '%E' ./prle huge.txt +RTS -N2 1>/dev/null
-	0:11.58
+	> /usr/bin/time -f '%E' ./prle large.txt +RTS -N2 1>/dev/null
+	0:08.50
 	
-	# Parallel map 4 coress 
-	/usr/bin/time -f '%E' ./prle huge.txt +RTS -N4 1>/dev/null
-	0:15.89
+	# Parallel map 4 cores
+	/usr/bin/time -f '%E' ./prle large.txt +RTS -N4 1>/dev/null
+	0:11.00
 
 Unfortunately, the bookkeeping and garbage collection overwhelm the
-problem very quickly, never achieving better peformance. 
+problem very quickly, never achieving better performance.
 
-
-I'm running the above on a few multi-megabyte text files (some with
-more redundancy than others) to try it out, and no amount of coaxing
-could make the parallelized version do any better.  While we could
-have written our `RLE` algorithm in plain `C` without much more
-trouble and not have encountered such performance obstacles, one does
-not [simplly parallelize C][8] by swapping in a `parMap` either (see
-also: [this][7]).  Thus, we deep-dive into some `Haskell` optimization
-to get a performant version.
+I'm running the above on a randomly-generated `12MB` text file, and no
+amount of coaxing could make the parallelized version do any better.
+While we could have written our `RLE` algorithm in plain `C` without
+much more trouble and not have encountered such performance obstacles,
+one does not [simply parallelize C][8] by swapping in a `parMap`
+either (see also: [this][7]).  Thus, we deep-dive into some `Haskell`
+optimization to get a performant version.
 
 There is one particularly painful bottleneck: `Haskell` list monads
 are not ideal for handling bulk data of the sort we need because
@@ -165,8 +163,8 @@ rleReduce a b = rleReduce' (viewr a) (viewl b)
 {% endhighlight %}
 
 Optionally, `Data.Sequence` can be expressed with `ViewPatterns`.
-Rewriting with these in mind allows the new `reduce` resemble the old
-one fairly closely:
+Rewriting with these in mind allows the new `reduce` to resemble the
+old one fairly closely:
 
 {% highlight haskell %}
 {-# LANGUAGE ViewPatterns #-}
@@ -201,21 +199,20 @@ complete benchmark:
 
 [<img src="/img/posts/beating-interview-problems-to-death-with-parallel-haskell/prle-plot.jpg" alt="Performance Plot" width="600" height="400" />](/img/posts/beating-interview-problems-to-death-with-parallel-haskell/prle-plot.png)
 
-Between 2 and 5 processors, we get a nicely ramped speedup.  After 5
-processors, the bookkeeping overhead rears its ugly head again
-reversing the trend, and around 48 processors (my system maximum), the
-parallelization ends up running as slowly as the unparallelized
-version.
-
-There's a lot more to explore, of course.  Creating a single chunk of
-work (called a `spark` in the `Haskell` threading model) for each
-processor could certainly be tweaked to potentially exploit the cores
-even more.
+This was run on a `0.5GB` file, as the smaller `12MB` file used above
+runs so fast that is essentially instant.  Between 2 and 5 processors,
+we get a nicely ramped speedup.  After 5 processors, the bookkeeping
+overhead rears its ugly head again reversing the trend, and around 48
+processors (my system maximum), the parallelization ends up running as
+slowly as the unparallelized version.  This is certainly not the end
+of possible optimizations, but we have to stop sometime.
 
 While I'm no `Haskell` expert, parallelization which costs no more
 than swapping in a `parMap` and paying homage to the Big O gods is a
 very compelling reason to hammer out any other toy interview questions
 with `Haskell` in the future.
+
+Get the code [here][9].  Feedback welcome.
 
 [1]: http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
 [2]: http://en.wikipedia.org/wiki/Run-length_encoding
@@ -225,3 +222,4 @@ with `Haskell` in the future.
 [6]: http://hadoop.apache.org/mapreduce/
 [7]: http://en.wikipedia.org/wiki/There_ain%27t_no_such_thing_as_a_free_lunch
 [8]: http://memegenerator.net/instance/20426610
+[9]: https://github.com/malloc47/snippets/tree/master/prle
