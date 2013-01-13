@@ -3,7 +3,7 @@ layout: page
 title: Research
 ---
 
-I study [computer vision][1] with an emphasis on [image segmentation][2], [document image analysis][3], and video event recognition. Currently, I do research (and manage the network) at the [Computer Vision Lab][4]. I've been funded by graduate teaching assistantships, [NSF][5], [NEH][6], [DARPA][7], and [AFOSR][15], as detailed in my [CV](https://raw.github.com/malloc47/cv/master/cv.pdf).
+I study [computer vision][1] with an emphasis on [image segmentation][2], [document image analysis][3], and video event recognition. Currently, I do research (and manage the network) at the [Computer Vision Lab][4]. I've been funded by graduate teaching assistantships, [NSF][5], [NEH][6], [DARPA][7], and [AFOSR][15], as detailed in my [CV](cv.pdf) and more briefly in my [résumé](resume.pdf).
 
 # Code
 
@@ -19,24 +19,24 @@ I study [computer vision][1] with an emphasis on [image segmentation][2], [docum
 
 # Papers
 
-- Jarrell Waggoner, Jeff Simmons, and Song Wang.
-[Combining global labeling and local relabeling for metallic image segmentation][8].
+- Jarrell Waggoner, Jeff Simmons, Marc De Graef, and Song Wang.  [Graph Cut Approaches for Materials Segmentation Preserving Shape, Appearance, and Topology][20].
+  *International Conference on 3D Materials Science*, 147-152, Seven
+  Springs, PA, 2012.
+
+- Jarrell Waggoner, Jeff Simmons, and Song Wang. [Combining global labeling and local relabeling for metallic image segmentation][8].
 In *Proceedings of SPIE (Computational Imaging X)*, volume 8296,
 Burlingame, CA, 2012.
 
-- Song Wang, Jarrell Waggoner, and Jeff Simmons.
-[Graph-cut methods for grain boundary segmentation][9].  *JOM Journal
+- Song Wang, Jarrell Waggoner, and Jeff Simmons. [Graph-cut methods for grain boundary segmentation][9].  *JOM Journal
 of the Minerals, Metals and Materials Society*, 63(7):49–51, 2011.
 
 - Andrew Temlyakov, Brent C. Munsell, Jarrell W. Waggoner, and Song
-Wang.
-[Two perceptually motivated strategies for shape classification][10]. In
+Wang. [Two perceptually motivated strategies for shape classification][10]. In
 *IEEE Conference on Computer Vision and Pattern Recognition*, pages
 2289–2296, 2010.
 
 - Zhiqi Zhang, Yu Cao, Dhaval Salvi, Kenton Oliver, Jarrell Waggoner,
-and Song Wang.
-[Free-shape subwindow search for object localization][11]. In *IEEE
+and Song Wang. [Free-shape subwindow search for object localization][11]. In *IEEE
 Conference on Computer Vision and Pattern Recognition*, pages
 1086–1093, 2010.
 
@@ -63,3 +63,4 @@ Conference on Computer Vision and Pattern Recognition*, pages
 [17]: https://github.com/malloc47/matscicut
 [18]: http://sapheos.org/
 [19]: https://github.com/malloc47/digital-collation
+[20]: http://cse.sc.edu/~songwang/document/3dms.pdf
