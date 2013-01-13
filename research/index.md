@@ -51,7 +51,7 @@ Conference on Computer Vision and Pattern Recognition*, pages
 [5]:  http://www.gk12.org
 [6]:  http://www.neh.gov/grants/guidelines/digitalhumanitiesstartup.html
 [7]:  http://www.darpa.mil/
-[8]:  http://spiedigitallibrary.org/proceedings/resource/2/psisdg/8296/1/829606_1
+[8]:  http://cse.sc.edu/~songwang/document/spie12.pdf
 [9]:  http://cse.sc.edu/~songwang/document/jom11.pdf
 [10]: http://cse.sc.edu/~songwang/document/cvpr10a.pdf
 [11]: http://cse.sc.edu/~songwang/document/cvpr10b.pdf
