@@ -2,15 +2,15 @@
 layout: post
 title: Producing LaTeX from NumPy Arrays
 date: 2013-01-29 20:00:00
-published: false
+published: true
 ---
 
-For my comprehensive exam, I had need of quickly converting some NumPy
+For my comprehensive exam, I needed to quickly convert some NumPy
 arrays into nice-looking LaTeX `array` elements.  The TeX Stack
 Exchange site has a good [answer][1] for `tabular` environments, but
-wasn't quite suited to what I needed for the `array` environment.  The
-usual answer here would be [Pweave][2] but, being short on time, I
-ended up rolling my own function instead:
+wasn't quite suited to the `array` environment.  The usual answer here
+would be [Pweave][2] but, being short on time, I ended up rolling my
+own function instead:
 
 {% highlight python %}
 def to_latex(a,label='A'):
