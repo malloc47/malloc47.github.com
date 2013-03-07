@@ -4,7 +4,7 @@ title: Talks
 ---
 
 - [Computer Science: Research, Industry, and Entrepreneurship][4].
-  Careers in Science Lecture Series.  March 6, 2013.
+  Careers in Science Lecture Series. Lancaster, SC.  March 6, 2013.
 
 - [Combining Global Labeling and Local Relabeling for
   Metallic Image Segmentation][3].  SPIE (Computational Image XI).
