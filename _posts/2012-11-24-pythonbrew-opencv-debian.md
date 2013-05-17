@@ -74,7 +74,7 @@ should use, since all your additional packages installed into the
 
     ~/.pythonbrew/venvs/Python-2.7.3/{venv-name}/include/python2.7
 
-The hitch, however, is that the `virtualenv` does not got a
+The hitch, however, is that the `virtualenv` does not have a
 copy/symlink of the shared library we specifically built when first
 compiling python using `pythonbrew`, unlike a typical native python
 install.  This means that `cmake`'s approach to locate this library
