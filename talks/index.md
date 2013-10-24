@@ -3,6 +3,9 @@ layout: page
 title: Talks
 ---
 
+- [Python for Computer Vision][8]. [All Things Open][9].  Raleigh, SC.
+  October 24, 2013. [Source][10].
+
 - [Interactive Grain Image Segmentation Using Graph Cut Algorithms][7]. USC
   Graduate Student Day. Columbia, SC.  April 12, 2013.
 
@@ -24,3 +27,6 @@ title: Talks
 [5]: /posscon2013/
 [6]: http://posscon.org/
 [7]: /gsd2013/
+[8]: /ato2013/
+[9]: http://allthingsopen.org/
+[10]: https://github.com/malloc47/ato2013-code
