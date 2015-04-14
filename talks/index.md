@@ -3,6 +3,9 @@ layout: page
 title: Talks
 ---
 
+- [Rules Engines: Logic As Data Structure][11]. [POSSCON][6].
+  Columbia, SC.  April 14, 2015. [Source][12].
+
 - [Python for Computer Vision][8]. [All Things Open][9].  Raleigh, SC.
   October 24, 2013. [Source][10].
 
@@ -30,3 +33,5 @@ title: Talks
 [8]: /ato2013/
 [9]: http://allthingsopen.org/
 [10]: https://github.com/malloc47/ato2013-code
+[11]: /posscon2015/
+[12]: https://github.com/malloc47/posscon2015/
