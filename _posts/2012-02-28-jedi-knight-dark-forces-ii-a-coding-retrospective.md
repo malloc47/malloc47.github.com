@@ -189,4 +189,4 @@ ecosystem. It was an IDE. And it was fun.
 [4]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/readme.txt
 [5]: http://tacc.massassi.net/levels/review.php?id=41
 [6]: http://code.google.com/p/starwarsjediknightaltinstall/
-[7]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/cog/forcefield_goal.co
+[7]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/cog/forcefield_goal.cog
