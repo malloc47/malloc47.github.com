@@ -41,7 +41,7 @@ footer {
 }
 /* .content-body>p:first-child:first-letter {color: #C7EE68;} */
 .date {color: #AAA;}
-.date-dark {color: #666;}
+.date-dark {color: #444;}
 .social a, .social a:visited {
     color: #6F81D6;
     text-decoration: none;
