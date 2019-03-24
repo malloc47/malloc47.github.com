@@ -1,22 +1,4 @@
     <div class="share">
-<script type="text/javascript">
-(function(doc, script) {
-    var js,
-        fjs = doc.getElementsByTagName(script)[0],
-        add = function(url, id) {
-            if (doc.getElementById(id)) {return;}
-            js = doc.createElement(script);
-            js.src = url;
-            id && (js.id = id);
-            fjs.parentNode.insertBefore(js, fjs);
-        };
-
-    add(('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js', 'ga');
-    add('https://apis.google.com/js/plusone.js');
-    add('//platform.twitter.com/widgets.js', 'twitter-wjs');
-}(document, 'script'));
-</script>
       <iframe frameborder="no" scrolling="no" height="28px" width="100px" src="http://hnlike.com/upvote.php?link={{ site.url | cgi_escape }}{{ page.url | cgi_escape }}&title={{ site.title | cgi_escape }}&#47;{{ page.title | cgi_escape }}">Sorry, no iframes for you :(</iframe>
-      <g:plusone size="medium"></g:plusone>
       <a href="https://twitter.com/share" class="twitter-share-button" data-via="malloc47">Tweet</a>
     </div>
