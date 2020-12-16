@@ -335,12 +335,6 @@ nav ul li:first-child {
 .content-body img {
     border-style:none;
     border-width:0px;
-    -webkit-border-top-left-radius: 25px;
-    -webkit-border-bottom-right-radius: 25px;
-    -moz-border-radius-topleft: 25px;
-    -moz-border-radius-bottomright: 25px;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
     display: block;
     margin-left: auto;
     margin-right: auto;
