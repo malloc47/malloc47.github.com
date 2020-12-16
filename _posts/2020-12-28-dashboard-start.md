@@ -3,6 +3,7 @@ layout: post
 title: Building a Personal Dashboard in ClojureScript
 date: 2020-12-13 00:00:00
 published: true
+permalink: building-a-personal-dashboard-in-clojurescript
 ---
 
 After the 100th time checking the weather before heading out the door
@@ -134,7 +135,7 @@ components:
        [:> Grid card-opts [stocks]]]]]))
 ```
 
-The `:>` shorthand lets us adapt Reagent components from React
+The `:>` shorthand lets us adapt React components into Reagent
 components. `weather`, `clock`, `transit`, and `stocks` are functions
 that define the contents of each card. This gives us a blank slate to
 fill in our cards with content.
