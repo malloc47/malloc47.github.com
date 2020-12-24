@@ -12,9 +12,9 @@ near my front door with relevant information would be useful. In
 anticipation of venturing outdoors more regularly in a post-vaccine
 world, I decided to build a personal dashboard as my pandemic project.
 
-There is a lot of prior art in this space, from the [Magic Mirror][]
-Raspberry-Pi-deployed dashboard intended to be embedded in a DIY
-mirror, to customizable [iPad apps][] that have all the common
+There is a good deal of prior art in this space, from the [Magic
+Mirror][] Raspberry-Pi-deployed dashboard intended to be embedded in a
+DIY mirror, to customizable [iPad apps][] that have all the common
 personal dashboard features out-of-the-box. For my part, I wanted to
 balance the customizability associated with a DIY project with the
 lightweight-ness of a solution that runs entirely on a tablet. I
@@ -22,12 +22,12 @@ specifically wanted to customize the particular APIs used, including
 some less common sources like local transit times. Though I make no
 claims to being a frontend developer, I expect it is uncontroversial
 to say that a backend-less [SPA][] is among the more lightweight
-options in web application space. And my go-to for building frontend
-applications is [ClojureScript][].
+options in the web application space. And my go-to for building
+frontend applications is [ClojureScript][].
 
-This post will walk through the creation of [cockpit][], the
-ClojureScript SPA I now have mounted on my wall. Before getting to
-specifics, let's look at the final project:
+This series of posts will walk through the creation of [cockpit][],
+the ClojureScript SPA I now have mounted on my wall. Before getting to
+specifics, let's look at the final dashboard:
 
 <a href="/img/posts/cockpit/full.png">
   <img src="/img/posts/cockpit/full.png" alt="Full dashboard view not guaranteed to make sense" width="600" />
@@ -59,19 +59,19 @@ Some highlights:
   [GTFS][] feeds from the particular transit agency in
   question.
 
-Each card has a lot more details worth diving into, but this post will
-primarily cover the skeleton of the application; I'll aspirationally
-follow-up with future posts to explore the different cards in the
-dashboard.
+There are loads more details that go into each card, but this post
+will primarily cover the skeleton of the application; I'll
+aspirationally follow-up with future posts to explore the different
+cards in the dashboard.
 
 # Dashboard Skeleton
 
-In the ClojureScript SPA space, there are several top-level React
+In the ClojureScript SPA space, there are several stand-out React
 wrappers vying for dominance. For this project, I chose [re-frame][]
 since the learning curve for a small-scale project was lighter than
 [Fulcro][]. Rather than wire all the various libraries, build tools,
 and debugging utilities together manually, the [re-frame-template][]
-makes it easy to get started:
+makes it easy to get started. This
 
     lein new re-frame cockpit +10x +cider +kondo +test
 
@@ -89,13 +89,13 @@ toes into Material UI requires adding it as a dependency to
  ...}
 ```
 
-which will get it installed through the typical `npm` channels during
-the build.
+which will instruct `shadow-cljs` to fetch the dependencies through
+`npm` during the build.
 
 The `src/cljs/<project>/views.cljs` file is where the "Hello World"
-`main-panel` lives. Thanks to the magic of shadow-cljs, we can require
-the React components directly into the `cockpit.views` namespace as if
-they were native ClojureScript code:
+`main-panel` lives. Thanks to the magic of `shadow-cljs`, we can
+require the React components directly into the `cockpit.views`
+namespace as if they were native ClojureScript code:
 
 ```clojure
 (ns cockpit.views
@@ -109,8 +109,8 @@ they were native ClojureScript code:
    ["@material-ui/core/Typography" :default Typography]))
 ```
 
-This lets us modify the `main-panel` with our Material UI [Grid][]
-components:
+With this in place, we can modify the `main-panel` with our Material
+UI [Grid][] components:
 
 ```clojure
 (defn main-panel []
@@ -124,7 +124,7 @@ components:
        [:> Grid card-opts [stocks]]]]]))
 ```
 
-The `:>` shorthand lets us adapt React components into Reagent
+The `:>` shorthand adapts React components into Reagent
 components. `weather`, `clock`, `transit`, and `stocks` are functions
 that define the contents of each card. This gives us a blank slate to
 fill in our cards with content.
@@ -135,9 +135,9 @@ fill in our cards with content.
   <img src="/img/posts/cockpit/clock.png" alt="Clock card" width="400" />
 </a>
 
-The clock card consists of a header with the date, the current time, a
-grid with the Central and Pacific times displayed, and the
-sunrise/sunset times.
+The clock card consists of a header with the date, the current local
+time, a side-by-side view of the time in the US Central and Pacific
+time zones, and the sunrise/sunset times.
 
 The `clock` view implementing this looks something like:
 
@@ -147,26 +147,26 @@ The `clock` view implementing this looks something like:
    [:> CardContent
 
     [:> Typography {:align "center" :variant "h4"}
-     @(re-frame/subscribe [::clock/day])]
+     @(re-frame/subscribe [::events/day])]
 
     [:> Typography {:align "center" :variant "h1"}
-     @(re-frame/subscribe [::clock/time])]
+     @(re-frame/subscribe [::events/time])]
 
     [:> Grid {:container true :spacing 0 :direction "row"
               :justify "center" :alignItems "center"}
      [:> Grid {:item true :xs 6}
       [:> Typography {:align "center" :variant "h6"}
-       @(re-frame/subscribe [::clock/time-pt])]
+       @(re-frame/subscribe [::events/time-pt])]
       [:> Typography {:align "center" :variant "body2"}
        "San Francisco"]]
      [:> Grid {:item true :xs 6}
       [:> Typography {:align "center" :variant "h6"}
-       @(re-frame/subscribe [::clock/time-ct])]
+       @(re-frame/subscribe [::events/time-ct])]
       [:> Typography {:align "center" :variant "body2"}
        "Chicago"]]]
 
     (let [{:keys [sunrise sunset]}
-          @(re-frame/subscribe [::weather/sun])]
+          @(re-frame/subscribe [::events/sun])]
       [:> Typography {:align "center"
                       :variant "h6"}
        [:i {:class "wi wi-sunrise"}]
@@ -175,7 +175,11 @@ The `clock` view implementing this looks something like:
        sunset])]])
 ```
 
-Nested within the various React components styling the view are
+which makes liberal use of the `Typography` Material-UI component
+along with a nested `Grid` component to show the ET/CT timezones
+side-by-side.
+
+Nested within these React components styling the view are
 `re-frame/subscribe` functions which bind the view to re-frame
 _subscriptions_ which are, effectively, listeners for re-frame
 _events_. Subscriptions and events are commonly defined in
@@ -204,19 +208,19 @@ for the main time display are comparatively simple:
 ```
 
 Subscriptions and events in re-frame are a [complex][subscriptions]
-and nuanced topic, so this breakdown will only begin to scratch the
-surface. In short, the `::timer` event--when triggered--will update
-the `:clock` key in the application's `db` state. The `::clock`
-subscription is a "Layer 2" extractor subscription that does nothing
-but pluck the `:clock` key back out of the application `db`. The
-`::time` subscription is a "Layer 3" materialized view of this
-extracted value (the `:<- [::clock]` adds the subscription
-dependency), converting it to the time string that is ready to be
-inserted into the rendered view. Internally, re-frame chains these
-subscriptions into a graph, updating all the Layer 2 subscriptions
-when the db changes, and then updates only the changed Layer 3
-subscriptions and their subscribed views, leaving everything else
-untouched.
+topic, so this treatment will only begin to scratch the surface. In
+short, the `::timer` event--when triggered--will update the `:clock`
+key in the application's `db` state hash-map. The `::clock`
+subscription defined with `reg-sub` is a "Layer 2" extractor
+subscription that does nothing but pluck the `:clock` key back out of
+the application `db`. The `::time` subscription is a "Layer 3"
+materialized view of this extracted value (the `:<- [::clock]` adds
+the subscription dependency), converting it to a string that is ready
+to be inserted into the rendered view. Internally, re-frame chains
+these subscriptions into a graph, updating all the Layer 2
+subscriptions when the db changes, and then updates only the changed
+Layer 3 subscriptions and their subscribed views, leaving everything
+else untouched.
 
 To tie things together, we need to continually trigger the `::timer`
 event for our clock to receive updates and be re-rendered in the
