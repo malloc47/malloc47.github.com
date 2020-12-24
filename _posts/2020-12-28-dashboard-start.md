@@ -59,6 +59,10 @@ Some highlights:
   [GTFS][] feeds from the particular transit agency in
   question.
 
+- The compiled dashboard is physically hosted from my home router and
+  is displayed on an inexpensive [Amazon Fire 8][] tablet with the
+  [Fully Kiosk][] app.
+
 There are loads more details that go into each card, but this post
 will primarily cover the skeleton of the application; I'll
 aspirationally follow-up with future posts to explore the different
@@ -222,6 +226,10 @@ subscriptions when the db changes, and then updates only the changed
 Layer 3 subscriptions and their subscribed views, leaving everything
 else untouched.
 
+The remaining subscriptions are left as an exercise to the reader with
+spoilers available (isolated to a dedicated namespace) in the
+[`clock.cljs` file][clock.cljs] in the source.
+
 To tie things together, we need to continually trigger the `::timer`
 event for our clock to receive updates and be re-rendered in the
 view. For this, we turn to [re-pollsive][], a library that lets us
@@ -268,3 +276,6 @@ involves our first external API calls.
 [Grid]: https://material-ui.com/components/grid/
 [subscriptions]: https://day8.github.io/re-frame/subscriptions/
 [re-pollsive]: https://github.com/gadfly361/re-pollsive
+[Amazon Fire 8]: https://www.amazon.com/Fire-HD-8-Previous-Generation-9th/dp/B0794RHPZD
+[Fully Kiosk]: https://www.fully-kiosk.com/
+[clock.cljs]: https://github.com/malloc47/cockpit/blob/ac0ba2f5c7d985aceca03fdb079050d498983587/src/cljs/cockpit/clock.cljs
