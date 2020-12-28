@@ -1,29 +1,30 @@
 ---
 layout: post
 title: Building a Personal Dashboard in ClojureScript
-date: 2020-12-13 00:00:00
+date: 2020-12-27 00:00:00
 published: true
 permalink: building-a-personal-dashboard-in-clojurescript
 ---
 
-After the 100th time checking the weather before heading out the door
-in the morning, I came to the realization that having a tablet mounted
-near my front door with relevant information would be useful. In
-anticipation of venturing outdoors more regularly in a post-vaccine
-world, I decided to build a personal dashboard as my pandemic project.
+After the 100th time checking the weather or looking up transit times
+before heading out the door in the morning, I came to the realization
+that having a tablet mounted near my front door with relevant
+information would be useful. In anticipation of venturing outdoors
+more regularly in a post-vaccine world, I decided to build a personal
+dashboard as my pandemic project.
 
 There is a good deal of prior art in this space, from the [Magic
 Mirror][] Raspberry-Pi-deployed dashboard intended to be embedded in a
 DIY mirror, to customizable [iPad apps][] that have all the common
 personal dashboard features out-of-the-box. For my part, I wanted to
-balance the customizability associated with a DIY project with the
-lightweight-ness of a solution that runs entirely on a tablet. I
-specifically wanted to customize the particular APIs used, including
-some less common sources like local transit times. Though I make no
-claims to being a frontend developer, I expect it is uncontroversial
-to say that a backend-less [SPA][] is among the more lightweight
-options in the web application space. And my go-to for building
-frontend applications is [ClojureScript][].
+balance the customizability of a DIY project with the lightweight-ness
+of a solution that runs entirely on a tablet. I specifically wanted to
+customize the particular APIs used, including some less common sources
+like local transit times. Though I make no claims to being a frontend
+developer, I expect it is uncontroversial to say that a backend-less
+[SPA][] is among the more lightweight options in the web application
+space. And my go-to for building frontend applications is
+[ClojureScript][].
 
 This series of posts will walk through the creation of [cockpit][],
 the ClojureScript SPA I now have mounted on my wall. Before getting to
@@ -63,10 +64,11 @@ Some highlights:
   is displayed on an inexpensive [Amazon Fire 8][] tablet with the
   [Fully Kiosk][] app.
 
-There are loads more details that go into each card, but this post
-will primarily cover the skeleton of the application; I'll
-aspirationally follow-up with future posts to explore the different
-cards in the dashboard.
+There are loads more details that go into a card--each is effectively
+its own mini application. This post will primarily cover the skeleton
+of the dashboard and the bare-bones clock card; I'll aspirationally
+follow-up with future posts to explore the other cards in the
+dashboard.
 
 # Dashboard Skeleton
 
@@ -105,12 +107,12 @@ namespace as if they were native ClojureScript code:
 (ns cockpit.views
   (:require
    [re-frame.core :as re-frame]
-   ["@material-ui/core/Card" :default Card]
+   ["@material-ui/core/Card"        :default Card]
    ["@material-ui/core/CardContent" :default CardContent]
-   ["@material-ui/core/Container" :default Container]
-   ["@material-ui/core/Grid" :default Grid]
+   ["@material-ui/core/Container"   :default Container]
+   ["@material-ui/core/Grid"        :default Grid]
    ["@material-ui/core/CssBaseline" :default CssBaseline]
-   ["@material-ui/core/Typography" :default Typography]))
+   ["@material-ui/core/Typography"  :default Typography]))
 ```
 
 With this in place, we can modify the `main-panel` with our Material
@@ -181,9 +183,10 @@ The `clock` view implementing this looks something like:
 
 which makes liberal use of the `Typography` Material-UI component
 along with a nested `Grid` component to show the ET/CT timezones
-side-by-side.
+side-by-side. The only missing pieces are some minor styling to fix
+the height of the `Card` so it fills the containing `Grid`.
 
-Nested within these React components styling the view are
+Nested within the React components that make up the clock view are
 `re-frame/subscribe` functions which bind the view to re-frame
 _subscriptions_ which are, effectively, listeners for re-frame
 _events_. Subscriptions and events are commonly defined in
@@ -230,11 +233,11 @@ The remaining subscriptions are left as an exercise to the reader with
 spoilers available (isolated to a dedicated namespace) in the
 [`clock.cljs` file][clock.cljs] in the source.
 
-To tie things together, we need to continually trigger the `::timer`
-event for our clock to receive updates and be re-rendered in the
-view. For this, we turn to [re-pollsive][], a library that lets us
-trigger events based on a fixed interval. After adding the library
-dependency to the `project.clj` file, we initialize it in the
+To tie things together, we must continually trigger the `::timer`
+event for our clock to receive updates and subsequently be re-rendered
+in the view. For this, we turn to [re-pollsive][], a library that lets
+us trigger events based on a fixed time interval. After adding the
+library dependency to the `project.clj` file, we initialize it in the
 `src/cljs/<project>/core.cljs` file to continually send the `::timer`
 event:
 
@@ -251,8 +254,8 @@ event:
 An `:interval` of 1 will update our clock every second.
 
 With all this in place, a `lein dev` will build and begin serving the
-application from `localhost:8280`, complete with hot-reloading to make
-iterating and tweaking the app seamless.
+application from [localhost:8280](http://localhost:8280), complete
+with hot-reloading to make iterating and tweaking the app seamless.
 
 The next post in this series will dive into the Weather card, which
 involves our first external API calls.
