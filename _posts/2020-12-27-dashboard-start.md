@@ -257,8 +257,10 @@ With all this in place, a `lein dev` will build and begin serving the
 application from [localhost:8280](http://localhost:8280), complete
 with hot-reloading to make iterating and tweaking the app seamless.
 
-The next post in this series will dive into the Weather card, which
-involves our first external API calls.
+The [next post][] in this series will dive into the Weather card,
+which involves our first external API calls.
+
+| Part 1 | [Part 2][next post] |
 
 [Magic Mirror]: https://magicmirror.builders/
 [iPad apps]: https://apps.apple.com/us/app/id659672658
@@ -282,3 +284,4 @@ involves our first external API calls.
 [Amazon Fire 8]: https://www.amazon.com/Fire-HD-8-Previous-Generation-9th/dp/B0794RHPZD
 [Fully Kiosk]: https://www.fully-kiosk.com/
 [clock.cljs]: https://github.com/malloc47/cockpit/blob/ac0ba2f5c7d985aceca03fdb079050d498983587/src/cljs/cockpit/clock.cljs
+[next post]: {% post_url 2021-07-07-dashboard-weather %}
