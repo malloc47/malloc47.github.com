@@ -284,4 +284,4 @@ which involves our first external API calls.
 [Amazon Fire 8]: https://www.amazon.com/Fire-HD-8-Previous-Generation-9th/dp/B0794RHPZD
 [Fully Kiosk]: https://www.fully-kiosk.com/
 [clock.cljs]: https://github.com/malloc47/cockpit/blob/ac0ba2f5c7d985aceca03fdb079050d498983587/src/cljs/cockpit/clock.cljs
-[next post]: {% post_url 2021-07-07-dashboard-weather %}
+[next post]: {% post_url 2021-07-09-dashboard-weather %}
