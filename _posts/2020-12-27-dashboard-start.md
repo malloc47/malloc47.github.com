@@ -260,7 +260,7 @@ with hot-reloading to make iterating and tweaking the app seamless.
 The [next post][] in this series will dive into the Weather card,
 which involves our first external API calls.
 
-| Part 1 | [Part 2][next post] |
+| Part 1 | [Part 2][next post] | [Part 3][last post] |
 
 [Magic Mirror]: https://magicmirror.builders/
 [iPad apps]: https://apps.apple.com/us/app/id659672658
@@ -285,3 +285,4 @@ which involves our first external API calls.
 [Fully Kiosk]: https://www.fully-kiosk.com/
 [clock.cljs]: https://github.com/malloc47/cockpit/blob/ac0ba2f5c7d985aceca03fdb079050d498983587/src/cljs/cockpit/clock.cljs
 [next post]: {% post_url 2021-07-09-dashboard-weather %}
+[last post]: {% post_url 2021-09-01-dashboard-transit %}
