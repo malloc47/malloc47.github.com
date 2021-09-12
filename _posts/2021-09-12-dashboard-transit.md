@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Building a Personal Dashboard in ClojureScript Part 3
-date: 2021-08-01 00:00:00
+date: 2021-09-12 00:00:00
 published: true
 permalink: building-a-personal-dashboard-in-clojurescript-part-3
 ---
@@ -36,7 +36,8 @@ challenges:
 2. Consuming transit data from the above source, stitching it together
    to populate the view.
 
-For narrative reasons, we'll take these points in reverse order.
+For narrative reasons, we'll take these points in reverse order before
+delving into the implementation.
 
 # Consuming Transit Data
 
@@ -65,8 +66,8 @@ are glossed over in this diagram for simplicity.
 GTFS is quite normalized so there isn't an obvious self-contained
 single entity we can read that will let us drive everything in our
 dashboard.  Combing through the GTFS entities, there is noticeably a
-sizable number that are not relevant to displaying transit times at
-chosen stations. Removing entities related to fare calculation,
+sizable number that are not relevant to displaying transit times at a
+chosen station. Removing entities related to fare calculation,
 pathing, language translation, station layout, and so forth, the
 resulting trimmed-down ERD looks like:
 
@@ -74,12 +75,12 @@ resulting trimmed-down ERD looks like:
   <img src="/img/posts/cockpit/gtfs-erd-small.svg" alt="GTFS ERD Small" width="350" />
 </a>
 
-This subset of GTFS entities is a bit more manageable for walking
-through what we need to consume for our dashboarding needs. The
-particular subset that might be relevant to other agencies might be
-different (e.g., some agencies might rely more on `frequency`-based
-service or have `calendar`-based service changes) but this is all I
-needed based on the [MTA][] GTFS.
+This subset of GTFS entities is a bit more manageable for
+demonstrating what we need to consume for our dashboard. The
+particular relevant subset might be different for other agencies
+(e.g., some agencies might rely more on `frequency`-based service or
+have `calendar`-based service changes) but this is all I needed based
+on the [MTA][] GTFS.
 
 Exploring this subset in more detail, the `agency` entity isn't
 strictly necessary except in cases where the feed represents multiple
@@ -108,11 +109,11 @@ GTFS that we need for this dashboard.
 # Serving Transit Data
 
 Stepping backwards to address point (1) above, we need to talk about
-how we physically serve and consume GTFS in our web application. The
-static portion of `GTFS` is a zip file containing `.txt` files
-(effectively CSV formatted)--not impossible to handle in a web
-application with the right [decompression][zip.js] and
-[parsing][papaparse] libraries, but hardly idiomatic. The GTFS
+how we physically fetch GTFS in our web application. The static
+portion of `GTFS` is a zip file containing `.txt` files (effectively
+CSV formatted)--not impossible to download directly from the transit
+agency into a web application with the right [decompression][zip.js]
+and [parsing][papaparse] libraries, but hardly idiomatic. The GTFS
 Realtime format is even more challenging as it is serialized as a
 [Protocol Buffer][]. It _might_ be theoretically possible to consume
 the realtime ProtoBuf stream by providing the `.proto` file to the
@@ -192,9 +193,10 @@ previous installments, I'll only be going over the highlights of the
 [source code][source] in this section.
 
 As with other external APIs we need to hit, we use
-[re-frame-http-fx][] for defining the "effect handlers". An example
-where we fetch the `stop-times` (assumes that the `stop` has already
-been fetched):
+[re-frame-http-fx][] for defining the "effect handlers" that made the
+side-effecting API calls. An example where we fetch the `stop-times`
+(assumes that the `stop` has already been fetched and is passed as
+input):
 
 ```clojure
 (re-frame/reg-event-fx
@@ -237,9 +239,15 @@ events for all the new `route-ids` that it finds:
                        route-ids)})))
 ```
 
-Because routes do not change very often, `route-ids` that are already
-present in the `app-db` are not fetched again to minimize API queries,
-effectively treating the `app-db` as a cache.
+The route-fetching events are fired after fetching the stop times
+because the routes that serve a particular stop might change at any
+given point so we don't necessarily know all the routes ahead of time.
+And it would be better not to have to preemptively fetch every route
+in the system, particularly for larger agencies like the MTA. We also
+want to avoid re-fetching the same routes over and over again, so
+`route-ids` that are already present in the `app-db` are not fetched
+again to minimize API queries, effectively treating the `app-db` as a
+cache.
 
 How the `stop` and `route` entities are persisted is less interesting
 so I'm omitting examples of them here. Just like the [weather
@@ -454,7 +462,32 @@ arrow and a circular `Avatar` symbol with the line `short-name` to
 display the route. The inner `map-indexed` generates exactly 4 stop
 times (or empty `Grid` items to pad out the grid).
 
+# Conclusion
 
+Since this the final post in the series, I would be remiss not to
+include some photos of the finished product:
+
+| <a href="/img/posts/cockpit/wall1.jpg"> <img src="/img/posts/cockpit/wall1.jpg" alt="Wall-mounted dashboard" height="250" /> </a> | <a href="/img/posts/cockpit/wall2.jpg"> <img src="/img/posts/cockpit/wall2.jpg" alt="Wall-mounted dashboard with door" height="250" /> </a> |
+
+Differing slightly from the [first installment][], I've since replaced
+the stock chart in the lower right with a webcam view from [NYC DOT][]
+but kept the appearance otherwise unchanged.
+
+The dashboard is displayed on an inexpensive, previous-generation
+[Amazon Fire 8][] using the [WallPanel][] app (having switched away
+from [Fully Kiosk][] for this open-source option) to keep the
+ClojureScript SPA running continually. To physically affix the tablet
+to the wall, I purchased a [tablet wall mount][] which adheres using
+Command Strips. A wall-colored Micro USB cable to keep the tablet
+charged completes the installation.
+
+So far, this setup has been working well. There are some minor
+annoyances with the hardware: This particular Fire tablet does not
+make ambient light adjustments to the screen brightness so it lightens
+my living room considerably at night. Given that this tablet is a full
+order of magnitude cheaper than the premium tablet options, it is has
+been more than sufficient for this purpose and I won't be overly upset
+by battery or screen burn-in issues long-term.
 
 | [Part 1][first installment] | [Part 2][previous installment] | Part 3 |
 
@@ -476,3 +509,8 @@ times (or empty `Grid` items to pad out the grid).
 [source]: https://github.com/malloc47/cockpit/blob/d4badb7e652014693574063806a8ccda27d9fa36/src/cljs/cockpit/transit.cljs
 [re-frame-http-fx]: https://github.com/day8/re-frame-http-fx
 [BFF]: https://samnewman.io/patterns/architectural/bff/
+[Amazon Fire 8]: https://www.amazon.com/Fire-HD-8-Previous-Generation-9th/dp/B0794RHPZD
+[NYC DOT]: http://nyc.gov/dot
+[Fully Kiosk]: https://www.fully-kiosk.com/
+[WallPanel]: https://github.com/thanksmister/wallpanel-android
+[tablet wall mount]: https://www.amazon.com/gp/product/B01BX5YWF4/
