@@ -285,4 +285,4 @@ which involves our first external API calls.
 [Fully Kiosk]: https://www.fully-kiosk.com/
 [clock.cljs]: https://github.com/malloc47/cockpit/blob/ac0ba2f5c7d985aceca03fdb079050d498983587/src/cljs/cockpit/clock.cljs
 [next post]: {% post_url 2021-07-09-dashboard-weather %}
-[last post]: {% post_url 2021-09-01-dashboard-transit %}
+[last post]: {% post_url 2021-09-12-dashboard-transit %}

@@ -23,7 +23,7 @@ like this:
   <img src="/img/posts/cockpit/transit.png" alt="Sample transit card" width="400" />
 </a>
 
-Building this view, however, is far simpler than it sounds. A big part
+Building this view, however, is less simple than it sounds. A big part
 of the complexity is in finding and consuming a source for the transit
 departure times. Unlike the [weather card][previous installment],
 there isn't a single, free, purpose-built API to serve such
@@ -31,7 +31,7 @@ dashboards. To deal with transit, we have to solve two main
 challenges:
 
 1. Finding a source for the transit data we need to display on the
-   dashboard
+   dashboard.
 
 2. Consuming transit data from the above source, stitching it together
    to populate the view.
@@ -43,8 +43,8 @@ delving into the implementation.
 
 The most common way to address (2) is by consuming a source that
 adheres to the [GTFS] (General Transit Feed Specification), the
-defacto standard for transit data that is published by the majority of
-transit agencies. It has complementary [static][GTFS static] and
+defacto standard for transit data that is published by many transit
+agencies. It has complementary [static][GTFS static] and
 [realtime][GTFS realtime] flavors, and we need both sources to get the
 most accurate data for our dashboard.
 
@@ -65,22 +65,21 @@ are glossed over in this diagram for simplicity.
 
 GTFS is quite normalized so there isn't an obvious self-contained
 single entity we can read that will let us drive everything in our
-dashboard.  Combing through the GTFS entities, there is noticeably a
-sizable number that are not relevant to displaying transit times at a
-chosen station. Removing entities related to fare calculation,
-pathing, language translation, station layout, and so forth, the
-resulting trimmed-down ERD looks like:
+dashboard.  Combing through the GTFS entities, there is a sizable
+number that are not relevant to displaying transit times at a chosen
+station. Removing entities related to fare calculation, pathing,
+language translation, station layout, and so forth, the resulting
+trimmed-down ERD looks like:
 
 <a href="/img/posts/cockpit/gtfs-erd-small.svg">
-  <img src="/img/posts/cockpit/gtfs-erd-small.svg" alt="GTFS ERD Small" width="350" />
+  <img src="/img/posts/cockpit/gtfs-erd-small.svg" alt="GTFS ERD Small" width="300" />
 </a>
 
-This subset of GTFS entities is a bit more manageable for
-demonstrating what we need to consume for our dashboard. The
-particular relevant subset might be different for other agencies
-(e.g., some agencies might rely more on `frequency`-based service or
-have `calendar`-based service changes) but this is all I needed based
-on the [MTA][] GTFS.
+This subset of the GTFS is a bit more manageable for demonstrating
+what we need to consume for our dashboard. The particular relevant
+subset might be different for other agencies (e.g., some agencies
+might rely more on `frequency`-based service or have `calendar`-based
+service changes) but this is all I needed based on the [MTA][] GTFS.
 
 Exploring this subset in more detail, the `agency` entity isn't
 strictly necessary except in cases where the feed represents multiple
@@ -99,9 +98,8 @@ bucket the `stop times` into groups by route.
 So far, we've only touched the entities in the static GTFS, which is
 sufficient if the agency consistency runs on time (🤣). To bring the
 prescheduled `stop times` into alignment with reality, we read the
-`trip updates` GTFS Realtime source and (hand-waving a lot here)
-update the `stop times` with these realtime updates at a reasonable
-interval.
+`trip updates` Realtime source and (hand-waving a lot here) update the
+`stop times` with these realtime updates at a reasonable interval.
 
 At a high-level, this is our roadmap for reading the subset of the
 GTFS that we need for this dashboard.
@@ -109,19 +107,20 @@ GTFS that we need for this dashboard.
 # Serving Transit Data
 
 Stepping backwards to address point (1) above, we need to talk about
-how we physically fetch GTFS in our web application. The static
-portion of `GTFS` is a zip file containing `.txt` files (effectively
-CSV formatted)--not impossible to download directly from the transit
-agency into a web application with the right [decompression][zip.js]
-and [parsing][papaparse] libraries, but hardly idiomatic. The GTFS
-Realtime format is even more challenging as it is serialized as a
-[Protocol Buffer][]. It _might_ be theoretically possible to consume
-the realtime ProtoBuf stream by providing the `.proto` file to the
-browser and using a [ProtoBuf javascript decoder][pbf]; in practice,
-the real-time updates from the [MTA][MTA realtime] are
-megabytes-to-gigabytes and are updated frequently enough that I had
-concerns as to whether a cheap, wall-mounted tablet would be able to
-handle parsing the feeds in-browser at a reasonable frequency.
+how we physically convey GTFS data into our web application. The
+static portion of the GTFS is a zip file containing `.txt` files
+(effectively CSV formatted)--not impossible to download directly from
+the transit agency into a web application with the right
+[decompression][zip.js] and [parsing][papaparse] libraries, but hardly
+idiomatic. The GTFS Realtime format is even more challenging as it is
+serialized as a [Protocol Buffer][]. It _might_ be theoretically
+possible to consume the realtime ProtoBuf stream by providing the
+`.proto` file to the browser and using a [ProtoBuf javascript
+decoder][pbf]; in practice, the real-time updates from the [MTA][MTA
+realtime] are megabytes-to-gigabytes and are updated frequently enough
+that I had concerns as to whether a cheap, wall-mounted tablet would
+be able to handle parsing the feeds in-browser at a reasonable
+frequency.
 
 Thankfully, there are multiple server-side options available which
 vary in quality, completeness, and implementation language. Choosing a
@@ -139,16 +138,27 @@ an OTP instance for their route planning or transit time needs--if
 such an instance is public-facing, using it saves a lot of work
 configuring and hosting our own OTP instance.
 
-Remember from the previous section that we have the following
-pseudocode to get a viable payload for our dashboard:
+The discussion from the previous section roughly translates to the
+following Clojure pseudocode to walk through the GTFS entities and
+collect a useful payload:
 
+```clojure
+(defn stop-times
+  [stop-id]
+  (->> stop-id
+       fetch-stop
+       fetch-stop-times
+       (map (fn [stop-time]
+              (let [trip  (fetch-trip (:trip-id stop-time))
+                    route (fetch-route (:route-id trip))]
+                (assoc stop-time
+                       :route route
+                       :direction (:direction trip)))))))
 ```
-1. Given a particular stop ID
-2. Fetch the stop times for the given stop
-3. Associate a route for each stop time by walking through the
-   trip entity
-4. Group stop times by route and direction
-```
+
+Following this, we can `concat` all the `stop-times` from all the
+`stop-id`s together and do a `(group-by #(select-keys % [:direction
+:route]))` to bundle them into the rows displayed in the dashboard.
 
 From the [Index API][], the following endpoints look promising to meet
 these needs:
@@ -175,7 +185,7 @@ this optimization assumption we get an even trimmer effective ERD:
 
 <a href="/img/posts/cockpit/gtfs-erd-smaller.svg"> <img
   src="/img/posts/cockpit/gtfs-erd-smaller.svg" alt="GTFS ERD Smaller"
-  width="350" /> </a>
+  width="300" /> </a>
 
 Depending on your particular agency, this optimization may not be
 applicable or might be overkill if you're hosting your own OTP and
@@ -194,7 +204,7 @@ previous installments, I'll only be going over the highlights of the
 
 As with other external APIs we need to hit, we use
 [re-frame-http-fx][] for defining the "effect handlers" that made the
-side-effecting API calls. An example where we fetch the `stop-times`
+side-effecting REST calls. An example where we fetch the `stop-times`
 (assumes that the `stop` has already been fetched and is passed as
 input):
 
@@ -373,9 +383,9 @@ together with a 3rd-level subscription:
                        (comp :stop-id :stop first))))))
 ```
 
-This is a _lot_ to unpack (which probably means it needs some
-refactoring into more subscriptions); out of laziness, I'll just
-summarize the highlights:
+This is a _lot_ to unpack, especially compared with the pseudocode
+above (which probably means this code needs some refactoring into more
+subscriptions); out of laziness, I'll just summarize the highlights:
 
 - Keep only `stop-times` that are less than 60 minutes out
 - The `stop` and `route` are attached to the `stop-time` with an inner
@@ -485,7 +495,7 @@ So far, this setup has been working well. There are some minor
 annoyances with the hardware: This particular Fire tablet does not
 make ambient light adjustments to the screen brightness so it lightens
 my living room considerably at night. Given that this tablet is a full
-order of magnitude cheaper than the premium tablet options, it is has
+order of magnitude cheaper than the premium tablet options, it has
 been more than sufficient for this purpose and I won't be overly upset
 by battery or screen burn-in issues long-term.
 

@@ -394,7 +394,7 @@ of the dashboard: the transit card.
 | [Part 1][previous installment] | Part 2 | [Part 3][last installment] |
 
 [previous installment]: {% post_url 2020-12-27-dashboard-start %}
-[last installment]: {% post_url 2021-09-01-dashboard-transit %}
+[last installment]: {% post_url 2021-09-12-dashboard-transit %}
 [Open Weather Map API]: https://openweathermap.org/api
 [re-frame-http-fx]: https://github.com/day8/re-frame-http-fx
 [one call endpoint]: https://openweathermap.org/api/one-call-api
