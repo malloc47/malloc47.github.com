@@ -509,7 +509,7 @@ by battery or screen burn-in issues long-term.
 [GTFS]: https://developers.google.com/transit
 [GTFS static]: https://developers.google.com/transit/gtfs
 [GTFS realtime]: https://developers.google.com/transit/gtfs-realtime
-[GTFS reference]: http://www.normes-donnees-tc.org/wp-content/uploads/2014/05/TranpsmodelForGoogle-09.pdf
+[GTFS reference]: https://web.archive.org/web/20130117174415/http://www.dft.gov.uk/transmodel/schema/doc/GoogleTransit/TransmodelForGoogle-09.pdf
 [zip.js]: https://gildas-lormeau.github.io/zip.js/
 [papaparse]: https://www.papaparse.com/
 [Protocol Buffer]: https://developers.google.com/protocol-buffers
