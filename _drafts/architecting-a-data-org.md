@@ -10,18 +10,14 @@ There are some great resources on [what Staff Engineers
 do][what-staff-engs-do] and as someone who fits the [Architect
 archetype][staff-archetypes] (at least by job title), I have given a
 lot of thought to the broad categories of work--particularly the more
-abstract--that happen under this umbrella. The type of work varies
-greatly by the particular flavor of architecture in question; whether
-dealing with traditional [application architecture][], large-scale
-[enterprise architecture][], or otherwise traversing the floors of the
-[architect elevator][], the artifacts I produced day-to-day vary
-widely.
-
-One lesser-discussed category of work that I find valuable in this
-conversation is what I term **architecture intersection**, the process
-of juxtaposing and aligning different architectural domains so they
-are jointly better realized. I recognize this is a very abstract
-definition, so here are some examples work that fall into this bucket:
+abstract--that happen under this umbrella. One lesser-discussed
+category of work that I find valuable in this conversation is what I
+term **architecture intersection**, the process of juxtaposing and
+aligning different architectural domains so they are jointly better
+realized. Similar to how engineers must juggle performance, security,
+extensibility, scalability, and [all the other -ilities][system
+quality attributes] when designing systems, software architects have
+to trade-off among disparate domains, e.g.,
 
 - Intersecting an application [reference architecture][] with a
   particular [application architecture][] instance, ideally
@@ -38,19 +34,38 @@ definition, so here are some examples work that fall into this bucket:
   organized supports the system decomposition.
 
 This may sound like a lot of buzzword bingo--and, indeed, outside of
-large organizations, a lot of these layers are by lack of necessity
-far less formalized--but intuitively this is something most engineers
-already do at various scales without having a term attached: We juggle
-performance, security, extensibility, scalability, and [all the other
-ilities][system quality attributes] at a functional- and code-level,
-so architecture intersection is effectively the same activity at a
-higher level of abstraction.
+large organizations, a lot of these layers are far less
+formalized--but there's an [architect elevator][] to ride whether or
+not these terms are formally in use.
 
-So why attach a term to this activity? I'm hoping to discuss a series
-of these intersections, highlighting how anchoring decisions in one
+I supply this framing in the service of discussing a series of these
+intersections, highlighting how anchoring decisions in one
 architectural domain impacts another, starting with the last
-bullet-point above: How [organizational architecture][] impacts the
-[systems architecture][] of a data platform.
+bullet-point above: How [organizational architecture][] and [systems
+architecture][] work together to define the modern **data
+organization**. Consider this a guide to all the architecture
+decisions I wish I had known to anticpate when building out a data
+organization from scratch.
+
+# The Modern Data Organization
+
+As much as frontend application development practices have become the
+butt of many jokes for inventing new client-side frameworks every few
+years with little stability, it is arguable that modern data practices
+are even more nacient and evolving. That's not to say that technical
+people with "data" in their title is a new thing, but the modern data
+organization is often a chimera of traditional practices like [BI][]
+rolled together with newly-labeled practices like [MLOps][] resulting
+in a [proliferation of technologies][data landscape 2021] that might
+even prompt frontend folks to ask us to chill out.
+
+With 2020 being the [year of automation][2020 automation] for the data
+practices, it's not hard to argue that the maturity of the data
+landscape is easily [10 years behind][] areas like web application
+development. While other technical areas were leaning heavily into
+deployment automation and infrastructure-as-code, a lot of the "big
+data" systems were barely beyond supporting ad-hoc non-production
+workflows. Because of this reality, there isn't a
 
 # Organizational Structure
 
@@ -75,6 +90,12 @@ bullet-point above: How [organizational architecture][] impacts the
 [organizational architecture]: https://en.wikipedia.org/wiki/Organizational_architecture
 [systems architecture]: https://en.wikipedia.org/wiki/Systems_architecture
 [system quality attributes]: https://en.wikipedia.org/wiki/List_of_system_quality_attributes
+[BI]: https://en.wikipedia.org/wiki/Business_intelligence
+[MLOps]: https://en.wikipedia.org/wiki/MLOps
+[data landscape 2021]: https://mattturck.com/data2021/
+[10 years behind]: https://www.ascend.io/blog/podcast-diving-into-data-engineering-with-sheel-choksi/
+[2020 automation]: https://twitter.com/mattturck/status/1272287334470422528
+
 
 [orgex1]: https://www.getdbt.com/data-teams/data-org-structure-examples/
 [orgex2]: https://medium.com/snaptravel/how-should-our-company-structure-our-data-team-e71f6846024d
