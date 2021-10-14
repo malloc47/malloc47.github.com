@@ -11,9 +11,9 @@ do][what-staff-engs-do] and as someone who fits the [Architect
 archetype][staff-archetypes] (at least by job title), I have given a
 lot of thought to the broad categories of work--particularly the more
 abstract--that happen under this umbrella. One lesser-discussed
-category of work that I find valuable in this conversation is what I
-term **architecture intersection**, the process of juxtaposing and
-aligning different architectural domains so they are jointly better
+category that I find valuable in this conversation is what I term
+**architecture intersection**, the process of juxtaposing and aligning
+different architectural domains so they are jointly better
 realized. Similar to how engineers must juggle performance, security,
 extensibility, scalability, and [all the other -ilities][system
 quality attributes] when designing systems, software architects have
@@ -44,28 +44,56 @@ architectural domain impacts another, starting with the last
 bullet-point above: How [organizational architecture][] and [systems
 architecture][] work together to define the modern **data
 organization**. Consider this a guide to all the architecture
-decisions I wish I had known to anticpate when building out a data
+decisions I wish I had anticipated when building out a data
 organization from scratch.
 
 # The Modern Data Organization
 
 As much as frontend application development practices have become the
 butt of many jokes for inventing new client-side frameworks every few
-years with little stability, it is arguable that modern data practices
-are even more nacient and evolving. That's not to say that technical
-people with "data" in their title is a new thing, but the modern data
-organization is often a chimera of traditional practices like [BI][]
-rolled together with newly-labeled practices like [MLOps][] resulting
-in a [proliferation of technologies][data landscape 2021] that might
-even prompt frontend folks to ask us to chill out.
+years, it is arguable that modern data practices are even more nascent
+and evolving. That's not to say that technical people with "data" in
+their title is a new thing, but the modern data organization is often
+a chimera of traditional practices like [BI][] rolled together with
+newly-labeled practices like [MLOps][] resulting in a [proliferation
+of technologies][data landscape 2021] that might even prompt frontend
+folks to ask us to chill out.
 
 With 2020 being the [year of automation][2020 automation] for the data
-practices, it's not hard to argue that the maturity of the data
+practices, it is not hard to argue that the maturity of the data
 landscape is easily [10 years behind][] areas like web application
 development. While other technical areas were leaning heavily into
 deployment automation and infrastructure-as-code, a lot of the "big
 data" systems were barely beyond supporting ad-hoc non-production
-workflows. Because of this reality, there isn't a
+pipelines. Because of this, many of the [best practices][twelve-factor
+app] that we have come to expect in a typical [SOA][] are not
+guaranteed to have obvious analogs when talking about large batch or
+streaming systems that form the backbone of data architectures.
+Details like how jobs are bundled into artifacts, how jobs are
+managed/scheduled, and even terminology we use to describe different
+kinds of tests do not have commonly-accepted defaults to fall back on.
+
+Despite the formative nature of the discipline, there are some common
+activities that tend to arise over and over again in data
+organizations:
+
+- Query existing datasets to glean new insights, potentially
+  extracting results into reports/dashboards
+
+- Train ML models on datasets and deploy them so their
+  prediction/inference is available for consumers to leverage
+
+- Build production workflows that ingest, process, and curate datasets
+
+- Choose and manage infrastructure and tooling for large-scale data
+  processing
+
+This is hardly exhaustive, and the way these activities are mapped to
+job roles varies from one organization to another--unlike "fronted" or
+"backend", "data scientist" can span surprisingly broad skillsets and
+activities. Ignoring titles for now, we can take these as the
+foundational activities that generate business value which justifies
+investing in a data organization.
 
 # Organizational Structure
 
@@ -95,6 +123,8 @@ workflows. Because of this reality, there isn't a
 [data landscape 2021]: https://mattturck.com/data2021/
 [10 years behind]: https://www.ascend.io/blog/podcast-diving-into-data-engineering-with-sheel-choksi/
 [2020 automation]: https://twitter.com/mattturck/status/1272287334470422528
+[twelve-factor app]: https://12factor.net/
+[SOA]: https://en.wikipedia.org/wiki/Service-oriented_architecture
 
 
 [orgex1]: https://www.getdbt.com/data-teams/data-org-structure-examples/
