@@ -77,8 +77,8 @@ Despite the formative nature of the discipline, there are some common
 activities that tend to arise over and over again in data
 organizations:
 
-- Query existing datasets to glean new insights, potentially
-  extracting results into reports/dashboards
+- Query large datasets to glean new insights, potentially extracting
+  results into reports/dashboards
 
 - Train ML models on datasets and deploy them so their
   prediction/inference is available for consumers to leverage
@@ -92,10 +92,43 @@ This is hardly exhaustive, and the way these activities are mapped to
 job roles varies from one organization to another--unlike "fronted" or
 "backend", "data scientist" can span surprisingly broad skillsets and
 activities. Ignoring titles for now, we can take these as the
-foundational activities that generate business value which justifies
+foundational, business-value-generating activities that justify
 investing in a data organization.
 
+Now that we have captured what leadership often wants a data
+organization to _do_, lets dive in to how its architected.
+
 # Organizational Structure
+
+There [is][orgex1] [a][orgex2] [lot][orgex3] [of][orgex4]
+[prior][orgex5] [work][orgex6] [describing][orgex7] the structure of a
+data organization; if you are familiar with general engineering
+organization literature then the high-level data-oriented flavors will
+not look much different, and there are [better discussions][data team
+topologies] on how [team topologies][] align with the data needs
+discussed in the previous section than I can do justice to here. The
+terminology used to describe the spectrum of organizational patterns
+is equally varied, some using [centralized/decentralized][orgex3],
+others use [monolith/mesh][data mesh], yet others describe [federated
+or embedded][orgex6] approaches, some split hairs on [particular
+aspects][orgex7] that are decentralized, and some find a middle ground
+with a ["center of excellence"][orgex5] enabling team whilst retaining
+elements of less-centralized approaches. And that's not to mention the
+[matrix / Spotify model][matrix model] that mixes some elements of a
+federated and embedded structures.
+
+My goal here is to describe the knock-on effects that these
+organizational architectures (by whatever name they go by in any
+particular context) have on the systems that get built. To constrain
+the aspects discussed here, I will group these into some broad
+categories:
+
+- Monolith / Centralized
+
+- Decentralized / Federated / Embedded
+
+This list is certainly not without controversy as some of the nuance
+in these structures will necessarily be lost by rolling them together.
 
 # Components
 
@@ -135,3 +168,7 @@ investing in a data organization.
 [orgex6]: https://snowplowanalytics.com/blog/2020/03/10/a-guide-to-data-team-structures-with-examples/
 [orgex7]: https://towardsdatascience.com/organizing-data-teams-where-to-make-the-cut-49969c5ec093
 [sizing-teams]: https://lethain.com/sizing-engineering-teams/
+[data team topologies]: https://medium.com/data-arena/team-topologies-for-data-engineering-teams-a15c5eb3849c
+[team topologies]: https://teamtopologies.com/
+[data mesh]: https://martinfowler.com/articles/data-monolith-to-mesh.html
+[matrix model]: https://blog.crisp.se/wp-content/uploads/2012/11/SpotifyScaling.pdf
