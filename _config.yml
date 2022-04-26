@@ -4,5 +4,5 @@ permalink: /:categories/:title/
 plugins: [jekyll-paginate]
 paginate: 5
 paginate_path: "page:num"
-url: http://www.malloc47.com
+url: https://www.malloc47.com
 title: malloc47
