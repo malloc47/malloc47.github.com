@@ -183,10 +183,10 @@ feel rather lucky to have stumbled on something that was
 simultaneously fun and empowering. JK wasn't just a game. It was an
 ecosystem. It was an IDE. And it was fun.
 
-[1]: http://www.gamasutra.com/view/feature/3233/adding_languages_to_game_engines.php
+[1]: https://www.gamasutra.com/view/feature/3233/adding_languages_to_game_engines.php
 [2]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/cog/forcefield_goal.cog
-[3]: http://starwars.wikia.com/wiki/JED
+[3]: https://jkdf2.fandom.com/wiki/JED
 [4]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/readme.txt
-[5]: http://tacc.massassi.net/levels/review.php?id=41
-[6]: http://code.google.com/p/starwarsjediknightaltinstall/
+[5]: https://tacc.massassi.net/levels/review.php?id=41
+[6]: https://code.google.com/p/starwarsjediknightaltinstall/
 [7]: https://raw.github.com/malloc47/return-of-thrawn/master/thrawn/cog/forcefield_goal.cog

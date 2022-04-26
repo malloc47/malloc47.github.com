@@ -214,12 +214,12 @@ with `Haskell` in the future.
 
 Get the code [here][9].  Feedback welcome.
 
-[1]: http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
-[2]: http://en.wikipedia.org/wiki/Run-length_encoding
-[3]: http://stackoverflow.com/questions/2048854/c-interview-question-run-length-coding-of-strings
-[4]: http://rosettacode.org/wiki/Run-length_encoding
-[5]: http://en.wikipedia.org/wiki/MapReduce
-[6]: http://hadoop.apache.org/mapreduce/
-[7]: http://en.wikipedia.org/wiki/There_ain%27t_no_such_thing_as_a_free_lunch
-[8]: http://memegenerator.net/instance/20426610
+[1]: https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
+[2]: https://en.wikipedia.org/wiki/Run-length_encoding
+[3]: https://stackoverflow.com/questions/2048854/c-interview-question-run-length-coding-of-strings
+[4]: https://rosettacode.org/wiki/Run-length_encoding
+[5]: https://en.wikipedia.org/wiki/MapReduce
+[6]: https://hadoop.apache.org/mapreduce/
+[7]: https://en.wikipedia.org/wiki/There_ain%27t_no_such_thing_as_a_free_lunch
+[8]: https://memegenerator.net/instance/20426610
 [9]: https://github.com/malloc47/snippets/tree/master/prle

@@ -8,8 +8,8 @@ date: 2012-02-18 00:00:00
 I've been accumulating helpful and interesting articles for a number
 of years now. At first, they existed solely as starred articles in
 Google Reader. Eventually, I migrated to
-[Delicious](http://delicious.com/), and finally to
-[diigo](http://www.diigo.com). While diigo has served me well, I
+[Delicious](https://delicious.com/), and finally to
+[diigo](https://www.diigo.com). While diigo has served me well, I
 finally decided to consolidate services and begin using Google's +1
 feature, as it is fairly ubiquitous and is associated with an account
 I am already logged into (and appears nicely on my Google+ profile).

@@ -65,8 +65,8 @@ to anyone in a similar situation.
 
 You'll find it on gitub [here][4].
 
-[1]: http://en.wikipedia.org/wiki/Ldap
-[2]: http://en.wikipedia.org/wiki/Active_directory
-[3]: http://en.wikipedia.org/wiki/Network_Information_Service
+[1]: https://en.wikipedia.org/wiki/Ldap
+[2]: https://en.wikipedia.org/wiki/Active_directory
+[3]: https://en.wikipedia.org/wiki/Network_Information_Service
 [4]: https://github.com/malloc47/pmldap
 [5]: https://github.com/malloc47/pmldap/commit/ab8918c17f22d2a9dabd6ea9ca97b39c9cdc968a

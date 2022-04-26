@@ -136,8 +136,8 @@ Depending on what you're doing, there may be other tricks with
 `LD_LIBRARY_PATH` to make specific things work, but your
 `pythonbrew`ed python should be primed to access opencv from here.
 
-[1]: http://opencv.willowgarage.com
+[1]: https://opencv.org/
 [2]: https://github.com/utahta/pythonbrew
-[3]: http://www.virtualenv.org/
+[3]: https://virtualenv.pypa.io/en/latest/
 [4]: https://github.com/saghul/pythonz
 [5]: http://opencv.willowgarage.com/wiki/InstallGuide%20%3A%20Debian

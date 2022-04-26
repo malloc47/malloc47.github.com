@@ -63,4 +63,4 @@ average) education level required to comprehend man pages is worth
 considering as more mainstream distributions bring with them an influx
 of younger and less experienced users.
 
-[1]: http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test
+[1]: https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test

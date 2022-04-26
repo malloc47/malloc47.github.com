@@ -477,8 +477,8 @@ just boot back into the previous generation.
 [9]: https://github.com/malloc47/config/blob/cd6d1568f50c9b839f5146b45362cd6c4d857882/hosts/rally.nix
 [10]: https://www.qgis.org/
 [11]: https://nixos.org/nixos/nix-pills/nixpkgs-overriding-packages.html
-[12]: http://r6.ca/blog/20140422T142911Z.html
-[13]: http://www.pathname.com/fhs/
+[12]: https://r6.ca/blog/20140422T142911Z.html
+[13]: https://www.pathname.com/fhs/
 [14]: https://wiki.archlinux.org/index.php/HiDPI
 [15]: https://github.com/NixOS/nixpkgs/pull/9250
 [16]: https://nixos.wiki/wiki/NixOS_Modules
