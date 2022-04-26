@@ -83,29 +83,30 @@ I study [computer vision][1] with an emphasis on [image segmentation][2], [docum
 
 [University][14] &rarr; [College][13] &rarr; [Department][12] &rarr; [Lab][4]
 
-[1]:  http://en.wikipedia.org/wiki/Computer_vision
-[2]:  http://en.wikipedia.org/wiki/Segmentation_%28image_processing%29
-[3]:  http://www.ias.ac.in/sadhana/Pdf2002Feb/pe989.pdf
-[4]:  http://cvl.cse.sc.edu
-[5]:  http://www.gk12.org
-[6]:  http://www.neh.gov/grants/guidelines/digitalhumanitiesstartup.html
-[7]:  http://www.darpa.mil/
-[8]:  http://cse.sc.edu/~songwang/document/spie12.pdf
-[9]:  http://cse.sc.edu/~songwang/document/jom11.pdf
-[10]: http://cse.sc.edu/~songwang/document/cvpr10a.pdf
-[11]: http://cse.sc.edu/~songwang/document/cvpr10b.pdf
-[12]: http://www.cse.sc.edu
-[13]: http://www.engr.sc.edu
-[14]: http://www.sc.edu
-[15]: http://www.wpafb.af.mil/afrl/afosr/
+[//]: # (Broken links below)
+[1]:  https://en.wikipedia.org/wiki/Computer_vision
+[2]:  https://en.wikipedia.org/wiki/Segmentation_%28image_processing%29
+[3]:  https://www.ias.ac.in/sadhana/Pdf2002Feb/pe989.pdf
+[4]:  https://cvl.cse.sc.edu
+[5]:  https://www.gk12.org
+[6]:  https://www.neh.gov/grants/guidelines/digitalhumanitiesstartup.html
+[7]:  https://www.darpa.mil/
+[8]:  https://cse.sc.edu/~songwang/document/spie12.pdf
+[9]:  https://cse.sc.edu/~songwang/document/jom11.pdf
+[10]: https://cse.sc.edu/~songwang/document/cvpr10a.pdf
+[11]: https://cse.sc.edu/~songwang/document/cvpr10b.pdf
+[12]: https://www.cse.sc.edu
+[13]: https://www.engr.sc.edu
+[14]: https://www.sc.edu
+[15]: https://www.wpafb.af.mil/afrl/afosr/
 [16]: https://github.com/malloc47/ratio-contour
 [17]: https://github.com/malloc47/matscicut
-[18]: http://sapheos.org/
+[18]: https://sapheos.org/
 [19]: https://github.com/malloc47/digital-collation
-[20]: http://cse.sc.edu/~songwang/document/3dms.pdf
-[21]: http://www.cse.sc.edu/~songwang/document/uai12.pdf
-[22]: http://www.cse.sc.edu/~songwang/document/spie13.pdf
-[23]: http://www.cse.sc.edu/~songwang/document/wacv13a.pdf
-[24]: http://www.cse.sc.edu/~songwang/document/wacv13b.pdf
-[25]: http://www.cse.sc.edu/~songwang/document/wacv13c.pdf
-[26]: http://www.cse.sc.edu/~songwang/document/cvpr12.pdf
+[20]: https://cse.sc.edu/~songwang/document/3dms.pdf
+[21]: https://www.cse.sc.edu/~songwang/document/uai12.pdf
+[22]: https://www.cse.sc.edu/~songwang/document/spie13.pdf
+[23]: https://www.cse.sc.edu/~songwang/document/wacv13a.pdf
+[24]: https://www.cse.sc.edu/~songwang/document/wacv13b.pdf
+[25]: https://www.cse.sc.edu/~songwang/document/wacv13c.pdf
+[26]: https://www.cse.sc.edu/~songwang/document/cvpr12.pdf

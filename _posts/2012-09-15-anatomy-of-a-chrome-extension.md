@@ -27,13 +27,13 @@ looks like this for `nonpartisan.me`:
     "icons"            : { "16": "icon16.png",
                            "48": "icon48.png",
                           "128": "icon128.png" },
-    "homepage_url"     : "http://nonpartisan.me",
+    "homepage_url"     : "https://nonpartisan.me",
     "page_action"      : {"default_icon" : "icon48.png",
                           "default_title": "nonpartisan'ed" },
     "permissions"      : ["tabs",
-                          "http://www.facebook.com/",
-                          "http://www.twitter.com/",
-                          "http://plus.google.com/"],
+                          "https://www.facebook.com/",
+                          "https://www.twitter.com/",
+                          "https://plus.google.com/"],
     "options_page"     : "options.html",
     "content_scripts"  : [
     {
@@ -211,6 +211,6 @@ have.
 [2]: https://github.com/malloc47/nonpartisan.me
 [3]: https://github.com/malloc47/nonpartisan.me/blob/master/chrome/options.js
 [4]: https://github.com/malloc47/nonpartisan.me/blob/master/chrome/background.js
-[5]: http://www.charlestoncitypaper.com/charleston/sick-of-politics-on-facebook-try-this-browser-tool/Content?oid=4153447
+[5]: https://charlestoncitypaper.com/sick-of-politics-on-facebook-try-this-browser-tool/
 [6]: https://chrome.google.com/webstore/detail/ninebcppidndhampaggnjbijpacoadgg
-[7]: http://developer.chrome.com/extensions/docs.html
+[7]: https://developer.chrome.com/extensions/docs.html

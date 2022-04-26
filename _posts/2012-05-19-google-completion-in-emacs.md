@@ -16,7 +16,7 @@ query string as `JSON`:
 
 {% highlight bash %}
 > echo -en $(curl -H "Accept: application/json" \
-  "http://suggestqueries.google.com/complete/search?client=firefox&q=query")
+  "https://suggestqueries.google.com/complete/search?client=firefox&q=query")
 
 ["query",["query","query xiv","query letter","query_posts","query shark","query access","query tracker","query string","query letter sample","queryperformancecounter"]]
 {% endhighlight %}
@@ -31,7 +31,7 @@ the results into `emacs` and insert it into the current buffer:
 (defun google-request (query)
  (shell-command-to-string 
   (format
-   "echo -en $(curl -H \"Accept: application/json\" \"http://suggestqueries.google.com/complete/search?client=firefox&q=%s\" 2>/dev/null)"
+   "echo -en $(curl -H \"Accept: application/json\" \"https://suggestqueries.google.com/complete/search?client=firefox&q=%s\" 2>/dev/null)"
    query)))
 
 (defun google-preprocess (query)

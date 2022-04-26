@@ -110,5 +110,5 @@ in other languages.
 [1]: https://gist.github.com/2324425
 [2]: https://gist.github.com/2037497
 [3]: https://github.com/open-it-lab/ol-curriculum/blob/master/makefile
-[4]: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=652952
-[5]: http://www.reddit.com/r/programming/comments/qxn73/mixing_javascript_and_the_cpreprocessor/
+[4]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=652952
+[5]: https://www.reddit.com/r/programming/comments/qxn73/mixing_javascript_and_the_cpreprocessor/

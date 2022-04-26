@@ -47,6 +47,6 @@ in the future, since there's a lot that is hard coded (the `\[ \]`
 environment, stringification of the array, the fact that all columns
 are centered, etc.).  A gist of the function is available [here][3].
 
-[1]: http://tex.stackexchange.com/questions/54990/convert-numpy-array-into-tabular
-[2]: http://mpastell.com/pweave/
+[1]: https://tex.stackexchange.com/questions/54990/convert-numpy-array-into-tabular
+[2]: https://mpastell.com/pweave/
 [3]: https://gist.github.com/4665827

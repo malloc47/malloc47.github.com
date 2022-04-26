@@ -109,12 +109,12 @@ stylishness of laptops will begin to wane.  I'm okay with that.
 \[Incidentally, you can turn a conventional keyboard into a stenotype-like device with [Plover][8],
 an open-source stenotype software package.\]
 
-[1]: http://en.wikipedia.org/wiki/Stenotype
-[2]: http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard
-[3]: http://www.ebay.com/sch/i.html?_trksid=p5197.m570.l1313&_nkw=stenotype&_sacat=0&_from=R40
-[4]: http://content.dell.com/us/en/gen/d/campaigns/xps-linux-laptop
-[5]: http://pythonforios.com/
-[6]: http://www.android-x86.org/
-[7]: http://www.hackthings.com/brace-yourself-here-come-the-hardware-startups/
-[8]: http://stenoknight.com/wiki/Main_Page
-[9]: http://www.fastcompany.com/3004563/2013-when-tablets-beat-laptops
+[1]: https://en.wikipedia.org/wiki/Stenotype
+[2]: https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard
+[3]: https://www.ebay.com/sch/i.html?_trksid=p5197.m570.l1313&_nkw=stenotype&_sacat=0&_from=R40
+[4]: https://content.dell.com/us/en/gen/d/campaigns/xps-linux-laptop
+[5]: https://pythonforios.com/
+[6]: https://www.android-x86.org/
+[7]: https://www.hackthings.com/brace-yourself-here-come-the-hardware-startups/
+[8]: https://stenoknight.com/wiki/Main_Page
+[9]: https://www.fastcompany.com/3004563/2013-when-tablets-beat-laptops

@@ -504,7 +504,7 @@ by battery or screen burn-in issues long-term.
 [first installment]: {% post_url 2020-12-27-dashboard-start %}
 [previous installment]: {% post_url 2021-07-09-dashboard-weather %}
 [Index API]: http://dev.opentripplanner.org/apidoc/1.0.0/resource_IndexAPI.html
-[MTA]: http://mta.info/
+[MTA]: https://mta.info/
 [MTA realtime]: https://api.mta.info/
 [GTFS]: https://developers.google.com/transit
 [GTFS static]: https://developers.google.com/transit/gtfs
@@ -520,7 +520,7 @@ by battery or screen burn-in issues long-term.
 [re-frame-http-fx]: https://github.com/day8/re-frame-http-fx
 [BFF]: https://samnewman.io/patterns/architectural/bff/
 [Amazon Fire 8]: https://www.amazon.com/Fire-HD-8-Previous-Generation-9th/dp/B0794RHPZD
-[NYC DOT]: http://nyc.gov/dot
+[NYC DOT]: https://nyc.gov/dot
 [Fully Kiosk]: https://www.fully-kiosk.com/
 [WallPanel]: https://github.com/thanksmister/wallpanel-android
 [tablet wall mount]: https://www.amazon.com/gp/product/B01BX5YWF4/

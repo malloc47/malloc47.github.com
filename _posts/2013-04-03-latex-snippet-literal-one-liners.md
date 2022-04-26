@@ -65,5 +65,5 @@ the longer line will be stretched horizontally to fit in the available space.
 
 You can find a fully-working (as of TeXLive 2012) gist [here][2].
 
-[1]: http://tex.stackexchange.com/questions/33417/adjust-font-size-on-the-fly
+[1]: https://tex.stackexchange.com/questions/33417/adjust-font-size-on-the-fly
 [2]: https://gist.github.com/malloc47/5298181

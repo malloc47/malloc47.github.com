@@ -6,11 +6,11 @@ date: 2012-03-24 23:00:00
 
 For the upcoming [POSSCON][1] here in Columbia, we had need of QR
 codes for the brochure.  Lots of them.  And while there are
-[some](http://qrcode.kaywa.com/)
-[great](http://goqr.me/)
-[online](http://www.patrick-wied.at/static/qrgen/)
-[resources](http://www.onlineqrlab.com/),
-I wanted to create QR codes in batch.  
+[some](https://qrcode.kaywa.com/)
+[great](https://goqr.me/)
+[online](https://www.patrick-wied.at/static/qrgen/)
+resources,
+I wanted to create QR codes in batch.
 
 Of course, the online services could be batch processed with a dose
 of `curl` magic, but there is a more UNIX way: `libqrencode`. 
@@ -18,8 +18,8 @@ of `curl` magic, but there is a more UNIX way: `libqrencode`.
 Creating a discrete QR code image is straightforward with the
 `qrencode` command:
 
-    qrencode -o output.png -s 50 "http://www.malloc47.com"
-	
+    qrencode -o output.png -s 50 "https://www.malloc47.com"
+
 The `-s` parameter controls the size of the QR "dots" and therefore
 the output resolution.
 
@@ -55,9 +55,9 @@ a large set of QR codes with this script, simply create a file with
 file prefix-`URL`(or whatever data is to be encoded) pairs, each on a
 separate line,
 
-    google http://www.google.com
-	amazon http://www.amazon.com
-	reddit http://www.reddit.com
+    google https://www.google.com
+	amazon https://www.amazon.com
+	reddit https://www.reddit.com
 	....
 
 and then loop over this file, line-by-line:
@@ -99,6 +99,6 @@ Incidentally, all the tools used here can be installed on Arch with
 Not exactly the prettiest shell glue, but it certainly beats slowly
 copy &amp; pasting in and out of a browser.
 
-[1]: http://www.posscon.org/
-[2]: http://en.wikipedia.org/wiki/Netpbm_format
-[3]: http://stackoverflow.com/questions/2924422/how-do-i-determine-if-a-web-page-exists-with-shell-scripting
+[1]: https://www.posscon.org/
+[2]: https://en.wikipedia.org/wiki/Netpbm_format
+[3]: https://stackoverflow.com/questions/2924422/how-do-i-determine-if-a-web-page-exists-with-shell-scripting

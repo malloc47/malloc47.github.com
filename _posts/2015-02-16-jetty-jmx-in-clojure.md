@@ -85,7 +85,7 @@ for how many threads are allocated, and
 
 to find out how many requests are waiting on threads.
 
-[1]: http://en.wikipedia.org/wiki/Java_Management_Extensions
+[1]: https://en.wikipedia.org/wiki/Java_Management_Extensions
 [2]: https://github.com/malloc47/jetty-jmx
 [3]: https://github.com/ring-clojure/ring/blob/master/ring-jetty-adapter/project.clj#L9
 [4]: https://github.com/sunng87/ring-jetty9-adapter

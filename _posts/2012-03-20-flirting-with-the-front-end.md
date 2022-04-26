@@ -77,7 +77,7 @@ All in all, a good transition so far.
 [1]: http://www.fortunecity.com
 [2]: https://github.com/mojombo/jekyll
 [3]: https://github.com/
-[4]: http://liquidmarkup.org/
+[4]: https://shopify.github.io/liquid/
 [5]: https://github.com/malloc47/malloc47.github.com
-[6]: http://www.jslint.com/
+[6]: https://www.jslint.com/
 [7]: https://developers.google.com/pagespeed/

@@ -28,10 +28,10 @@ title: Talks
 [3]: /spie2013/
 [4]: /cs-careers/
 [5]: /posscon2013/
-[6]: http://posscon.org/
+[6]: https://www.posscon.org/
 [7]: /gsd2013/
 [8]: /ato2013/
-[9]: http://allthingsopen.org/
+[9]: https://allthingsopen.org/
 [10]: https://github.com/malloc47/ato2013-code
 [11]: /posscon2015/
 [12]: https://github.com/malloc47/posscon2015/
