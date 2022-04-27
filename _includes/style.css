@@ -50,6 +50,15 @@ body {
     background-color: #777;
 }
 
+p {
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    -ms-hyphenate-limit-lines: 2;
+    -webkit-hyphenate-limit-lines: 2;
+    hyphenate-limit-lines: 2;
+}
+
 footer {
     text-align: center;
     font-size: 12px;
