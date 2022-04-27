@@ -22,7 +22,7 @@ prevalent requirements among config files being synced:
 
 * machines and/or distros have a common header or footer that must be
   included (e.g., a list of system users in `/etc/passwd`), and
- 
+
 * specific machines (e.g., servers) shouldn't have some files synced
   with the rest of the machines (e.g., file shares might be different
   on a server).
@@ -50,10 +50,10 @@ Also in the repo are a few convenience tools that I've found useful:
 
 * `setup` bootstraps config files from a remote machine so they can be
   merged with the desired additions
-  
+
 * `cmd` runs an arbitrary command on all machines (or a particular
   group of machines)
-  
+
 * `useradd` is a feature-incomplete reimplementation of the native
   `useradd` command that works on local `passwd`, `shadow`, and
   `group` files to add new users that can later be synchronized across

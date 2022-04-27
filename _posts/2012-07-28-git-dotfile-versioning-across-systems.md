@@ -16,9 +16,9 @@ to the home folder:
 DEST=$HOME
 FILES=$(git ls-files | grep -v .gitignore | grep -v ^$(basename $0)$)
 for f in $FILES ; do
-    [ -n "$(dirname $f)" \ 
+    [ -n "$(dirname $f)" \
       -a "$(dirname $f)" != "." \
-      -a ! -d "$DEST/$(dirname $f)" ] \ 
+      -a ! -d "$DEST/$(dirname $f)" ] \
     && mkdir -p $DEST/$(dirname $f)
     ln -sf $(pwd)/$f $DEST/$f
 done
@@ -48,18 +48,18 @@ fi
 
 Thus, for example, given `machine1` and `machine2` and a repo in the
 `~/dotfiles` directory with these files:
-    
+
 	~/dotfiles/.gitconfig
 	~/dotfiles/.sys/machine2/.gitconfig
 
 `machine1` will get a symlink from
 
-    ~/dotfiles/.gitconfig 
-	
+    ~/dotfiles/.gitconfig
+
 to `~/.gitconfig`, while `machine2` will instead get a symlink from
 
     ~/dotfiles/.sys/machine2/.gitconfig
-	
+
 to `~/.gitconfig`.  This variant of the script doesn't explicitly
 ignore the `.sys` folder itself so it will be added to the home folder
 as well.  Which, as an aside, can be useful by including something
@@ -82,7 +82,7 @@ if [ $# -lt $EXPECTED_ARGS ]
 then
     echo "Usage: `basename $0` directory"
     echo "WILL clobber existing files without permission: Use at your own risk"
-    exit 65 
+    exit 65
 fi
 
 DEST=$1
@@ -93,7 +93,7 @@ for f in $FILES ; do
     if [ -n "$(dirname $f)" -a "$(dirname $f)" != "." -a ! -d "$DEST/$(dirname $f)" ] ; then
         mkdir -p $DEST/$(dirname $f)
     fi
-	
+
     if [ -e ".sys/$(hostname)/$f" ] ; then
         ln -sf $(pwd)/.sys/$(hostname)/$f $DEST/$f
     else
@@ -115,7 +115,7 @@ Doing this, the contents of the `tmp/` directory can be verified with
 Once satisfied, it can be run again with
 
     > ./deploy ~
-	
+
 to symlink all the files to the home folder proper.
 
 Feel free to grab an up-to-date version of this script from my own

@@ -13,7 +13,7 @@ resources,
 I wanted to create QR codes in batch.
 
 Of course, the online services could be batch processed with a dose
-of `curl` magic, but there is a more UNIX way: `libqrencode`. 
+of `curl` magic, but there is a more UNIX way: `libqrencode`.
 
 Creating a discrete QR code image is straightforward with the
 `qrencode` command:

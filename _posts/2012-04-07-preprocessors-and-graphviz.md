@@ -15,7 +15,7 @@ Initially, I grafted together an unwieldy [script][1] that used an
 ugly `grep`+`sed` combination to grab the line number and substitute
 the included file contents: essentially a poor man's preprocessor.
 Thankfully, to the rescue was a particularly useful [gist][2]
-(initially illustrated with JavaScript) I serendipitously found 
+(initially illustrated with JavaScript) I serendipitously found
 on [Reddit][5]. The key call being this:
 
     cpp -P -undef -Wundef -std=c99 -nostdinc -Wtrigraphs \
@@ -70,12 +70,12 @@ So, given a `nodes.doth` file with these contents:
         node1 [label = "1"];
         node2 [label = "2"];
         node3 [label = "3"];
-	
+
 and a `graph.dot` file as such:
 
     graph g {
         #include "nodes.doth"
-    
+
         node1 -- node2;
         node2 -- node3;
         node3 -- node1;
@@ -92,7 +92,7 @@ file,
         node2 -- node3;
         node3 -- node1;
     }
-	
+
 which will then be compiled by graphviz's `dot` command into an image.
 While obviously not necessary with this toy example, scaling up to
 more nodes shared by multiple graphs is much more pleasant when the

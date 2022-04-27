@@ -25,7 +25,7 @@ The python you choose has to be built with shared libraries if you
 want to install opencv later:
 
 {% highlight bash %}
-pythonbrew install --configure="--enable-shared" 2.7.3 
+pythonbrew install --configure="--enable-shared" 2.7.3
 {% endhighlight %}
 
 After this, you can bootstrap a `virtualenv` as usual
@@ -101,7 +101,7 @@ everything stitched together:
     PYTHON_EXECUTABLE=~/.pythonbrew/venvs/Python-2.7.3/{venv-name}/bin/python
 	PYTHON_INCLUDE_DIR=~/.pythonbrew/venvs/Python-2.7.3/debian/include/python2.7
 	PYTHON_LIBRARY=~/.pythonbrew/pythons/Python-2.7.3/lib/libpython2.7.so
-	
+
 Additionally, if you find that numpy isn't autodetected, you can specify
 
     PYTHON_NUMPY_INCLUDE_DIR=~/.pythonbrew/venvs/Python-2.7.3/debian/lib/python2.7/site-packages/numpy/core/include

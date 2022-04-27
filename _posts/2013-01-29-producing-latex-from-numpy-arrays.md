@@ -16,15 +16,15 @@ own function instead:
 def to_latex(a,label='A'):
     sys.stdout.write('\[ '
                      + label
-                     + ' = \\left| \\begin{array}{' 
-                     + ('c'*a.shape[1]) 
+                     + ' = \\left| \\begin{array}{'
+                     + ('c'*a.shape[1])
                      + '}\n' )
     for r in a:
         sys.stdout.write(str(r[0]))
         for c in r[1:]:
             sys.stdout.write(' & '+str(c))
         sys.stdout.write('\\\\\n')
-    sys.stdout.write('\\end{array} \\right| \]\n')    
+    sys.stdout.write('\\end{array} \\right| \]\n')
 {% endhighlight %}
 
 Here's an incomplete snippet of it in action, where I convolve an

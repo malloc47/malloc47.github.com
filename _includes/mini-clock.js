@@ -4,14 +4,14 @@ function drawClock() {
     var d = new Date();
 
     // Swap from day to night or night to day
-    if ((d.getHours() < 19 && 
-	d.getHours() > 6) && 
-       !window.theme && 
+    if ((d.getHours() < 19 &&
+	d.getHours() > 6) &&
+       !window.theme &&
        !window.theme_override) {
 	check_time();
 	return;
-    } else if (!(d.getHours() < 19 && 
-	      d.getHours() > 6) && 
+    } else if (!(d.getHours() < 19 &&
+	      d.getHours() > 6) &&
 	    window.theme &&
 	    !window.theme_override) {
 	check_time();
@@ -54,7 +54,7 @@ function drawCircle(c, p1, p2, r, clr) {
     c.save();
     c.fillStyle = clr;
     c.beginPath();
-    c.arc(p1, p2, r, 0, Math.PI*2, false); 
+    c.arc(p1, p2, r, 0, Math.PI*2, false);
     c.closePath();
     c.fill();
     c.restore();
@@ -67,7 +67,7 @@ function drawPie(c, p1, p2, r, a1, a2, clr) {
     c.save();
     c.fillStyle = clr;
     c.beginPath();
-    c.arc(p1, p2, r, r2, r1, false); 
+    c.arc(p1, p2, r, r2, r1, false);
     c.lineTo(p1, p2);
     c.closePath();
     c.fill();
