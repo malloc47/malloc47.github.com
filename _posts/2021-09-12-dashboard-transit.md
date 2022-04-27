@@ -6,7 +6,7 @@ published: true
 permalink: building-a-personal-dashboard-in-clojurescript-part-3
 ---
 
-My raison d'etre for creating the wall-mounted dashboard discussed in
+My raison d'être for creating the wall-mounted dashboard discussed in
 [previous][first installment] [posts][previous installment] was to
 help with timing my transit connections when leaving my NYC
 apartment. After living on my block for a few months, I had worked out
