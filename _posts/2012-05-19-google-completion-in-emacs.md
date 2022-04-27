@@ -29,22 +29,22 @@ the results into `emacs` and insert it into the current buffer:
 
 {% highlight cl %}
 (defun google-request (query)
- (shell-command-to-string 
+ (shell-command-to-string
   (format
    "echo -en $(curl -H \"Accept: application/json\" \"https://suggestqueries.google.com/complete/search?client=firefox&q=%s\" 2>/dev/null)"
    query)))
 
 (defun google-preprocess (query)
- (let ((l (split-string 
-	   (apply 'string 
-		  (removel 
+ (let ((l (split-string
+	   (apply 'string
+		  (removel
 		   '(?\" ?\[ ?\])
 		   (string-to-list query)))
 	   ",")))
   (if (> (length (car (cdr l))) 0)
     (remove (car l) (cdr l))
    nil)))
-   
+
 (defun google-complete ()
  (interactive)
  (end-of-thing 'word)
@@ -55,7 +55,7 @@ the results into `emacs` and insert it into the current buffer:
      (insert (substring
 	       (car q)
 	       (length s))))))))
-		   
+
 (defun removel (el l)
  (cond (el (removel (cdr el) (remove (car el) l)))
        (t l)))

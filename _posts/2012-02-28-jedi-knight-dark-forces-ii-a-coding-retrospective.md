@@ -41,9 +41,9 @@ and event types (e.g., messages). Have a look:
     thing player local
     surface upsuf1
     end
-    
+
     code
-    
+
     activated:
     if (GetSenderRef() == upsuf1)
     {
@@ -51,7 +51,7 @@ and event types (e.g., messages). Have a look:
 	    TeleportThing(player, ghosttel1);
 	    return;
     }
-    
+
     if (GetSenderRef() == downsect)
     {
 	    player = GetLocalPlayerThing();

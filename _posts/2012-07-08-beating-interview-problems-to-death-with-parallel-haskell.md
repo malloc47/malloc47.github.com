@@ -34,7 +34,7 @@ function has type
 rleMap :: (Eq a) => [a] -> [(a, Int)]
 {% endhighlight %}
 
-Simple and easy.  But where's the fun in calling it quits now? 
+Simple and easy.  But where's the fun in calling it quits now?
 Let's [MapReduce][5] our `RLE` algorithm to make it easier to parallelize
 and potentially [Hadoop][6]-friendly.  We've already got our `map`
 function, so lets create a `reduce`:
@@ -45,7 +45,7 @@ rleReduce [] [] = []
 rleReduce a  [] = a
 rleReduce [] b  = b
 rleReduce a b
-          | (fst $ last a ) == (fst $ head b) = 
+          | (fst $ last a ) == (fst $ head b) =
                  init a ++  [(fst(last(a)),snd(last(a)) + snd(head(b)))] ++ tail b
           | otherwise = a ++ b
 {% endhighlight %}
@@ -89,15 +89,15 @@ we might expect some improvement:
 
 	# parallelRLE n s = foldl rleReduce [] $ (parMap rdeepseq) rleMap $ chunkn n s
 	> ghc -O2 prle --make -threaded -rtsopts
-	
+
     # Parallel map 1 core
 	> /usr/bin/time -f '%E' ./prle large.txt +RTS -N1 1>/dev/null
 	0:06.31
-	
-	# Parallel map 2 cores 
+
+	# Parallel map 2 cores
 	> /usr/bin/time -f '%E' ./prle large.txt +RTS -N2 1>/dev/null
 	0:08.50
-	
+
 	# Parallel map 4 cores
 	/usr/bin/time -f '%E' ./prle large.txt +RTS -N4 1>/dev/null
 	0:11.00
@@ -125,7 +125,7 @@ constant time operation. This is in contrast to `[]`, where only
 adding an element to a list head is constant time.  Importing these
 
 {% highlight haskell %}
-import Data.ByteString.Lazy.Char8 as BL 
+import Data.ByteString.Lazy.Char8 as BL
        (ByteString
        ,length
        , take
@@ -157,7 +157,7 @@ rleReduce a b = rleReduce' (viewr a) (viewl b)
               rleReduce' EmptyR _ = b
               rleReduce' _ EmptyL = a
               rleReduce' (rs :> r) (l :< ls)
-                         | (fst r) == (fst l) = 
+                         | (fst r) == (fst l) =
                            (rs |> (fst(r),snd(r) + snd(l))) >< ls
                          | otherwise = a >< b
 {% endhighlight %}
@@ -172,7 +172,7 @@ rleReduce (viewr -> EmptyR) (viewl -> EmptyL) = S.empty
 rleReduce (viewr -> EmptyR) b = b
 rleReduce a (viewl -> EmptyL) = a
 rleReduce a@(viewr -> (rs :> r)) b@(viewl -> (l :< ls))
-           | (fst r) == (fst l) = 
+           | (fst r) == (fst l) =
              (rs |> (fst(r),snd(r) + snd(l))) >< ls
            | otherwise = a >< b
 {% endhighlight %}

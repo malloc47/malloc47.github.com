@@ -295,8 +295,8 @@ nav ul:after {
     content: "\227B ";
 }
 
-nav ul li { 
-    display: inline; 
+nav ul li {
+    display: inline;
 }
 
 nav ul li:before{
