@@ -2,57 +2,42 @@
 
 @font-face {
     font-family: 'ExistenceLight';
-    src: url('../font/Existence-Light-webfont.eot');
-    src: url('../font/Existence-Light-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../font/Existence-Light-webfont.woff') format('woff'),
-    url('../font/Existence-Light-webfont.ttf') format('truetype'),
-    url('../font/Existence-Light-webfont.svg#ExistenceLight') format('svg');
+    src: url('../font/Existence-Light-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: 'GudeaRegular';
-    src: url('../font/Gudea-Regular-webfont.eot');
-    src: url('../font/Gudea-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../font/Gudea-Regular-webfont.woff') format('woff'),
-    url('../font/Gudea-Regular-webfont.ttf') format('truetype'),
-    url('../font/Gudea-Regular-webfont.svg#GudeaRegular') format('svg');
+    font-family: 'Gudea';
+    src: url('../font/Gudea-Regular-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: 'GudeaItalic';
-    src: url('../font/Gudea-Italic-webfont.eot');
-    src: url('../font/Gudea-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../font/Gudea-Italic-webfont.woff') format('woff'),
-    url('../font/Gudea-Italic-webfont.ttf') format('truetype'),
-    url('../font/Gudea-Italic-webfont.svg#GudeaItalic') format('svg');
+    font-family: 'Gudea';
+    src: url('../font/Gudea-Italic-webfont.woff2') format('woff2');
     font-weight: normal;
-    font-style: normal;
+    font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: 'GudeaBold';
-    src: url('../font/Gudea-Bold-webfont.eot');
-    src: url('../font/Gudea-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../font/Gudea-Bold-webfont.woff') format('woff'),
-    url('../font/Gudea-Bold-webfont.ttf') format('truetype'),
-    url('../font/Gudea-Bold-webfont.svg#GudeaBold') format('svg');
-    font-weight: normal;
+    font-family: 'Gudea';
+    src: url('../font/Gudea-Bold-webfont.woff2') format('woff2');
+    font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: 'InconsolataMedium';
-    src: url('../font/Inconsolata-webfont.eot');
-    src: url('../font/Inconsolata-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../font/Inconsolata-webfont.woff') format('woff'),
-    url('../font/Inconsolata-webfont.ttf') format('truetype'),
-    url('../font/Inconsolata-webfont.svg#InconsolataMedium') format('svg');
+    font-family: 'Inconsolata';
+    src: url('../font/Inconsolata-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 /* Main site components */
@@ -61,7 +46,7 @@ body {
     background-position: left top;
     background-repeat: repeat;
     font-size: 13pt;
-    font-family: 'GudeaRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #777;
 }
 
@@ -179,7 +164,7 @@ footer {
 }
 
 #main-header .header-number {
-    font-family: 'GudeaRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #main-header a {
@@ -240,7 +225,8 @@ footer {
 .social {
     float: right;
     text-align: center;
-    font-family: 'GudeaBold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
     font-size: 9pt;
     width: 1em;
     padding-left: 1.5em;
@@ -284,7 +270,7 @@ footer {
 
 nav {
     text-align: center;
-    font-family: 'InconsolataMedium', Consolas, 'Lucida Console', Monaco, monospace;
+    font-family: 'Inconsolata', Consolas, 'Lucida Console', Monaco, monospace;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -367,15 +353,17 @@ nav ul li:first-child {
 }
 
 em {
-    font-family: 'GudeaItalic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: italic;
 }
 
 strong {
-    font-family: 'GudeaBold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
 }
 
 code {
-    font-family: 'InconsolataMedium', Consolas, 'Lucida Console', Monaco, monospace;
+    font-family: 'Inconsolata', Consolas, 'Lucida Console', Monaco, monospace;
 }
 
 pre {
