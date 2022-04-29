@@ -1,0 +1,26 @@
+{% extends "/html/base.html" %}
+{%block subtitle %}/{{post.title}}{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{% for tag in tags %}{{tag.name}}{% if not forloop.last %},{% endif %}{% endfor %}">
+{% if post.description %}
+<meta name="description" content="{{post.description}}">
+{% comment %} OpenGraph tags {% endcomment %}
+<meta property="og:description" content="{{post.description}}">
+{% endif %}
+<meta property="og:url" content="{{site-url}}{{uri}}" />
+<meta property="og:title" content="{{post.title}}" />
+<meta property="og:type" content="article" />
+{% endblock %}
+{% block content %}
+<div class="content">
+  <div class="content-wrap">
+    <p class="date">{{post.date|date:"yyyy"}} <span class="date-dark">00</span>{{post.date|date:"MM"}} <span class="date-dark">00</span>{{post.date|date:"dd"}} </p>
+    {% include "/html/header-info-post.html" %}
+    <header>{{post.title}}</header>
+    <div class="content-body">
+      {{post.content|safe}}
+    </div>
+  </div>
+  {% include "/html/post-social.html" %}
+</div>
+{% endblock %}

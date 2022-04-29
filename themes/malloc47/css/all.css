@@ -1,0 +1,506 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0b1 | 201101
+   NOTE: WORK IN PROGRESS
+   USE WITH CAUTION AND TEST WITH ABANDON */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define visible focus styles!
+:focus {
+	outline: ?????;
+} */
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* Fonts */
+
+@font-face {
+    font-family: 'ExistenceLight';
+    src: url('../font/Existence-Light-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('../font/Gudea-Regular-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('../font/Gudea-Italic-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('../font/Gudea-Bold-webfont.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inconsolata';
+    src: url('../font/Inconsolata-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Main site components */
+
+body {
+    background-position: left top;
+    background-repeat: repeat;
+    font-size: 13pt;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #777;
+}
+
+p {
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    -ms-hyphenate-limit-lines: 2;
+    -webkit-hyphenate-limit-lines: 2;
+    hyphenate-limit-lines: 2;
+}
+
+footer {
+    text-align: center;
+    font-size: 12px;
+}
+
+.footer-padding {
+    padding: 10px;
+}
+
+#miniclock {
+    display: block;
+    float:left;
+    /* position: absolute; */
+    /* float: left; */
+    /* top: 10px; */
+    /* left: 10px; */
+}
+
+.icons {
+    position:relative;
+    top:4px;
+    right:4px;
+    float:right;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.icons-left {
+    position:relative;
+    top:4px;
+    left:4px;
+    float:left;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.icons-inline {
+    position:relative;
+    text-align:center;
+}
+
+.icons a {
+    display: block;
+    float:right;
+    padding-right:2px;
+    padding-bottom:2px;
+}
+
+.icons-left span {
+    display: block;
+    float:left;
+    padding-left:2px;
+    padding-bottom:2px;
+}
+
+.icons-inline a {
+    display: inline-block;
+    width:25px;
+    height:25px;
+    padding-right:2px;
+}
+
+.transparent {
+    zoom: 1;
+    filter: alpha(opacity=75);
+    opacity: 0.75;
+    -moz-transition: opacity .4s ease;
+    -webkit-transition: opacity .4s ease;
+    -o-transition: opacity .4s ease;
+}
+
+.transparent-light {
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.50;
+    -moz-transition: opacity .4s ease;
+    -webkit-transition: opacity .4s ease;
+    -o-transition: opacity .4s ease;
+}
+
+.transparent:hover, .transparent-light:hover{
+    zoom: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+#main-header {
+    padding: 10px;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 28pt;
+    font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
+    text-shadow: 1px 1px 4px #000000;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#main-header .header-number {
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#main-header a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+#main-header .header-name {
+    font-size: 12pt;
+}
+
+#container {
+    max-width: 720px;
+    padding: 0 10px 10px 10px;
+    margin: 0px auto;
+}
+
+/* Individual content elements */
+
+#contents {
+    text-align: justify;
+}
+
+.content {
+    padding: 25px 10px 25px 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.content-wrap {
+    max-width: 620px;
+    margin: 0px auto;
+}
+
+.content-body {}
+
+.content:last-child {
+    border-style: none;
+}
+
+.content header {
+    text-align: center;
+    font-size: 24pt;
+    font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
+    margin: 0px auto;
+    margin-bottom: 0.5em;
+}
+
+.date {
+    margin:0px;
+    float: left;
+    font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
+    font-size: 9pt;
+    width: 2.5em;
+}
+
+.social {
+    float: right;
+    text-align: center;
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 9pt;
+    width: 1em;
+    padding-left: 1.5em;
+}
+
+/* Content options */
+
+.columns {
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    column-count: 2;
+    column-gap: 10px;
+    /* padding: 25px 0px 25px 0px; */
+}
+
+.columns img {
+    display:block;
+    margin:5px auto;
+}
+
+.centered>* {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    width:300px;
+    text-align:center;
+}
+
+.left {
+    padding: 25px 150px 25px 0px;
+}
+
+.share {
+    max-width: 640px;
+    margin: 0px auto;
+}
+
+/* navigation */
+
+nav {
+    text-align: center;
+    font-family: 'Inconsolata', Consolas, 'Lucida Console', Monaco, monospace;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+nav ul {
+    width: 100%;
+}
+
+nav ul:before {
+    content: "\227A ";
+}
+
+nav ul:after {
+    content: "\227B ";
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li:before{
+    content: "/";
+}
+
+nav ul li:first-child {
+    border-left: 0px none;
+}
+
+/* content styles */
+
+.content>*>*>* {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.content-body>p:last-child:after {
+    content: " \2318";
+}
+
+.content-body img {
+    border-style:none;
+    border-width:0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content ul, ol{
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+.content ul {
+    list-style-type: circle;
+}
+
+.content ol {
+    list-style-type: decimal;
+}
+
+.content ol li, .content ul li {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.content ol li:first-child, .content ul li:first-child {
+    padding-top: 0em;
+}
+
+.content ol li:last-child, .content ul li:last-child {
+    padding-bottom: 0em;
+}
+
+em {
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: italic;
+}
+
+strong {
+    font-family: 'Gudea', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+code {
+    font-family: 'Inconsolata', Consolas, 'Lucida Console', Monaco, monospace;
+}
+
+pre {
+    overflow:auto;
+    padding: 10px;
+}
+
+pre code {
+
+}
+
+blockquote {
+    margin-left: 2.5em;
+    margin-right: 2.5em;
+    border-left: 2px solid;
+    padding-left: 0.5em;
+}
+
+/* .content-body a:before { */
+/*     content: "/"; */
+/* } */
+
+h1, h2, h3, h4, h5, h6 {font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;}
+h1 {font-size: 24pt;}
+h2 {font-size: 20pt;}
+h3 {font-size: 18pt;}
+h4 {font-size: 16pt;}
+h5 {font-size: 14pt;}
+h6 {font-size: 12pt;}
+
+h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
+    content: "\00A7";
+}
+
+.selectable {
+    cursor:pointer;
+}
+
+table {
+    padding: 0;
+    margin-left:auto;
+    margin-right:auto;
+}
+table tr {
+    border-top: 1px solid #cccccc;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th :first-child, table tr td :first-child {
+    margin-top: 0;
+}
+table tr th :last-child, table tr td :last-child {
+    margin-bottom: 0;
+}
+

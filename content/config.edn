@@ -1,0 +1,28 @@
+{:site-title           "malloc47"
+ :author               "Jarrell Waggoner"
+ :description          ""
+ :site-url             "https://www.malloc47.com"
+ :post-root            "posts"
+ :page-root            "pages"
+ :post-root-uri        ""
+ :page-root-uri        ""
+ :tag-root-uri         ""
+ :author-root-uri      ""
+ :public-dest          "public"
+ :blog-prefix          ""
+ :rss-name             "feed.xml"
+ :recent-posts         3
+ :post-date-format     "yyyy-MM-dd"
+ :archive-group-format "yyyy MMMM"
+ :sass-src             []
+ :theme                "malloc47"
+ :resources            ["img" "cv.pdf" "resume.pdf" "favicon.ico"]
+ :keep-files           [".git"]
+ :ignored-files        [#"\.#.*" #".*\.swp$"]
+ ;; These previews are overridden with the full contents
+ :previews?            true
+ :posts-per-page       5
+ :clean-urls           :trailing-slash
+ :collapse-subdirs?    false
+ :hide-future-posts?   true
+ :debug?               false}

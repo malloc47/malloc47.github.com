@@ -1,0 +1,25 @@
+{% extends "/html/base.html" %}
+{% block content %}
+{% for post in posts %}
+<div class="content">
+  <div class="content-wrap">
+    <p class="date">{{post.date|date:"yyyy"}} <span class="date-dark">00</span>{{post.date|date:"MM"}} <span class="date-dark">00</span>{{post.date|date:"dd"}} </p>
+    {% include "/html/header-info.html" %}
+    <header><a href="{{post.uri}}">{{post.title}}</a></header>
+    <div class="content-body">
+      {{post.content|safe}}
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% if any next-uri prev-uri %}
+<nav id="pagination">
+  {% if prev-uri %}
+  <a class="left" href="{{prev-uri}}">&#8826; Newer</a>
+  {% endif %}
+  {% if next-uri %}
+  <a class="right" href="{{next-uri}}">Older &#8827;</a>
+  {% endif %}
+</nav>
+{% endif %}
+{% endblock %}
