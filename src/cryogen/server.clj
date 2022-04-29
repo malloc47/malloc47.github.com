@@ -10,7 +10,7 @@
     [cryogen-core.compiler :refer [compile-assets-timed]]
     [cryogen-core.config :refer [resolve-config]]
     [cryogen-core.io :refer [path]]
-    [cryogen.patch :refer [patch]]
+    [cryogen.patch :refer [patch update-article-fn]]
     [clojure.string :as string])
   (:import (java.io File)))
 
@@ -18,7 +18,7 @@
 
 (def extra-config-dev
   "Add dev-time configuration overrides here, such as `:hide-future-posts? false`"
-  {})
+  {:update-article-fn update-article-fn})
 
 (defn init [fast?]
   (patch)
