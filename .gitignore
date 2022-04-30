@@ -5,11 +5,6 @@ pom.xml.asc
 /classes/
 /target/
 /checkouts/
-.lein-deps-sum
-.lein-repl-history
-.lein-plugins/
-.lein-failures
+.nrepl-port
 /public/
-/themes/lotus/css/blog.css
-/themes/lotus/css/blog.css.map
 .cpcache/
