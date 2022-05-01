@@ -3,21 +3,6 @@ function drawClock() {
 
     var d = new Date();
 
-    // Swap from day to night or night to day
-    if ((d.getHours() < 19 &&
-	d.getHours() > 6) &&
-       !window.theme &&
-       !window.theme_override) {
-	check_time();
-	return;
-    } else if (!(d.getHours() < 19 &&
-	      d.getHours() > 6) &&
-	    window.theme &&
-	    !window.theme_override) {
-	check_time();
-	return;
-    }
-
     // Draw clock
     var e = document.getElementById('miniclock');
     if (e && e.getContext) {

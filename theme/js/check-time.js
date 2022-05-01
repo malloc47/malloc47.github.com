@@ -1,6 +1,11 @@
 function lightp() {
-    var hour = new Date().getHours();
-    return (hour < 19 && hour > 6);
+    if (window.matchMedia) {
+	return !window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    else {
+	var hour = new Date().getHours();
+	return (hour < 19 && hour > 6);
+    }
 }
 
 function check_time() {
@@ -50,5 +55,12 @@ var cookie2 = read_cookie('theme')==null ? false : read_cookie('theme') == "true
 window.theme_override = cookie1;
 
 window.theme = window.theme_override ? cookie2 : lightp()
+
+if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)')
+	.addEventListener('change', function(event) {
+	    check_time();
+	});
+}
 
 check_time();
