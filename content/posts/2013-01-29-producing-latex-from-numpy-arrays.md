@@ -1,6 +1,6 @@
 {:layout :post
  :title "Producing LaTeX from NumPy Arrays"
- :date "2013-01-29 20:00:00"}
+ :date "2013-01-29T20:00:00"}
 
 For my comprehensive exam, I needed to quickly convert some NumPy
 arrays into nice-looking LaTeX `array` elements.  The TeX Stack

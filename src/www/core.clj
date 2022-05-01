@@ -10,7 +10,6 @@
    [www.config :refer [config]]
    [www.content :refer [content fixed-assets]]))
 
-
 (def app (-> (stasis/serve-pages content)
              (optimus/wrap fixed-assets optimizations/none serve-live-assets)
              wrap-content-type))

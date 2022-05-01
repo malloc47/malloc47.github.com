@@ -2,7 +2,6 @@
   (:require
    [www.parser.flexmark :as flexmark]
    [clojure.java.io :refer [copy]]
-   [selmer.parser :refer [render render-file]]
    [clojure.string :as str])
   (:import
    (java.io StringReader StringWriter PushbackReader)))
@@ -27,6 +26,3 @@
   (->> markdown-string
        (.parse flexmark/parser)
        (.render flexmark/renderer)))
-
-(defn template [untemplated-string]
-  (render untemplated-string))

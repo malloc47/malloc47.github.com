@@ -1,7 +1,5 @@
 {:title "Talks"
- :layout :page
- :page-index 4
- :navbar? true}
+ :layout :page}
 
 - [Rules Engines: Logic As Data Structure][11]. [POSSCON][6].
   Columbia, SC.  April 14, 2015. [Source][12].

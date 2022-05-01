@@ -18,10 +18,14 @@
          merge-page-sources
          process/lift
          (map (comp
+               process/template
                process/markdown
-               process/metadata
-               process/normalize))
+               process/normalize
+               process/metadata))
          process/return)))
 
 (defn fixed-assets []
-  (load-assets "content" [#"\.pdf"]))
+  (concat
+   (load-assets "content" [#"\.pdf"])
+   (load-assets "content" [#"\.png" #"\.svg" #"\.jpg"])
+   (load-assets "theme" [#"\.woff2"])))

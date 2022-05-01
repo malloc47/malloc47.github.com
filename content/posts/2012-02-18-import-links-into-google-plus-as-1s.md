@@ -1,7 +1,7 @@
 {:layout :post
  :title "Import Links into Google Plus as +1s"
  :permalink "/blog/import-links-into-google-plus-as-1s/"
- :date "2012-02-18 00:00:00"}
+ :date "2012-02-18"}
 
 I've been accumulating helpful and interesting articles for a number
 of years now. At first, they existed solely as starred articles in

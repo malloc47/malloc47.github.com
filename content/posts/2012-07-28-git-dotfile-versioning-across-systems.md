@@ -1,6 +1,6 @@
 {:layout :post
  :title "Git Dotfile Versioning Across Systems"
- :date "2012-07-29 00:00:00"}
+ :date "2012-07-29"}
 
 For users of unix-like operating systems, treating your dotfiles like
 real code and keeping them in a repository is a supremely good idea.

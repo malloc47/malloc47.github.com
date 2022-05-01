@@ -1,11 +1,11 @@
-{% extends "/html/base.html" %}
-{%block subtitle %}/{{page.title}}{% endblock %}
+{% extends "html/base.html" %}
+{%block subtitle %}/{{title}}{% endblock %}
 {% block content %}
 <div class="content">
   <div class="content-wrap">
-    <header>{{page.title}}</header>
+    <header>{{title}}</header>
     <div class="content-body">
-      {{page.content|safe}}
+      {{content|safe}}
     </div>
   </div>
 </div>

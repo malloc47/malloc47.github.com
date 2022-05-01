@@ -1,7 +1,7 @@
 {:layout :post
  :title "Building a Personal Dashboard in ClojureScript"
- :date "2020-12-27 00:00:00"
- :permalink "building-a-personal-dashboard-in-clojurescript"}
+ :date "2020-12-27"
+ :permalink "/building-a-personal-dashboard-in-clojurescript"}
 
 After the 100th time checking the weather or looking up transit times
 before heading out the door in the morning, I came to the realization

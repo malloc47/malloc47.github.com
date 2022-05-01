@@ -1,6 +1,6 @@
 {:layout :post
  :title "Beating Interview Problems to Death with Parallel Haskell"
- :date "2012-07-08 00:00:00"}
+ :date "2012-07-08"}
 
 Like anyone for whom graduation is becoming more immanent, I've been
 taking a look at the latest trends in the typical technology interview

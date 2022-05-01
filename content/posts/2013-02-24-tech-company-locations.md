@@ -1,6 +1,6 @@
 {:layout :post
  :title "Tech Company Locations (North America)"
- :date "2013-02-24 00:00:00"}
+ :date "2013-02-24"}
 
 <p>Since I'm soon to be on the technology job market, I decided to get
 a handle on where the major technology companies were located.  After

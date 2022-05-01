@@ -1,6 +1,6 @@
 {:layout :post
  :title "Jetty JMX in Clojure"
- :date "2015-02-16 00:00:00"}
+ :date "2015-02-16"}
 
 Embedded Jetty is one of the more popular servers for ring
 applications.  [JMX][1] can be useful for poking around the guts of

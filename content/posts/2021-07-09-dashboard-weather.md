@@ -1,7 +1,7 @@
 {:layout :post
  :title "Building a Personal Dashboard in ClojureScript Part 2"
- :date "2021-07-09 00:00:00"
- :permalink "building-a-personal-dashboard-in-clojurescript-part-2"}
+ :date "2021-07-09"
+ :permalink "/building-a-personal-dashboard-in-clojurescript-part-2"}
 
 Following the [previous installment] in my series on building a
 dashboard in ClojureScript, I'll be diving into the weather card.

@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
-    <title>{{title}}/{% block subtitle %}{% endblock %}</title>
+    <title>{{site-title}}/{% block subtitle %}{% endblock %}</title>
     {% block meta %}
     <meta name="description" content="{{description}}">
     <meta name="keywords" content="">
     <meta name="author" content="Jarrell Waggoner">
     <meta property="og:url" content="{{site-url}}{{uri}}" />
-    <meta property="og:title" content="{{title}}" />
+    <meta property="og:title" content="{{site-title}}" />
     <meta property="og:type" content="article" />
     {% endblock %}
     <meta name="viewport" content="width=720">
@@ -32,15 +32,15 @@
       <canvas id="miniclock" width="50" height="50" class="selectable"></canvas>
       <span id="toggle" class="transparent-light toggle selectable"></span>
     </div>
-    {% include "/html/social.html" %}
+    {% include "html/social.html" %}
     <div id="container">
-      {% include "/html/header.html" %}
-      {% include "/html/nav.html" %}
+      {% include "html/header.html" %}
+      {% include "html/nav.html" %}
       <div id="contents" role="main">
         {% block content %}
         {% endblock %}
       </div>
-      {% include "/html/footer.html" %}
+      {% include "html/footer.html" %}
       </div>
     <!-- {% script "js/highlight.pack.js" %} -->
     <!-- <script>hljs.initHighlightingOnLoad();</script> -->

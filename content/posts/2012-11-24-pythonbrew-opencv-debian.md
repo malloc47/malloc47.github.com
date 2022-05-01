@@ -1,6 +1,6 @@
 {:layout :post
  :title "pythonbrew+opencv+debian"
- :date "2012-11-24 15:00:00"}
+ :date "2012-11-24T15:00:00"}
 
 There are a number of ways to go about building a modern development
 environment for scientific computing and computer vision in python.

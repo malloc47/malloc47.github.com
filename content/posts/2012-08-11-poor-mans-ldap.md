@@ -1,6 +1,6 @@
 {:layout :post
  :title "Poor Man's LDAP"
- :date "2012-08-11 00:00:00"}
+ :date "2012-08-11"}
 
 In addition to being a researcher and backend web developer, I've also
 worn the system administrator hat for a number of years.  While the

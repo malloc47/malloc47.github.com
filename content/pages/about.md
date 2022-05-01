@@ -1,7 +1,5 @@
 {:title "About"
- :layout :page
- :page-index 1
- :navbar? true}
+ :layout :page}
 
 <div class="icons-inline">
 <a href="mailto:malloc47@gmail.com" class="transparent gmail"> </a>

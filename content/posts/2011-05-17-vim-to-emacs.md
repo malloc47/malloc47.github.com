@@ -1,7 +1,7 @@
 {:layout :post
  :title "vim -> emacs"
  :permalink "/blog/vim-to-emacs/"
- :date "2011-05-18 00:00:00"}
+ :date "2011-05-18"}
 
 After having grown up in the terminal with vim at my side, I've been transitioning to back to emacs. There's no shortage of guides for making the leap, but there's a number of features in vim that operate very differently in emacs, or do not map cleanly to a single feature. There's nothing like not knowing how to get that *one* feature you rely on when making the vim-&gt;emacs leap to make you want to run back to familiar territory. Here's a few of the discoveries I've made along the way.
 
