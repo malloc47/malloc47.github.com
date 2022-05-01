@@ -1,18 +1,24 @@
 (ns www.core
   (:require
    [ring.middleware.content-type :refer [wrap-content-type]]
+   [ring.middleware.default-charset :refer [wrap-default-charset]]
    [optimus.prime :as optimus]
-   [optimus.optimizations :as optimizations]
-   [optimus.strategies :refer [serve-live-assets]]
+   [optimus.strategies :refer [serve-live-assets
+                               serve-frozen-assets]]
    [optimus.export :refer [save-assets]]
    [ring.server.standalone :as ring-server]
    [stasis.core :as stasis]
    [www.config :refer [config]]
-   [www.content :refer [content fixed-assets]]))
+   [www.content :refer [content assets]]
+   [www.optimizations :as optimizations]))
 
 (def app (-> (stasis/serve-pages content)
-             (optimus/wrap fixed-assets optimizations/none serve-live-assets)
-             wrap-content-type))
+             (optimus/wrap assets
+                           optimizations/all
+                           serve-live-assets
+                           (:optimus config))
+             wrap-content-type
+             (wrap-default-charset "utf-8")))
 
 (defn serve
   [{:keys [join?] :as opts}]
@@ -24,9 +30,12 @@
       opts)))
 
 (defn -main []
-  (let [{:keys [public-dest]} config
-        fixed-assets (optimizations/none (fixed-assets) {})]
+  (let [{:keys [public-dest]} config]
     (stasis/empty-directory! public-dest)
-    (save-assets fixed-assets public-dest)
-    (stasis/export-pages (content) public-dest {:optimus-assets fixed-assets}))
+    (as-> (assets) <>
+      (optimizations/all <> (:optimus config))
+      (remove :bundled <>)
+      (remove :outdated <>)
+      (save-assets <> public-dest)
+      (stasis/export-pages (content) public-dest {:optimus-assets <>})))
   (System/exit 0))

@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'ExistenceLight';
-    src: url('../font/Existence-Light-webfont.woff2') format('woff2');
+    src: url('/font/Existence-Light-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -10,7 +10,7 @@
 
 @font-face {
     font-family: 'Gudea';
-    src: url('../font/Gudea-Regular-webfont.woff2') format('woff2');
+    src: url('/font/Gudea-Regular-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -18,7 +18,7 @@
 
 @font-face {
     font-family: 'Gudea';
-    src: url('../font/Gudea-Italic-webfont.woff2') format('woff2');
+    src: url('/font/Gudea-Italic-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -26,7 +26,7 @@
 
 @font-face {
     font-family: 'Gudea';
-    src: url('../font/Gudea-Bold-webfont.woff2') format('woff2');
+    src: url('/font/Gudea-Bold-webfont.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -34,7 +34,7 @@
 
 @font-face {
     font-family: 'Inconsolata';
-    src: url('../font/Inconsolata-webfont.woff2') format('woff2');
+    src: url('/font/Inconsolata-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

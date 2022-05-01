@@ -9,8 +9,6 @@ function check_time() {
     }
     document.getElementById('day-css').disabled = window.theme;
     document.getElementById('night-css').disabled = !window.theme;
-
-    drawClock();
 }
 
 function clock_button() {

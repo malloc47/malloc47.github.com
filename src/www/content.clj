@@ -1,6 +1,6 @@
 (ns www.content
   (:require
-   [optimus.assets :refer [load-assets]]
+   [optimus.assets :refer [load-assets load-bundle]]
    [stasis.core :refer [slurp-directory merge-page-sources]]
    [www.config :refer [config]]
    [www.process :as process]
@@ -24,8 +24,29 @@
                process/metadata))
          process/return)))
 
-(defn fixed-assets []
+(defn assets []
   (concat
    (load-assets "content" [#"\.pdf"])
    (load-assets "content" [#"\.png" #"\.svg" #"\.jpg"])
-   (load-assets "theme" [#"\.woff2"])))
+   (load-assets "content" ["/favicon.ico"])
+   (load-assets "theme" [#"\.woff2"])
+   (load-bundle "theme"
+                "style.css"
+                ["/css/reset.css"
+                 "/css/style.css"])
+   (load-bundle "theme"
+                "day.css"
+                ["/css/day.css"
+                 "/css/img-day.css"
+                 "/css/pygments-day.css"])
+   (load-bundle "theme"
+                "night.css"
+                ["/css/night.css"
+                 "/css/img-night.css"
+                 "/css/pygments-night.css"])
+   (load-bundle "theme"
+                "main.js"
+                ["/js/cookies.js"
+                 "/js/mini-clock.js"
+                 "/js/check-time.js"
+                 "/js/event-handler.js"])))
