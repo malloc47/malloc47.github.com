@@ -1,7 +1,7 @@
 {:layout :post
  :title "Import Links into Google Plus as +1s"
- :permalink ["/import-links-into-google-plus-as-1s/"
-             "/blog/import-links-into-google-plus-as-1s/"]
+ :permalink "/import-links-into-google-plus-as-1s/"
+ :redirects ["/blog/import-links-into-google-plus-as-1s/"]
  :date "2012-02-18"}
 
 I've been accumulating helpful and interesting articles for a number

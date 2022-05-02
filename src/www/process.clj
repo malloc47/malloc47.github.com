@@ -30,20 +30,14 @@
 (def filename-regexp #"/([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9\w\-]+)\.(\w+)$")
 
 (defn normalize
-  [{{:keys [permalink date format layout title draft?]} :metadata
+  [{{:keys [permalink date format layout title draft? redirects]} :metadata
     filename :filename :as m}]
   (let [file-date  (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
         file-title (get (re-find filename-regexp filename) 2)
         format     (keyword (or format
                                 (get (re-find #"\.(\w+)$" filename) 1)
                                 :unknown))
-        uri        (-> (or
-                        ;; Support permalinks with multiple redirects
-                        ;; where the first is the canonical location.
-                        ;; See: explode-permalinks
-                        (if (sequential? permalink)
-                          (first permalink)
-                          permalink)
+        uri        (-> (or permalink
                            file-title
                            ;; Pages as opposed to posts don't have a
                            ;; date, so fall back to getting the
@@ -60,7 +54,8 @@
          :layout    layout
          :title     title
          :draft?    draft?
-         :permalink permalink}
+         :permalink permalink
+         :redirects redirects}
         (->> (merge m))
         (dissoc :metadata))))
 
@@ -106,22 +101,19 @@
   [contents]
   (remove :draft? contents))
 
-(defn explode-permalinks
+(defn explode-redirects
   [contents]
   (mapcat
-   (fn [{:keys [permalink] :as c}]
-     (if (and (sequential? permalink) (> (count permalink) 1))
-       (let [destination (first permalink)]
-         (->> (rest permalink)
-              (map (fn [link]
-                     (-> c
-                         (assoc :uri         link
-                                :layout      :redirect
-                                :destination destination
-                                :redirect?   true)
-                         template)))
-              (concat [c])))
-       [c]))
+   (fn [{:keys [redirects permalink] :as c}]
+     (->> (or redirects [])
+          (map (fn [redirect]
+                 (-> c
+                     (assoc :uri         redirect
+                            :layout      :redirect
+                            :destination permalink
+                            :redirect?   true)
+                     template)))
+          (concat [c])))
    contents))
 
 (defn run
@@ -133,7 +125,7 @@
         remove-drafts
         (map (fn [c] (merge c context)))
         render
-        explode-permalinks
+        explode-redirects
         return)))
 
 (defn template-nested-paginated
