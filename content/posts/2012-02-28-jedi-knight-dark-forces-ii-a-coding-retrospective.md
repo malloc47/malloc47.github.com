@@ -1,6 +1,7 @@
 {:layout :post
  :title "Jedi Knight: Dark Forces II -- A coding retrospective"
- :permalink "/blog/jedi-knight-dark-forces-ii-a-coding-retrospective/"
+ :permalink ["/jedi-knight-dark-forces-ii-a-coding-retrospective/"
+             "/blog/jedi-knight-dark-forces-ii-a-coding-retrospective/"]
  :date "2012-02-28"
  :img "/img/posts/jk/thumb/jk-screenshot.jpg"}
 

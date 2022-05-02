@@ -1,6 +1,7 @@
 {:layout :post
  :title "Man Page Readability"
- :permalink "/blog/man-page-readability/"
+ :permalink ["/man-page-readability/"
+             "/blog/man-page-readability/"]
  :date "2012-02-11"}
 
 Man pages are one of the staples of a healthy \*nix diet, but having

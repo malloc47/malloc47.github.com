@@ -30,14 +30,20 @@
 (def filename-regexp #"/([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9\w\-]+)\.(\w+)$")
 
 (defn normalize
-  [{{:keys [permalink date format layout title]} :metadata
+  [{{:keys [permalink date format layout title draft?]} :metadata
     filename :filename :as m}]
   (let [file-date  (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
         file-title (get (re-find filename-regexp filename) 2)
         format     (keyword (or format
                                 (get (re-find #"\.(\w+)$" filename) 1)
                                 :unknown))
-        uri        (-> (or permalink
+        uri        (-> (or
+                        ;; Support permalinks with multiple redirects
+                        ;; where the first is the canonical location.
+                        ;; See: explode-permalinks
+                        (if (sequential? permalink)
+                          (first permalink)
+                          permalink)
                            file-title
                            ;; Pages as opposed to posts don't have a
                            ;; date, so fall back to getting the
@@ -48,11 +54,13 @@
                        leading-slash)
         date       (some-> (or date file-date) (subs 0 10) LocalDate/parse)
         title      (or title file-title)]
-    (-> {:format format
-         :uri    uri
-         :date   date
-         :layout layout
-         :title  title}
+    (-> {:format    format
+         :uri       uri
+         :date      date
+         :layout    layout
+         :title     title
+         :draft?    draft?
+         :permalink permalink}
         (->> (merge m))
         (dissoc :metadata))))
 
@@ -81,27 +89,51 @@
   (map (fn [[k v]] {:content v :filename k}) m))
 
 (defn return
-  [ms]
-  (->> ms
+  [contents]
+  (->> contents
        (map (fn [{:keys [uri content]}] [uri content]))
        (into {})))
 
 (defn parse
-  [content]
-  (map (comp normalize metadata) content))
+  [contents]
+  (map (comp normalize metadata) contents))
 
 (defn render
-  [content]
-  (map (comp template markdown) content))
+  [contents]
+  (map (comp template markdown) contents))
+
+(defn remove-drafts
+  [contents]
+  (remove :draft? contents))
+
+(defn explode-permalinks
+  [contents]
+  (mapcat
+   (fn [{:keys [permalink] :as c}]
+     (if (and (sequential? permalink) (> (count permalink) 1))
+       (let [destination (first permalink)]
+         (->> (rest permalink)
+              (map (fn [link]
+                     (-> c
+                         (assoc :uri         link
+                                :layout      :redirect
+                                :destination destination
+                                :redirect?   true)
+                         template)))
+              (concat [c])))
+       [c]))
+   contents))
 
 (defn run
-  ([content] (run content {}))
-  ([content context]
-   (->> content
+  ([contents] (run contents {}))
+  ([contents context]
+   (->> contents
         lift
         parse
+        remove-drafts
         (map (fn [c] (merge c context)))
         render
+        explode-permalinks
         return)))
 
 (defn template-nested-paginated
