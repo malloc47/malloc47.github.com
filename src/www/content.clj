@@ -11,18 +11,25 @@
    (slurp-directory path #"\.md")
    (slurp-directory path #"\.html")))
 
+(defn posts []
+  (get-path-contents (str (:content-root config) "/posts/")))
+
+(defn pages []
+  (get-path-contents (str (:content-root config) "/pages/")))
+
+(defn home+posts []
+  (->> (posts)
+       process/lift
+       process/parse
+       (map process/markdown)
+       (process/template-nested-paginated :home :posts 5)
+       process/return))
+
 (defn content []
-  (let [root (:content-root config)]
-    (->> {:posts   (get-path-contents (str root "/posts/"))
-          :pages   (get-path-contents (str root "/pages/"))}
-         merge-page-sources
-         process/lift
-         (map (comp
-               process/template
-               process/markdown
-               process/normalize
-               process/metadata))
-         process/return)))
+  (->> {:posts   (process/run (posts))
+        :pages   (process/run (pages))
+        :home    (home+posts)}
+       merge-page-sources))
 
 (defn assets []
   (concat
