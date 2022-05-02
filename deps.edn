@@ -1,5 +1,6 @@
 {:deps {org.clojure/clojure {:mvn/version "1.11.1"}
         optimus/optimus {:mvn/version "2022-02-13"}
+        optimus-autoprefixer/optimus-autoprefixer {:mvn/version "1.0.0-rc1"}
         ring/ring-headers {:mvn/version "0.3.0"}
         ring-server/ring-server {:mvn/version "0.5.0"}
         stasis/stasis {:mvn/version "2.5.1"}

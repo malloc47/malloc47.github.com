@@ -5,8 +5,6 @@ body {
 footer {
     color: #FFFFFF;
     background-color: #222;
-    -moz-box-shadow:    0px 0px 10px 0px #777;
-    -webkit-box-shadow: 0px 0px 10px 0px #777;
     box-shadow:         0px 0px 10px 0px #777;
 }
 
@@ -20,9 +18,7 @@ footer {
     letter-spacing: -0.20em;
     margin-left: -0.05em;
     margin-right: 0.20em;
-    -moz-transition: text-shadow .4s ease;
-    -webkit-transition: text-shadow .4s ease;
-    -o-transition: text-shadow .4s ease;
+    transition: text-shadow .4s ease;
 }
 
 #main-header .header-number:hover {text-shadow: 3px 3px 1px #666;}
@@ -32,8 +28,6 @@ footer {
 #contents {color: #000;}
 .content {
     background-color: #FFF;
-    -moz-box-shadow:    0px 0px 10px 0px #777;
-    -webkit-box-shadow: 0px 0px 10px 0px #777;
     box-shadow:         0px 0px 10px 0px #777;
 }
 /* .content-body>p:first-child:first-letter {color: #333;} */
@@ -53,8 +47,6 @@ footer {
 nav {
     color: #AAA;
     background-color: #FFF;
-    -moz-box-shadow:    0px 0px 10px 0px #777;
-    -webkit-box-shadow: 0px 0px 10px 0px #777;
     box-shadow:         0px 0px 10px 0px #777;
 }
 
@@ -65,9 +57,7 @@ pre {background-color: #EEECE7;}
 
 a {
     color: #FF5F00;
-    -moz-transition: color .2s linear;
-    -webkit-transition: color .2s linear;
-    -o-transition: color .2s linear;
+    transition: color .2s linear;
 }
 
 /* .content-body a:before {color: #AAA;} */
@@ -78,15 +68,6 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
     color: #AAA;
 }
 
-::-moz-selection {
-    background: #FFB573;
-    color: #000;
-}
-
-::-webkit-selection {
-    background: #FFB573;
-    color: #000;
-}
 ::selection {
     background: #FFB573;
     color: #000;

@@ -51,11 +51,7 @@ body {
 }
 
 p {
-    -ms-hyphens: auto;
-    -webkit-hyphens: auto;
     hyphens: auto;
-    -ms-hyphenate-limit-lines: 2;
-    -webkit-hyphenate-limit-lines: 2;
     hyphenate-limit-lines: 2;
 }
 
@@ -82,12 +78,6 @@ footer {
     top:4px;
     right:4px;
     float:right;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
@@ -96,12 +86,6 @@ footer {
     top:4px;
     left:4px;
     float:left;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
@@ -135,18 +119,14 @@ footer {
     zoom: 1;
     filter: alpha(opacity=75);
     opacity: 0.75;
-    -moz-transition: opacity .4s ease;
-    -webkit-transition: opacity .4s ease;
-    -o-transition: opacity .4s ease;
+    transition: opacity .4s ease;
 }
 
 .transparent-light {
     zoom: 1;
     filter: alpha(opacity=50);
     opacity: 0.50;
-    -moz-transition: opacity .4s ease;
-    -webkit-transition: opacity .4s ease;
-    -o-transition: opacity .4s ease;
+    transition: opacity .4s ease;
 }
 
 .transparent:hover, .transparent-light:hover{
@@ -163,12 +143,6 @@ footer {
     font-family: 'ExistenceLight', Futura, 'Century Gothic', AppleGothic, sans-serif;
     text-shadow: 1px 1px 4px #000000;
     cursor: default;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
@@ -244,10 +218,6 @@ footer {
 /* Content options */
 
 .columns {
-    -moz-column-count: 2;
-    -moz-column-gap: 10px;
-    -webkit-column-count: 2;
-    -webkit-column-gap: 10px;
     column-count: 2;
     column-gap: 10px;
     /* padding: 25px 0px 25px 0px; */
@@ -283,12 +253,6 @@ nav {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 20px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
