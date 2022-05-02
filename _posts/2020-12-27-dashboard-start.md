@@ -3,7 +3,7 @@ layout: post
 title: Building a Personal Dashboard in ClojureScript
 date: 2020-12-27 00:00:00
 published: true
-permalink: building-a-personal-dashboard-in-clojurescript
+permalink: /building-a-personal-dashboard-in-clojurescript/
 ---
 
 After the 100th time checking the weather or looking up transit times
