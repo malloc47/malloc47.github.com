@@ -70,11 +70,11 @@
 (defn template
   [{:keys [layout] :as payload}]
   (cond-> payload
-    layout (->>
-            (merge config)
-            (selmer/render-file (str "html/" (name layout) ".html"))
-            constantly
-            (update payload :content))))
+    layout
+    (->> (merge (select-keys config [:site]))
+         (selmer/render-file (str "html/" (name layout) ".html"))
+         constantly
+         (update payload :content))))
 
 ;; Map/list processing functions
 

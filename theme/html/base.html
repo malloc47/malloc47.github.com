@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
-    <title>{{site-title}}/{% block subtitle %}{% endblock %}</title>
+    <title>{{site.title}}/{% block subtitle %}{% endblock %}</title>
     {% block meta %}
     <meta name="description" content="{{description}}">
     <meta name="keywords" content="">
     <meta name="author" content="Jarrell Waggoner">
-    <meta property="og:url" content="{{site-url}}{{uri}}" />
-    <meta property="og:title" content="{{site-title}}" />
+    <meta property="og:url" content="{{site.url}}{{uri}}" />
+    <meta property="og:title" content="{{site.title}}" />
     <meta property="og:type" content="article" />
     {% endblock %}
     <meta name="viewport" content="width=720">
