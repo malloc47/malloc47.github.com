@@ -14,7 +14,7 @@
       <link>{{site.url}}{{ post.uri }}</link>
       <pubDate>{{post.modified|rfc822_date}}</pubDate>
       <author>{{site.email}} ({{site.author}})</author>
-      <guid>http://malloc47.com{{ post.uri }}</guid>{# Hardcoded URI so these guids match the previous guids #}
+      <guid isPermaLink="true">{{site.url}}{{ post.uri }}</guid>
       <description>{{post.content|xml_escape}}</description>
     </item>
     {% endfor %}
