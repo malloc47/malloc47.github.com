@@ -1,5 +1,5 @@
 {:layout :post
- :title "LaTeX Snippet&#58; (Literal) One Liners"
+ :title "LaTeX Snippet: (Literal) One Liners"
  :date "2013-04-03"}
 
 There are some truly [impressive][1] LaTeX solutions for doing

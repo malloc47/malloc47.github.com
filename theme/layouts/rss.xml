@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{site.title}}</title>
+    <link>{{site.url}}</link>
+    <atom:link href="{{site.url}}/rss.xml" rel="self" type="application/rss+xml" />
+    <description>{{site.description}}</description>
+    <language>en-us</language>
+    <pubDate>{{latest-modified|rfc822_date}}</pubDate>
+    <lastBuildDate>{{site.time|rfc822_date}}</lastBuildDate>
+    {% for post in posts %}
+    <item>
+      <title>{{post.title}}</title>
+      <link>{{site.url}}{{ post.uri }}</link>
+      <pubDate>{{post.modified|rfc822_date}}</pubDate>
+      <author>{{site.email}} ({{site.author}})</author>
+      <guid>http://malloc47.com{{ post.uri }}</guid>{# Hardcoded URI so these guids match the previous guids #}
+      <description>{{post.content|xml_escape}}</description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

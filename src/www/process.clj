@@ -1,12 +1,15 @@
 (ns www.process
   (:require
    [clojure.java.io :as io]
+   [clojure.java.shell :refer [sh]]
    [clojure.string :as str]
+   [selmer.filters :refer [add-filter!]]
    [selmer.parser :as selmer]
    [www.config :refer [config]]
    [www.parser :as parser])
   (:import
-   (java.time LocalDate)))
+   (java.time LocalDate)
+   (org.apache.commons.text StringEscapeUtils)))
 
 (defn metadata
   [{:keys [content] :as m}]
@@ -14,12 +17,15 @@
        parser/metadata
        (merge m)))
 
+(def file-extension-regexp
+  #"\.(\w+)$")
+
 (defn trailing-slash
   [s]
   (cond-> s
     (and (not (str/ends-with? s "/"))
          ;; does not have file extension
-         (not (get (re-find #"\.(\w+)$" s) 1)))
+         (not (get (re-find file-extension-regexp s) 1)))
     (str "/")))
 
 (defn leading-slash
@@ -66,6 +72,13 @@
     (update :content parser/markdown)))
 
 (selmer/set-resource-path! (io/resource "META-INF/theme"))
+(add-filter! :xml_escape (fn [s] (StringEscapeUtils/escapeXml10 s)))
+(add-filter! :rfc822_date (fn [date]
+                         (-> (doto (java.text.SimpleDateFormat.
+                                    "EEE, dd MMM yyyy HH:mm:ss zzz")
+                               (.setTimeZone
+                                (java.util.TimeZone/getTimeZone "GMT")))
+                             (.format date))))
 
 (defn template
   [{:keys [layout] :as payload}]
@@ -80,10 +93,10 @@
          constantly
          (update payload :content))))
 
-;; Map/list processing functions
+;; map/list processing functions
 
 (defn lift
-  "Convert single map of paths->contents into individual maps."
+  "convert single map of paths->contents into individual maps."
   [m]
   (map (fn [[k v]] {:content v :filename k}) m))
 
@@ -124,13 +137,20 @@
   ([contents] (run contents {}))
   ([contents context]
    (->> contents
-        lift
         parse
         remove-drafts
         (map (fn [c] (merge c context)))
         render
         explode-redirects
         return)))
+
+(defn template-nested
+  [layout context-key extra-context nested]
+  (->> (hash-map context-key nested)
+       (merge extra-context)
+       (merge (select-keys config [:site]))
+       (merge {:layout layout})
+       template))
 
 (defn template-nested-paginated
   ([layout context-key n-per-page nested]
@@ -160,3 +180,24 @@
                  (take (count nest-groups) <>)
                  (concat [nil] <> [nil])
                  (partition 3 1 <>)))))))
+
+(defn add-modified
+  "Lookup the filename and fetch the last modified timestamp according
+  to git, attaching it to the payload."
+  [contents]
+  (map (fn [{:keys [full-path] :as c}]
+         (let [git-timestamp
+               (->> full-path
+                    (sh "git" "log" "-1" "--pretty=%ct")
+                    :out
+                    str/trim)]
+           (try
+             (->> git-timestamp
+                  (Long.)
+                  (* 1000)
+                  (java.util.Date.)
+                  (assoc c :modified))
+             (catch NumberFormatException e
+               ;; TODO: make the default selectable?
+               (assoc c :modified (java.util.Date.))))))
+       contents))
