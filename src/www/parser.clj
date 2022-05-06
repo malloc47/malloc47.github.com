@@ -1,8 +1,8 @@
 (ns www.parser
   (:require
-   [www.parser.flexmark :as flexmark]
    [clojure.java.io :refer [copy]]
-   [clojure.string :as str])
+   [clojure.string :as str]
+   [www.parser.flexmark :as flexmark])
   (:import
    (java.io StringReader StringWriter PushbackReader)))
 

@@ -1,11 +1,10 @@
 (ns www.core
   (:require
+   [optimus.export :refer [save-assets]]
+   [optimus.prime :as optimus]
+   [optimus.strategies :refer [serve-live-assets #_serve-frozen-assets]]
    [ring.middleware.content-type :refer [wrap-content-type]]
    [ring.middleware.default-charset :refer [wrap-default-charset]]
-   [optimus.prime :as optimus]
-   [optimus.strategies :refer [serve-live-assets
-                               serve-frozen-assets]]
-   [optimus.export :refer [save-assets]]
    [ring.server.standalone :as ring-server]
    [stasis.core :as stasis]
    [www.config :refer [config]]
@@ -21,7 +20,7 @@
              (wrap-default-charset "utf-8")))
 
 (defn serve
-  [{:keys [join?] :as opts}]
+  [opts]
   (ring-server/serve app
     (merge
      {:join?         true

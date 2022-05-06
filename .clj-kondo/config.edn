@@ -1,0 +1,5 @@
+{:linters {:unsorted-required-namespaces {:level :error}
+           :refer-all                    {:level :error}
+           :single-key-in                {:level :warning}
+           :shadowed-var                 {:level :off}
+           :namespace-name-mismatch      {:level :error}}}

@@ -1,8 +1,7 @@
 (ns www.optimizations
   (:require
-   [clojure.string :as str]
-   [optimus.optimizations :as optimus]
-   [optimus-autoprefixer.core :as prefixer]))
+   [optimus-autoprefixer.core :as prefixer]
+   [optimus.optimizations :as optimus]))
 
 (defn all [assets options]
   (-> assets

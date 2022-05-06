@@ -14,6 +14,8 @@
         com.vladsch.flexmark/flexmark-ext-tables {:mvn/version "0.64.0"}
         org.apache.commons/commons-text {:mvn/version "1.9"}}
  :paths ["src" "." "theme"]
- :aliases {:build {:main-opts ["-m" "www.core"]}
-           :serve {:exec-fn   www.core/serve
-                   :exec-args {:port 4000}}}}
+ :aliases {:build  {:main-opts ["-m" "www.core"]}
+           :serve  {:exec-fn   www.core/serve
+                    :exec-args {:port 4000}}
+           :lint   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.04.25"}}
+                    :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}}}

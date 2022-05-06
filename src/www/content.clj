@@ -4,8 +4,7 @@
    [optimus.assets :refer [load-assets load-bundle]]
    [stasis.core :refer [slurp-directory merge-page-sources]]
    [www.config :refer [config]]
-   [www.process :as process]
-   [www.parser :refer [markdown metadata]]))
+   [www.process :as process]))
 
 (defn get-path-contents [path]
   (->> (merge

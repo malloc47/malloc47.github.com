@@ -201,7 +201,7 @@
                   (* 1000)
                   (java.util.Date.)
                   (assoc c :modified))
-             (catch NumberFormatException e
+             (catch NumberFormatException _
                ;; TODO: make the default selectable?
                (assoc c :modified (java.util.Date.))))))
        contents))
