@@ -21,12 +21,13 @@
 
 (defn serve
   [opts]
-  (ring-server/serve app
-    (merge
-     {:join?         true
-      :open-browser? true
-      :auto-refresh? true}
-      opts)))
+  (ring-server/serve
+   app
+   (merge
+    {:join?         true
+     :open-browser? true
+     :auto-refresh? true}
+    opts)))
 
 (defn -main []
   (let [{:keys [public-dest]} config]

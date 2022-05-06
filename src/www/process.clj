@@ -77,12 +77,13 @@
 (selmer/set-resource-path! (io/resource "META-INF/theme"))
 (add-filter! :uricomp_encode #(URLEncoder/encode % "UTF-8"))
 (add-filter! :xml_escape (fn [s] (StringEscapeUtils/escapeXml10 s)))
-(add-filter! :rfc822_date (fn [date]
-                         (-> (doto (SimpleDateFormat.
-                                    "EEE, dd MMM yyyy HH:mm:ss zzz")
-                               (.setTimeZone
-                                (TimeZone/getTimeZone "GMT")))
-                             (.format date))))
+(add-filter! :rfc822_date
+             (fn [date]
+               (-> (doto (SimpleDateFormat.
+                          "EEE, dd MMM yyyy HH:mm:ss zzz")
+                     (.setTimeZone
+                      (TimeZone/getTimeZone "GMT")))
+                   (.format date))))
 
 (defn template
   [{:keys [layout] :as payload}]
