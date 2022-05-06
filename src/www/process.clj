@@ -84,6 +84,13 @@
                      (.setTimeZone
                       (TimeZone/getTimeZone "GMT")))
                    (.format date))))
+(add-filter! :iso8601_date
+             (fn [date]
+               (-> (doto (SimpleDateFormat.
+                          "yyyy-MM-dd'T'HH:mm:ss'Z'")
+                     (.setTimeZone
+                      (TimeZone/getTimeZone "UTC")))
+                   (.format date))))
 
 (defn template
   [{:keys [layout] :as payload}]

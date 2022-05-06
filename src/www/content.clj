@@ -35,20 +35,21 @@
        (process/template-nested-paginated :home :posts 5)
        process/return))
 
-(defn rss []
+(defn feed [layout]
   (let [posts           (processed-posts)
         latest-modified (->> posts (map :modified) sort reverse first)]
     (->> posts
-         (process/template-nested :rss.xml :posts
+         (process/template-nested layout :posts
                                   {:latest-modified latest-modified})
          :content
-         (hash-map "/rss.xml"))))
+         (hash-map (str "/" (name layout))))))
 
 (defn content []
   (->> {:posts (process/run (posts))
         :pages (process/run (pages))
         :home  (home+posts)
-        :rss   (rss)}
+        :rss   (feed :rss.xml)
+        :atom  (feed :atom.xml)}
        merge-page-sources))
 
 (defn assets []
