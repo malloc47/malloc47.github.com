@@ -9,6 +9,9 @@
    [www.parser :as parser])
   (:import
    (java.time LocalDate)
+   (java.net URLEncoder)
+   (java.util TimeZone)
+   (java.text SimpleDateFormat)
    (org.apache.commons.text StringEscapeUtils)))
 
 (defn metadata
@@ -72,12 +75,13 @@
     (update :content parser/markdown)))
 
 (selmer/set-resource-path! (io/resource "META-INF/theme"))
+(add-filter! :uricomp_encode #(URLEncoder/encode % "UTF-8"))
 (add-filter! :xml_escape (fn [s] (StringEscapeUtils/escapeXml10 s)))
 (add-filter! :rfc822_date (fn [date]
-                         (-> (doto (java.text.SimpleDateFormat.
+                         (-> (doto (SimpleDateFormat.
                                     "EEE, dd MMM yyyy HH:mm:ss zzz")
                                (.setTimeZone
-                                (java.util.TimeZone/getTimeZone "GMT")))
+                                (TimeZone/getTimeZone "GMT")))
                              (.format date))))
 
 (defn template
