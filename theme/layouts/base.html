@@ -28,15 +28,15 @@
       <canvas id="miniclock" width="50" height="50" class="selectable"></canvas>
       <span id="toggle" class="transparent-light toggle selectable"></span>
     </div>
-    {% include "html/social.html" %}
+    {% include "layouts/social.html" %}
     <div id="container">
-      {% include "html/header.html" %}
-      {% include "html/nav.html" %}
+      {% include "layouts/header.html" %}
+      {% include "layouts/nav.html" %}
       <div id="contents" role="main">
         {% block content %}
         {% endblock %}
       </div>
-      {% include "html/footer.html" %}
+      {% include "layouts/footer.html" %}
       </div>
   </body>
 </html>

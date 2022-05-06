@@ -72,7 +72,11 @@
   (cond-> payload
     layout
     (->> (merge (select-keys config [:site]))
-         (selmer/render-file (str "html/" (name layout) ".html"))
+         (selmer/render-file (cond-> (str "layouts/" (name layout))
+                               (-> (re-find file-extension-regexp (name layout))
+                                   (get 1)
+                                   not)
+                               (str ".html")))
          constantly
          (update payload :content))))
 

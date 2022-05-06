@@ -1,4 +1,4 @@
-{% extends "html/base.html" %}
+{% extends "layouts/base.html" %}
 {%block subtitle %}{{title}}{% endblock %}
 {% block meta %}
 <meta name="keywords" content="{% for tag in tags %}{{tag.name}}{% if not forloop.last %},{% endif %}{% endfor %}">
@@ -15,12 +15,12 @@
 <div class="content">
   <div class="content-wrap">
     <p class="date">{{date|date:"yyyy"}} <span class="date-dark">00</span>{{date|date:"MM"}} <span class="date-dark">00</span>{{date|date:"dd"}} </p>
-    {% include "html/header-info-post.html" %}
+    {% include "layouts/header-info-post.html" %}
     <header>{{title}}</header>
     <div class="content-body">
       {{content|safe}}
     </div>
   </div>
-  {% include "html/post-social.html" %}
+  {% include "layouts/post-social.html" %}
 </div>
 {% endblock %}

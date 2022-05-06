@@ -1,11 +1,11 @@
-{% extends "html/base.html" %}
+{% extends "layouts/base.html" %}
 {%block subtitle %}{{title}}{% endblock %}
 {% block content %}
 {% for post in posts %}
 <div class="content">
   <div class="content-wrap">
     <p class="date">{{post.date|date:"yyyy"}} <span class="date-dark">00</span>{{post.date|date:"MM"}} <span class="date-dark">00</span>{{post.date|date:"dd"}} </p>
-    {% include "html/header-info.html" %}
+    {% include "layouts/header-info.html" %}
     <header><a href="{{post.uri}}">{{post.title}}</a></header>
     <div class="content-body">
       {{post.content|safe}}
