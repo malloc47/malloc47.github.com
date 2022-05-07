@@ -1,18 +1,12 @@
 (ns www.process
   (:require
-   [clojure.java.io :as io]
    [clojure.java.shell :refer [sh]]
    [clojure.string :as str]
-   [selmer.filters :refer [add-filter!]]
-   [selmer.parser :as selmer]
    [www.config :refer [config]]
-   [www.parser :as parser])
+   [www.parser :as parser]
+   [www.render :as renderer])
   (:import
-   (java.time LocalDate)
-   (java.net URLEncoder)
-   (java.util TimeZone)
-   (java.text SimpleDateFormat)
-   (org.apache.commons.text StringEscapeUtils)))
+   (java.time LocalDate)))
 
 (defn metadata
   [{:keys [content] :as m}]
@@ -20,15 +14,12 @@
        parser/metadata
        (merge m)))
 
-(def file-extension-regexp
-  #"\.(\w+)$")
-
 (defn trailing-slash
   [s]
   (cond-> s
     (and (not (str/ends-with? s "/"))
          ;; does not have file extension
-         (not (get (re-find file-extension-regexp s) 1)))
+         (not (get (re-find #"\.(\w+)$" s) 1)))
     (str "/")))
 
 (defn leading-slash
@@ -74,34 +65,12 @@
     (= format :md)
     (update :content parser/markdown)))
 
-(selmer/set-resource-path! (io/resource "META-INF/theme"))
-(add-filter! :uricomp_encode #(URLEncoder/encode % "UTF-8"))
-(add-filter! :xml_escape (fn [s] (StringEscapeUtils/escapeXml10 s)))
-(add-filter! :rfc822_date
-             (fn [date]
-               (-> (doto (SimpleDateFormat.
-                          "EEE, dd MMM yyyy HH:mm:ss zzz")
-                     (.setTimeZone
-                      (TimeZone/getTimeZone "GMT")))
-                   (.format date))))
-(add-filter! :iso8601_date
-             (fn [date]
-               (-> (doto (SimpleDateFormat.
-                          "yyyy-MM-dd'T'HH:mm:ss'Z'")
-                     (.setTimeZone
-                      (TimeZone/getTimeZone "UTC")))
-                   (.format date))))
-
 (defn template
   [{:keys [layout] :as payload}]
   (cond-> payload
     layout
     (->> (merge (select-keys config [:site]))
-         (selmer/render-file (cond-> (str "layouts/" (name layout))
-                               (-> (re-find file-extension-regexp (name layout))
-                                   (get 1)
-                                   not)
-                               (str ".html")))
+         (renderer/template layout)
          constantly
          (update payload :content))))
 
