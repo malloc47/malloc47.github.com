@@ -2,4 +2,5 @@
            :refer-all                    {:level :error}
            :single-key-in                {:level :warning}
            :shadowed-var                 {:level :off}
-           :namespace-name-mismatch      {:level :error}}}
+           :namespace-name-mismatch      {:level :error}
+           :unresolved-symbol            {:exclude [(rum.core/defc)]}}}
