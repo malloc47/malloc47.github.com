@@ -1,6 +1,7 @@
 (ns www.process
   (:require
    [clojure.java.shell :refer [sh]]
+   [clojure.spec.alpha :as s]
    [clojure.string :as str]
    [www.config :refer [config]]
    [www.parser :as parser]
@@ -13,6 +14,10 @@
   (->> content
        parser/metadata
        (merge m)))
+
+(s/fdef metadata
+  :args (s/cat :input :resource/lifted)
+  :ret :resource/split)
 
 (defn trailing-slash
   [s]
@@ -50,20 +55,28 @@
         title      (or title file-title)]
     (-> {:format    format
          :uri       uri
-         :date      date
          :layout    layout
-         :title     title
-         :draft?    draft?
-         :permalink permalink
-         :redirects redirects}
+         :title     title}
+        (cond->
+         draft?    (assoc :draft? draft?)
+         redirects (assoc :redirects redirects)
+         date      (assoc :date date))
         (->> (merge m))
         (dissoc :metadata))))
+
+(s/fdef normalize
+  :args (s/cat :input :resource/split)
+  :ret :resource/payload)
 
 (defn markdown
   [{:keys [format] :as m}]
   (cond-> m
     (= format :md)
     (update :content parser/markdown)))
+
+(s/fdef markdown
+  :args (s/cat :input (s/keys :req-un [:resource/format :resource/content]))
+  :ret :resource/payload)
 
 (defn template
   [{:keys [layout] :as payload}]
@@ -74,6 +87,10 @@
          constantly
          (update payload :content))))
 
+(s/fdef template
+  :args (s/cat :input (s/keys :req-un [:resource/layout]))
+  :ret :resource/payload)
+
 ;; map/list processing functions
 
 (defn lift
@@ -81,11 +98,19 @@
   [m]
   (map (fn [[k v]] {:content v :filename k}) m))
 
+(s/fdef lift
+  :args (s/cat :input :resource/raw)
+  :ret (s/coll-of :resource/payload))
+
 (defn return
   [contents]
   (->> contents
        (map (fn [{:keys [uri content]}] [uri content]))
        (into {})))
+
+(s/fdef return
+  :args (s/cat :input (s/coll-of :resource/payload))
+  :ret (s/coll-of :resource/raw))
 
 (defn parse
   [contents]
@@ -102,13 +127,13 @@
 (defn explode-redirects
   [contents]
   (mapcat
-   (fn [{:keys [redirects permalink] :as c}]
+   (fn [{:keys [redirects uri] :as c}]
      (->> (or redirects [])
           (map (fn [redirect]
                  (-> c
                      (assoc :uri         redirect
                             :layout      :redirect
-                            :destination permalink
+                            :destination uri
                             :redirect?   true)
                      template)))
           (concat [c])))
@@ -149,10 +174,10 @@
      (->> nest-groups
           (map (fn [[prev-uri uri next-uri] nested]
                  (->> (hash-map context-key nested)
-                      (merge {:layout layout
+                      (merge {:layout   layout
                               ;; TODO: abstract title generation
-                              :title (subs uri 1)
-                              :uri uri
+                              :title    (subs uri 1)
+                              :uri      uri
                               :next-uri next-uri
                               :prev-uri prev-uri})
                       template))
@@ -182,3 +207,13 @@
                ;; TODO: make the default selectable?
                (assoc c :modified (java.util.Date.))))))
        contents))
+
+(comment
+  (require '[clojure.spec.test.alpha :as stest])
+  (stest/instrument
+   [`metadata
+    `normalize
+    `markdown
+    `template
+    `lift
+    `return]))
