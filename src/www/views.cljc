@@ -3,18 +3,18 @@
    [rum.core :as rum]
    [www.config :refer [config]]))
 
-(def meta-tags
-  (let [{{:keys [title url author description]} :site} config]
-    (list
-     [:meta {:charset "utf-8"}]
-     [:meta {:name "description" :content description}]
-     [:meta {:name "keywords" :content ""}]
-     [:meta {:name "author" :content author}]
-     ;; TODO: add page uri to url
-     [:meta {:property "og:url" :content url}]
-     [:meta {:property "og:title" :content title}]
-     [:meta {:property "og:type" :content "article"}]
-     [:meta {:name "viewport" :content "width=720"}])))
+(defn meta-tags
+  [{{:keys [title url author description]} :site}]
+  (list
+   [:meta {:charset "utf-8"}]
+   [:meta {:name "description" :content description}]
+   [:meta {:name "keywords" :content ""}]
+   [:meta {:name "author" :content author}]
+   ;; TODO: add page uri to url
+   [:meta {:property "og:url" :content url}]
+   [:meta {:property "og:title" :content title}]
+   [:meta {:property "og:type" :content "article"}]
+   [:meta {:name "viewport" :content "width=720"}]))
 
 (def font-preload
   (list
@@ -64,7 +64,8 @@
 (def js
   [:script {:src "/assets/main.js"}])
 
-(def icons-left
+(rum/defc dark-mode-controls
+  []
   [:div.icons-left
    [:canvas#miniclock.selectable {:width "50" :height "50"}]
    [:span#toggle.transparent-light.toggle.selectable]])
@@ -104,13 +105,57 @@
      "Creative Commons Attribution 3.0"]
     "."]])
 
+(rum/defc page
+  [payload]
+  [:div.content
+   [:div.content-wrap
+    [:header "TITLE"]
+    [:div.content-body
+     {:dangerouslySetInnerHTML {:__html (:content payload)}}]]])
+
+(rum/defc single-post
+  ([payload]
+   (single-post payload false))
+  ([payload link-title?]
+   [:div.content
+    [:div.content-wrap
+     [:p.date "yyyy" [:span.date-dark "00"] "MM" [:span.date-dark "00" "dd"]]
+     [:p.social
+      [:a
+       {:href "https://www.facebook.com/sharer.php?u=&amp;t="
+        :target "_blank"
+        :rel "nofollow"
+        :title "Share on Facebook"}
+       "F"]
+      [:a
+       {:href "https://twitter.com/intent/tweet?url=&amp;text=&amp;via=malloc47&amp;related=malloc47"
+        :target "_blank"
+        :rel "nofollow"
+        :title "Tweet"}
+       "T"]]
+     [:header (if link-title? [:a {:href (:uri payload)} "TITLE"] "TITLE")]
+     [:div.content-body
+      {:dangerouslySetInnerHTML {:__html (:content payload)}}]]]))
+
+(rum/defc post
+  [payload]
+  (conj (single-post payload true)
+        [:div.share
+         [:a.twitter-share-button {:href "https://twitter.com/share" :data-via "malloc47"} "Tweet"]]))
+
 (rum/defc base
   []
   (let [{{:keys [title]} :site} config
-        content "wat"]
+        payload {:layout :post
+                 :content "<h1>HIIIIIIIIIIII</h1>"
+                 :uri "https://www.whereever.com"}]
     [:html {:lang "en"}
-     [:head [:title title] meta-tags font-preload css
-      [:body icons-left icons
+     [:head [:title title] (meta-tags payload) font-preload css
+      [:body (dark-mode-controls) icons
        [:div#container header nav
-        [:div#contents {:role "main"} content]
+        [:div#contents {:role "main"}
+         (cond
+           (sequential? payload) ""
+           (= (:layout payload) :page) (page payload)
+           (= (:layout payload) :post) (single-post payload))]
         footer]]]]))
