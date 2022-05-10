@@ -25,9 +25,16 @@
        (filter (every-pred #(.isFile %)
                            #(re-find matcher (str %))))
        (map (fn [f]
-              (let [path     (str f)
-                    filename (.getName f)]
-                {:path     path
+              (let [file-path (str f)
+                    filename  (.getName f)]
+                {:path     file-path
+                 ;; Since downstream utilities will not know what path
+                 ;; was specified, they need to know the relative path
+                 ;; following the given path to later construct a
+                 ;; proper URI.
+                 :relative-path (-> file-path
+                                    (str/replace-first path "")
+                                    leading-slash)
                  :filename filename
                  :content  (apply slurp f opts)
                  :format   (-> (re-find #"\.(\w+)$" filename)

@@ -35,16 +35,18 @@
 
 (defn metadata-from-filename
   "Extracts metadata-like info from the filename"
-  [{:keys [filename]}]
-  (let [post-name (get (re-find filename-regexp filename) 2)]
+  [{:keys [filename relative-path]}]
+  (let [post-name (get (re-find filename-regexp filename) 2)
+        relative-path (str/replace-first relative-path filename "")]
     {:title  (some-> post-name title-ize)
      :date   (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
-     :uri    (or post-name
-                 ;; Pages as opposed to posts don't have a
-                 ;; date, so fall back to getting the
-                 ;; filename without it
-                 (get (re-matches #"(.+)(\.\w+)$" filename) 1)
-                 filename)}))
+     :uri    (->> (or post-name
+                     ;; Pages as opposed to posts don't have a
+                     ;; date, so fall back to getting the
+                     ;; filename without it
+                      (get (re-matches #"(.+)(\.\w+)$" filename) 1)
+                      filename)
+                  (str relative-path))}))
 
 (defn file->resource
   [{:keys [metadata] :as payload}]

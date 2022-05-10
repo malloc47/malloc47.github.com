@@ -11,6 +11,7 @@
         :local-date (partial instance? LocalDate)))
 
 (s/def :file/path string?)
+(s/def :file/relative-path string?)
 (s/def :file/filename string?)
 (s/def :file/format (s/nilable keyword?))
 (s/def :file/modified inst?)
@@ -42,6 +43,7 @@
 
 (s/def :resource/raw
   (s/keys :req-un [:file/path
+                   :file/relative-path
                    :file/filename
                    :file/format
                    :resource/content]))
