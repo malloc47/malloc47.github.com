@@ -1,19 +1,15 @@
 (ns www.content
   (:require
-   [clojure.string :as str]
    [optimus.assets :refer [load-assets load-bundle]]
-   [stasis.core :refer [slurp-directory merge-page-sources]]
+   [stasis.core :refer [merge-page-sources]]
    [www.config :refer [config]]
+   [www.io :as io]
    [www.process :as process]))
 
 (defn get-path-contents [path]
-  (->> (merge
-        (slurp-directory path #"\.md")
-        (slurp-directory path #"\.html"))
-       process/lift
-       (map (fn [{:keys [filename] :as m}]
-              (assoc m :full-path
-                     (str (str/replace path #"/$" "") filename))))))
+  (->> (concat
+        (io/read-files path #"\.md")
+        (io/read-files path #"\.html"))))
 
 (defn posts []
   (get-path-contents (str (:content-root config) "/posts/")))
@@ -23,10 +19,10 @@
 
 (defn processed-posts []
   (->> (posts)
+       process/add-modified
        process/parse
        process/remove-drafts
        (map process/markdown)
-       process/add-modified
        (sort-by :date)
        reverse))
 

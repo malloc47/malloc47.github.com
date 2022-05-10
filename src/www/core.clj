@@ -32,6 +32,7 @@
 (defn -main []
   (let [{:keys [public-dest]} config]
     (stasis/empty-directory! public-dest)
+    (require '[www.spec]) ; Load for instrumentation side-effects
     (as-> (assets) <>
       (optimizations/all <> (:optimus config))
       (remove :bundled <>)

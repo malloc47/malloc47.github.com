@@ -1,13 +1,21 @@
 (ns www.process
   (:require
-   [clojure.java.shell :refer [sh]]
-   [clojure.spec.alpha :as s]
-   [clojure.string :as str]
    [www.config :refer [config]]
+   [www.io :as io]
    [www.parser :as parser]
    [www.render :as renderer])
   (:import
    (java.time LocalDate)))
+
+(defn add-modified
+  "Lookup the filename and fetch the last modified timestamp according
+  to git, attaching it to the payload."
+  [files]
+  (map (fn [{:keys [path] :as m}]
+         (->> path
+              io/most-recent-commit-timestamp
+              (assoc m :modified)))
+       files))
 
 (defn metadata
   [{:keys [content] :as m}]
@@ -15,33 +23,15 @@
        parser/metadata
        (merge m)))
 
-(s/fdef metadata
-  :args (s/cat :input :resource/lifted)
-  :ret :resource/split)
-
-(defn trailing-slash
-  [s]
-  (cond-> s
-    (and (not (str/ends-with? s "/"))
-         ;; does not have file extension
-         (not (get (re-find #"\.(\w+)$" s) 1)))
-    (str "/")))
-
-(defn leading-slash
-  [s]
-  (cond->> s (not (str/starts-with? s "/")) (str "/")))
-
 ;; Jekyll-style filenaming conventions
 (def filename-regexp #"/([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9\w\-]+)\.(\w+)$")
 
-(defn normalize
+(defn file->resource
   [{{:keys [permalink date format layout title draft? redirects]} :metadata
-    filename :filename :as m}]
+    filename :filename file-format :format :as m}]
   (let [file-date  (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
         file-title (get (re-find filename-regexp filename) 2)
-        format     (keyword (or format
-                                (get (re-find #"\.(\w+)$" filename) 1)
-                                :unknown))
+        format     (keyword (or format file-format :unknown))
         uri        (-> (or permalink
                            file-title
                            ;; Pages as opposed to posts don't have a
@@ -49,8 +39,8 @@
                            ;; filename without it
                            (get (re-matches #"(.+)(\.\w+)$" filename) 1)
                            filename)
-                       trailing-slash
-                       leading-slash)
+                       io/trailing-slash
+                       io/leading-slash)
         date       (some-> (or date file-date) (subs 0 10) LocalDate/parse)
         title      (or title file-title)]
     (-> {:format    format
@@ -64,19 +54,11 @@
         (->> (merge m))
         (dissoc :metadata))))
 
-(s/fdef normalize
-  :args (s/cat :input :resource/split)
-  :ret :resource/payload)
-
 (defn markdown
   [{:keys [format] :as m}]
   (cond-> m
     (= format :md)
     (update :content parser/markdown)))
-
-(s/fdef markdown
-  :args (s/cat :input (s/keys :req-un [:resource/format :resource/content]))
-  :ret :resource/payload)
 
 (defn template
   [{:keys [layout] :as payload}]
@@ -87,65 +69,46 @@
          constantly
          (update payload :content))))
 
-(s/fdef template
-  :args (s/cat :input (s/keys :req-un [:resource/layout]))
-  :ret :resource/payload)
-
-;; map/list processing functions
-
-(defn lift
-  "convert single map of paths->contents into individual maps."
-  [m]
-  (map (fn [[k v]] {:content v :filename k}) m))
-
-(s/fdef lift
-  :args (s/cat :input :resource/raw)
-  :ret (s/coll-of :resource/payload))
-
 (defn return
-  [contents]
-  (->> contents
+  [resources]
+  (->> resources
        (map (fn [{:keys [uri content]}] [uri content]))
        (into {})))
 
-(s/fdef return
-  :args (s/cat :input (s/coll-of :resource/payload))
-  :ret (s/coll-of :resource/raw))
-
 (defn parse
-  [contents]
-  (map (comp normalize metadata) contents))
+  [resources]
+  (map (comp file->resource metadata) resources))
 
 (defn render
-  [contents]
-  (map (comp template markdown) contents))
+  [resources]
+  (map (comp template markdown) resources))
 
 (defn remove-drafts
-  [contents]
-  (remove :draft? contents))
+  [resources]
+  (remove :draft? resources))
 
 (defn explode-redirects
-  [contents]
+  [resources]
   (mapcat
-   (fn [{:keys [redirects uri] :as c}]
+   (fn [{:keys [redirects uri] :as m}]
      (->> (or redirects [])
           (map (fn [redirect]
-                 (-> c
+                 (-> m
                      (assoc :uri         redirect
                             :layout      :redirect
                             :destination uri
                             :redirect?   true)
                      template)))
-          (concat [c])))
-   contents))
+          (concat [m])))
+   resources))
 
 (defn run
-  ([contents] (run contents {}))
-  ([contents context]
-   (->> contents
+  ([files] (run files {}))
+  ([files context]
+   (->> files
         parse
         remove-drafts
-        (map (fn [c] (merge c context)))
+        (map (fn [m] (merge m context)))
         render
         explode-redirects
         return)))
@@ -186,34 +149,3 @@
                  (take (count nest-groups) <>)
                  (concat [nil] <> [nil])
                  (partition 3 1 <>)))))))
-
-(defn add-modified
-  "Lookup the filename and fetch the last modified timestamp according
-  to git, attaching it to the payload."
-  [contents]
-  (map (fn [{:keys [full-path] :as c}]
-         (let [git-timestamp
-               (->> full-path
-                    (sh "git" "log" "-1" "--pretty=%ct")
-                    :out
-                    str/trim)]
-           (try
-             (->> git-timestamp
-                  (Long.)
-                  (* 1000)
-                  (java.util.Date.)
-                  (assoc c :modified))
-             (catch NumberFormatException _
-               ;; TODO: make the default selectable?
-               (assoc c :modified (java.util.Date.))))))
-       contents))
-
-(comment
-  (require '[clojure.spec.test.alpha :as stest])
-  (stest/instrument
-   [`metadata
-    `normalize
-    `markdown
-    `template
-    `lift
-    `return]))
