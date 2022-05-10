@@ -1,6 +1,6 @@
 {:layout :post
  :title "Man Page Readability"
- :permalink "/man-page-readability/"
+ :uri "/man-page-readability/"
  :redirects ["/blog/man-page-readability/"]
  :date "2012-02-11"}
 

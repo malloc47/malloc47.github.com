@@ -1,5 +1,6 @@
 (ns www.process
   (:require
+   [clojure.string :as str]
    [www.config :refer [config]]
    [www.io :as io]
    [www.parser :as parser]
@@ -24,35 +25,37 @@
        (merge m)))
 
 ;; Jekyll-style filenaming conventions
-(def filename-regexp #"/([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9\w\-]+)\.(\w+)$")
+(def filename-regexp #"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9\w\-]+)\.(\w+)$")
+
+(defn title-ize
+  [title]
+  (->> (str/split title #"-")
+       (map str/capitalize)
+       (str/join " ")))
+
+(defn metadata-from-filename
+  "Extracts metadata-like info from the filename"
+  [{:keys [filename]}]
+  (let [post-name (get (re-find filename-regexp filename) 2)]
+    {:title  (some-> post-name title-ize)
+     :date   (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
+     :uri    (or post-name
+                 ;; Pages as opposed to posts don't have a
+                 ;; date, so fall back to getting the
+                 ;; filename without it
+                 (get (re-matches #"(.+)(\.\w+)$" filename) 1)
+                 filename)}))
 
 (defn file->resource
-  [{{:keys [permalink date format layout title draft? redirects]} :metadata
-    filename :filename file-format :format :as m}]
-  (let [file-date  (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
-        file-title (get (re-find filename-regexp filename) 2)
-        format     (keyword (or format file-format :unknown))
-        uri        (-> (or permalink
-                           file-title
-                           ;; Pages as opposed to posts don't have a
-                           ;; date, so fall back to getting the
-                           ;; filename without it
-                           (get (re-matches #"(.+)(\.\w+)$" filename) 1)
-                           filename)
-                       io/trailing-slash
-                       io/leading-slash)
-        date       (some-> (or date file-date) (subs 0 10) LocalDate/parse)
-        title      (or title file-title)]
-    (-> {:format    format
-         :uri       uri
-         :layout    layout
-         :title     title}
-        (cond->
-         draft?    (assoc :draft? draft?)
-         redirects (assoc :redirects redirects)
-         date      (assoc :date date))
-        (->> (merge m))
-        (dissoc :metadata))))
+  [{:keys [metadata] :as payload}]
+  (-> (merge-with #(some identity %&)
+                  payload
+                  metadata
+                  (metadata-from-filename payload)
+                  {:format :unknown})
+      (update :uri (comp io/trailing-slash io/leading-slash))
+      (update :date #(some-> % (subs 0 10) LocalDate/parse))
+      (dissoc :metadata)))
 
 (defn markdown
   [{:keys [format] :as m}]

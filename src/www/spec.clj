@@ -15,9 +15,9 @@
 (s/def :file/format (s/nilable keyword?))
 (s/def :file/modified inst?)
 
-(s/def :resource/date :general/date)
 (s/def :metadata/date string?)
-(s/def :resource/permalink string?)
+
+(s/def :resource/date (s/nilable :general/date))
 (s/def :resource/layout
   (s/or
    :fixed #{:page :post :home :redirect}
@@ -63,7 +63,7 @@
                    :resource/layout]
           :opt-un [:resource/draft?
                    :resource/redirects
-                   :resource/permalink
+                   :resource/uri
                    :metadata/date]))
 
 (s/def :resource/site
@@ -127,7 +127,7 @@
      [`io/read-files
       `process/add-modified
       `process/metadata
-      `process/normalize
+      `process/file->resource
       `process/markdown
       `process/template
       `process/lift

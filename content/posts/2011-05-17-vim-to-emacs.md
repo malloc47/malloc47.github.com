@@ -1,6 +1,6 @@
 {:layout :post
  :title "vim -> emacs"
- :permalink "/vim-to-emacs/"
+ :uri "/vim-to-emacs/"
  :redirects ["/blog/vim-to-emacs/"]
  :date "2011-05-18"}
 
