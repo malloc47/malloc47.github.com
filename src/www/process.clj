@@ -107,6 +107,14 @@
           (concat [m])))
    resources))
 
+(defn verify
+  [resources]
+  (when-not (->> resources
+                 (map :uri)
+                 (apply distinct?))
+    (throw (IllegalStateException. "URIs are not all distinct")))
+  resources)
+
 (defn run
   ([files] (run files {}))
   ([files context]

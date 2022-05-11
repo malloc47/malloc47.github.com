@@ -111,13 +111,19 @@
   :args (s/cat :input (s/keys :req-un [:resource/layout]))
   :ret :resource/payload)
 
-(s/fdef process/lift
-  :args (s/cat :input (s/map-of :resource/uri :resource/content))
+(s/fdef process/explode-redirects
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/uri]
+                                         :opt-un [:resource/redirects])))
+  :ret (s/coll-of :resource/payload))
+
+(s/fdef process/verify
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/uri])))
   :ret (s/coll-of :resource/payload))
 
 (s/fdef process/return
-  :args (s/cat :input (s/coll-of :resource/payload))
-  :ret (s/coll-of (s/map-of :resource/uri :resource/content)))
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/uri
+                                                  :resource/content])))
+  :ret (s/map-of :resource/uri :resource/content))
 
 (s/fdef views/base
   :args (s/cat :input :resource/full)
@@ -132,6 +138,7 @@
       `process/file->resource
       `process/markdown
       `process/template
-      `process/lift
+      `process/explode-redirects
+      `process/verify
       `process/return
       `views/base]))
