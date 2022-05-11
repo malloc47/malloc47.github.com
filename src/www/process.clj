@@ -123,8 +123,7 @@
         remove-drafts
         (map (fn [m] (merge m context)))
         render
-        explode-redirects
-        return)))
+        explode-redirects)))
 
 (defn template-nested
   [layout context-key extra-context nested]

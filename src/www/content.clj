@@ -1,7 +1,6 @@
 (ns www.content
   (:require
    [optimus.assets :refer [load-assets load-bundle]]
-   [stasis.core :refer [merge-page-sources]]
    [www.config :refer [config]]
    [www.io :as io]
    [www.process :as process]))
@@ -28,25 +27,24 @@
 
 (defn home+posts []
   (->> (processed-posts)
-       (process/template-nested-paginated :home :posts 5)
-       process/return))
+       (process/template-nested-paginated :home :posts 5)))
 
 (defn feed [layout]
   (let [posts           (processed-posts)
         latest-modified (->> posts (map :modified) sort reverse first)]
-    (->> posts
-         (process/template-nested layout :posts
-                                  {:latest-modified latest-modified})
-         :content
-         (hash-map (str "/" (name layout))))))
+    (process/template-nested layout :posts
+                             {:latest-modified latest-modified
+                              :uri (str "/" (name layout))}
+                             posts)))
 
 (defn content []
-  (->> {:posts (process/run (posts))
-        :pages (process/run (pages))
-        :home  (home+posts)
-        :rss   (feed :rss.xml)
-        :atom  (feed :atom.xml)}
-       merge-page-sources))
+  (->> (concat (process/run (posts))
+               (process/run (pages))
+               (home+posts)
+               [(feed :rss.xml)
+                (feed :atom.xml)])
+       process/verify
+       process/return))
 
 (defn assets []
   (concat
