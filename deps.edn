@@ -13,7 +13,8 @@
         com.vladsch.flexmark/flexmark-ext-superscript {:mvn/version "0.64.0"}
         com.vladsch.flexmark/flexmark-ext-tables {:mvn/version "0.64.0"}
         org.apache.commons/commons-text {:mvn/version "1.9"}
-        rum/rum {:mvn/version "0.12.9"}}
+        rum/rum {:mvn/version "0.12.9"}
+        org.clojure/tools.cli {:mvn/version "1.0.206"}}
  :paths ["src" "." "theme"]
  :aliases {:build  {:main-opts ["-m" "www.core"]}
            :serve  {:exec-fn   www.core/serve

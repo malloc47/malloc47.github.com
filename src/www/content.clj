@@ -1,6 +1,6 @@
 (ns www.content
   (:require
-   [optimus.assets :refer [load-assets load-bundle]]
+   [optimus.assets :refer [load-bundle]]
    [www.config :refer [config]]
    [www.io :as io]
    [www.process :as process]))
@@ -10,11 +10,15 @@
         (io/read-files path #"\.md")
         (io/read-files path #"\.html"))))
 
+(defn content-path
+  [path]
+  (str (:content-root config) path))
+
 (defn posts []
-  (get-path-contents (str (:content-root config) "/posts/")))
+  (->> "/posts/" content-path get-path-contents))
 
 (defn pages []
-  (get-path-contents (str (:content-root config) "/pages/")))
+  (->> "/pages/" content-path get-path-contents))
 
 (defn processed-posts []
   (->> (posts)
@@ -41,17 +45,18 @@
   (->> (concat (process/run (posts))
                (process/run (pages))
                (home+posts)
+               (mapcat (fn [regex]
+                         (->> regex
+                              (io/read-files (content-path "/"))
+                              process/run))
+                       [#"\.ico" #"\.pdf" #"\.png" #"\.svg" #"\.jpg"])
+               (process/run (io/read-files (str "theme")  #"\.woff2"))
                [(feed :rss.xml)
                 (feed :atom.xml)])
-       process/verify
-       process/return))
+       process/verify))
 
 (defn assets []
   (concat
-   (load-assets "content" [#"\.pdf"])
-   (load-assets "content" [#"\.png" #"\.svg" #"\.jpg"])
-   (load-assets "content" ["/favicon.ico"])
-   (load-assets "theme" [#"\.woff2"])
    (load-bundle "theme"
                 "style.css"
                 ["/css/reset.css"

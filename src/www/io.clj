@@ -2,9 +2,12 @@
   (:require
    [clojure.java.io :as io]
    [clojure.java.shell :refer [sh]]
-   [clojure.string :as str])
+   [clojure.string :as str]
+   [www.config :refer [config]])
   (:import
-   (java.util Date)))
+   (java.util Date)
+   (java.io File)
+   (org.apache.commons.io FileUtils)))
 
 (defn trailing-slash
   [s]
@@ -19,28 +22,34 @@
   (cond->> s (not (str/starts-with? s "/")) (str "/")))
 
 (defn read-files
-  [path matcher & opts]
-  (->> (io/file path)
-       file-seq
-       (filter (every-pred #(.isFile %)
-                           #(re-find matcher (str %))))
-       (map (fn [f]
-              (let [file-path (str f)
-                    filename  (.getName f)]
-                {:path     file-path
-                 ;; Since downstream utilities will not know what path
-                 ;; was specified, they need to know the relative path
-                 ;; following the given path to later construct a
-                 ;; proper URI.
-                 :relative-path (-> file-path
-                                    (str/replace-first path "")
-                                    leading-slash)
-                 :filename filename
-                 :content  (apply slurp f opts)
-                 :format   (-> (re-find #"\.(\w+)$" filename)
-                               ;; first capture group
-                               (get 1)
-                               keyword)})))))
+  ([path] (read-files path nil))
+  ([path matcher & opts]
+   (->> (io/file path)
+        file-seq
+        (filter (every-pred #(.isFile %)
+                            (fn [f] (if matcher
+                                      (->> f str (re-find matcher))
+                                      true))))
+        (map (fn [f]
+               (let [file-path (str f)
+                     filename  (.getName f)
+                     format    (-> (re-find #"\.(\w+)$" filename)
+                                   ;; first capture group
+                                   (get 1)
+                                   keyword)]
+                 {:path          file-path
+                  ;; Since downstream utilities will not know what path
+                  ;; was specified, they need to know the relative path
+                  ;; following the given path to later construct a
+                  ;; proper URI.
+                  :relative-path (-> file-path
+                                     (str/replace-first path "")
+                                     leading-slash)
+                  :filename      filename
+                  :format        format
+                  :content       (if ((:parseable config) format)
+                                   (apply slurp f opts)
+                                   f)}))))))
 
 (defn most-recent-commit-timestamp
   [path]
@@ -58,3 +67,29 @@
       (catch NumberFormatException _
         ;; TODO: make the default selectable?
         (Date.)))))
+
+(defn delete-directory!
+  [path]
+  (-> path io/file FileUtils/deleteDirectory))
+
+(defn write
+  [output-file content]
+  (cond
+    (string? content) (spit output-file content)
+    (instance? File content) (io/copy content output-file)))
+
+(defn write-file
+  [uri content]
+  (let [path (str (:public-dest config) uri)
+        file (io/file
+              (cond-> path
+                (str/ends-with? path "/")
+                (str "index.html")))]
+    (-> file .getParentFile .mkdirs)
+    (write file content)))
+
+(defn write-resources
+  [resources]
+  (delete-directory! (:public-dest config))
+  (doseq [{:keys [content uri]} resources]
+    (write-file uri content)))

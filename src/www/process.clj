@@ -19,10 +19,12 @@
        files))
 
 (defn metadata
-  [{:keys [content] :as m}]
-  (->> content
-       parser/metadata
-       (merge m)))
+  [{:keys [content format] :as m}]
+  (if ((:parseable config) format)
+    (->> content
+         parser/metadata
+         (merge m))
+    m))
 
 ;; Jekyll-style filenaming conventions
 (def filename-regexp #"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9\w\-]+)\.(\w+)$")
@@ -34,17 +36,17 @@
        (str/join " ")))
 
 (defn metadata-from-filename
-  "Extracts metadata-like info from the filename"
-  [{:keys [filename relative-path]}]
-  (let [post-name (get (re-find filename-regexp filename) 2)
+  "extracts metadata-like info from the filename"
+  [{:keys [filename relative-path format]}]
+  (let [post-name (or (get (re-find filename-regexp filename) 2)
+                      (get (re-matches #"(.+)(\.\w+)$" filename) 1))
         relative-path (str/replace-first relative-path filename "")]
     {:title  (some-> post-name title-ize)
      :date   (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
-     :uri    (->> (or post-name
-                     ;; Pages as opposed to posts don't have a
-                     ;; date, so fall back to getting the
-                     ;; filename without it
-                      (get (re-matches #"(.+)(\.\w+)$" filename) 1)
+     ;; by default, parse-able things have their uri normalized
+     ;; without an extension
+     :uri    (->> (or (when ((:parseable config) format)
+                        post-name)
                       filename)
                   (str relative-path))}))
 
@@ -62,7 +64,7 @@
 (defn markdown
   [{:keys [format] :as m}]
   (cond-> m
-    (= format :md)
+    ((:parseable config) format)
     (update :content parser/markdown)))
 
 (defn template
@@ -109,10 +111,14 @@
 
 (defn verify
   [resources]
-  (when-not (->> resources
-                 (map :uri)
-                 (apply distinct?))
-    (throw (IllegalStateException. "URIs are not all distinct")))
+  (let [uris (map :uri resources)]
+    (when-not (apply distinct? uris)
+      (throw (IllegalStateException.
+              (str "URIs are not all distinct: "
+                   (as-> uris <>
+                     (frequencies <>)
+                     (for [[uri cnt] <> :when (> cnt 1)] uri)
+                     (str/join ", " <>)))))))
   resources)
 
 (defn run

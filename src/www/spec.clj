@@ -4,7 +4,9 @@
    [www.io :as io]
    [www.process :as process]
    [www.views :as views])
-  (:import (java.time LocalDate)))
+  (:import
+   (java.time LocalDate)
+   (java.io File)))
 
 (s/def :general/date
   (s/or :inst inst?
@@ -32,8 +34,8 @@
 (s/def :resource/redirects (s/or :single string?
                                  :multiple (s/coll-of string?)))
 (s/def :resource/uri string?)
-(s/def :resource/content string?)
-
+(s/def :resource/content (s/or :string string?
+                               :file (partial instance? File)))
 (s/def :site/title string?)
 (s/def :site/url string?)
 (s/def :site/author string?)
@@ -78,7 +80,7 @@
 
 (s/def :resource/enriched
   (s/merge :resource/raw
-           (s/keys :req-un [:resource/metadata])))
+           (s/keys :opt-un [:resource/metadata])))
 
 (s/def :resource/full
   (s/merge :resource/payload (s/keys :req-un [:site/site :resource/site])))
