@@ -1,9 +1,9 @@
 {% extends "layouts/base.html" %}
-{%block subtitle %}{{title}}{% endblock %}
+{%block subtitle %}{{metadata.title}}{% endblock %}
 {% block content %}
 <div class="content">
   <div class="content-wrap">
-    <header>{{title}}</header>
+    <header>{{metadata.title}}</header>
     <div class="content-body">
       {{content|safe}}
     </div>

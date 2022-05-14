@@ -1,6 +1,6 @@
 {:layout :post
  :title "Migrating to NixOS"
- :date "2019-03-14"}
+ :date #inst "2019-03-14T00:00:00.00Z"}
 
 After running [Arch Linux][1] for the last decade, I've finally made
 the jump to [NixOS][2]. For me, this means updating two VMs

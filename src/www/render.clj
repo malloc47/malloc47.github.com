@@ -16,6 +16,7 @@
 ;;; xml_escape, date_to_xmlschema, and date_to_rfc822
 (add-filter! :uricomp_encode #(URLEncoder/encode % "UTF-8"))
 (add-filter! :xml_escape (fn [s] (StringEscapeUtils/escapeXml10 s)))
+;; TODO: use clj-time or another high-level library?
 (add-filter! :rfc822_date
              (fn [date]
                (-> (doto (SimpleDateFormat.

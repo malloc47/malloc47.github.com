@@ -13,8 +13,8 @@
   <entry>
     <id>{{site.url}}{{post.uri}}</id>
     <link type="text/html" rel="alternate" href="{{site.url}}{{post.uri}}"/>
-    <title>{{post.title}}</title>
-    <updated>{{post.modified|iso8601_date}}</updated>
+    <title>{{post.metadata.title}}</title>
+    <updated>{{post.source.modified|iso8601_date}}</updated>
     <author>
       <name>{{site.author}}</name>
     </author>

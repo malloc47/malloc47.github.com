@@ -1,6 +1,6 @@
 {:layout :post
  :title "Laptops are the Stenotypes of Software Engineers"
- :date "2013-02-17"}
+ :date #inst "2013-02-17T00:00:00.00Z"}
 
 Increasingly, I've been asked variants on the question "what will
 happen to desktops/laptops," particularly in light of the

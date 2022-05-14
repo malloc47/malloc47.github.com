@@ -1,6 +1,6 @@
 {:layout :post
  :title "Anatomy of a Chrome Extension"
- :date "2012-09-15"}
+ :date #inst "2012-09-15T00:00:00.00Z"}
 
 I launched [nonpartisan.me][1] a few weeks back, which exists
 primarily in the form of a Google Chrome extension (there's a Firefox

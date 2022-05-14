@@ -1,22 +1,21 @@
 {% extends "layouts/base.html" %}
-{%block subtitle %}{{title}}{% endblock %}
+{%block subtitle %}{{metadata.title}}{% endblock %}
 {% block meta %}
 <meta name="keywords" content="{% for tag in tags %}{{tag.name}}{% if not forloop.last %},{% endif %}{% endfor %}">
-{% if description %}
+{% if metadata.description %}
 <meta name="description" content="{{description}}">
-{% comment %} OpenGraph tags {% endcomment %}
 <meta property="og:description" content="{{description}}">
 {% endif %}
 <meta property="og:url" content="{{site.url}}{{uri}}" />
-<meta property="og:title" content="{{title}}" />
+<meta property="og:title" content="{{metadata.title}}" />
 <meta property="og:type" content="article" />
 {% endblock %}
 {% block content %}
 <div class="content">
   <div class="content-wrap">
-    <p class="date">{{date|date:"yyyy"}} <span class="date-dark">00</span>{{date|date:"MM"}} <span class="date-dark">00</span>{{date|date:"dd"}} </p>
+    <p class="date">{{metadata.date|date:"yyyy"}} <span class="date-dark">00</span>{{metadata.date|date:"MM"}} <span class="date-dark">00</span>{{metadata.date|date:"dd"}} </p>
     {% include "layouts/header-info-post.html" %}
-    <header>{{title}}</header>
+    <header>{{metadata.title}}</header>
     <div class="content-body">
       {{content|safe}}
     </div>

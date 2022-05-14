@@ -2,7 +2,7 @@
  :title "Jedi Knight: Dark Forces II -- A coding retrospective"
  :uri "/jedi-knight-dark-forces-ii-a-coding-retrospective/"
  :redirects ["/blog/jedi-knight-dark-forces-ii-a-coding-retrospective/"]
- :date "2012-02-28"
+ :date #inst "2012-02-28T00:00:00.00Z"
  :img "/img/posts/jk/thumb/jk-screenshot.jpg"}
 
 Years ago, before I got my hands on a real compiler, I satisfied my

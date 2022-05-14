@@ -1,6 +1,6 @@
 {:layout :post
  :title "QR Codes En Masse"
- :date "2012-03-24T23:00:00"}
+ :date #inst "2012-03-24T23:00:00.00Z"}
 
 For the upcoming [POSSCON][1] here in Columbia, we had need of QR
 codes for the brochure.  Lots of them.  And while there are

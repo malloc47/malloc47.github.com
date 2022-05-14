@@ -1,6 +1,6 @@
 {:layout :post
  :title "Building a Personal Dashboard in ClojureScript Part 2"
- :date "2021-07-09"
+ :date #inst "2021-07-09T00:00:00.00Z"
  :uri "/building-a-personal-dashboard-in-clojurescript-part-2"}
 
 Following the [previous installment] in my series on building a

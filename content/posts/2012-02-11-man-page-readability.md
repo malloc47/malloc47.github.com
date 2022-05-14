@@ -2,7 +2,7 @@
  :title "Man Page Readability"
  :uri "/man-page-readability/"
  :redirects ["/blog/man-page-readability/"]
- :date "2012-02-11"}
+ :date #inst "2012-02-11T00:00:00.00Z"}
 
 Man pages are one of the staples of a healthy \*nix diet, but having
 grown up with them, it didn't occur to me until recently to wonder how

@@ -1,6 +1,6 @@
 {:layout :post
  :title "Building a Personal Dashboard in ClojureScript Part 3"
- :date "2020-12-27"
+ :date #inst "2020-12-27T00:00:00.00Z"
  :draft? true
  :uri "/building-a-personal-dashboard-in-clojurescript-part-3/"}
 

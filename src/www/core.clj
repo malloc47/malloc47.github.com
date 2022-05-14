@@ -1,5 +1,7 @@
 (ns www.core
   (:require
+   [clojure.spec.alpha :as spec]
+   [clojure.spec.test.alpha :as stest]
    [clojure.tools.cli :refer [parse-opts]]
    [optimus.export :refer [save-assets]]
    [optimus.prime :as optimus]
@@ -36,11 +38,13 @@
   [["-s" "--spec"]])
 
 (defn -main [& args]
-  (println args)
   (let [{{spec? :spec} :options} (parse-opts args cli-options)
         {:keys [public-dest]} config]
-    ;; Load for instrumentation side-effects
-    (when spec? (println "Instrumenting") (require '[www.spec]))
+    (when spec?
+      (println "Instrumenting")
+      (require '[www.spec])
+      (spec/check-asserts true)
+      (stest/instrument))
     (io/write-resources (content))
     (as-> (assets) <>
       (optimizations/all <> (:optimus config))

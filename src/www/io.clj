@@ -21,35 +21,8 @@
   [s]
   (cond->> s (not (str/starts-with? s "/")) (str "/")))
 
-(defn read-files
-  ([path] (read-files path nil))
-  ([path matcher & opts]
-   (->> (io/file path)
-        file-seq
-        (filter (every-pred #(.isFile %)
-                            (fn [f] (if matcher
-                                      (->> f str (re-find matcher))
-                                      true))))
-        (map (fn [f]
-               (let [file-path (str f)
-                     filename  (.getName f)
-                     format    (-> (re-find #"\.(\w+)$" filename)
-                                   ;; first capture group
-                                   (get 1)
-                                   keyword)]
-                 {:path          file-path
-                  ;; Since downstream utilities will not know what path
-                  ;; was specified, they need to know the relative path
-                  ;; following the given path to later construct a
-                  ;; proper URI.
-                  :relative-path (-> file-path
-                                     (str/replace-first path "")
-                                     leading-slash)
-                  :filename      filename
-                  :format        format
-                  :content       (if ((:parseable config) format)
-                                   (apply slurp f opts)
-                                   f)}))))))
+(def slash
+  (comp trailing-slash leading-slash))
 
 (defn most-recent-commit-timestamp
   [path]
@@ -67,6 +40,38 @@
       (catch NumberFormatException _
         ;; TODO: make the default selectable?
         (Date.)))))
+
+(defn file->source
+  [path opts f]
+  (let [file-path     (str f)
+        filename      (.getName f)
+        format        (-> (re-find #"\.(\w+)$" filename)
+                          ;; first capture group
+                          (get 1)
+                          keyword)
+        relative-path (-> file-path
+                          (str/replace-first path "")
+                          leading-slash)]
+    {:source  {:path     file-path
+               :filename filename
+               :format   format
+               :modified (-> file-path
+                             most-recent-commit-timestamp)}
+     :content (if ((:parseable config) format)
+                (apply slurp f opts)
+                f)
+     :uri     relative-path}))
+
+(defn read-files
+  ([path] (read-files path nil))
+  ([path matcher & opts]
+   (->> (io/file path)
+        file-seq
+        (filter (every-pred #(.isFile %)
+                            (fn [f] (if matcher
+                                      (->> f str (re-find matcher))
+                                      true))))
+        (map (partial file->source path opts)))))
 
 (defn delete-directory!
   [path]

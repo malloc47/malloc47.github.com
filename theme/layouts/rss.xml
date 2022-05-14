@@ -10,9 +10,9 @@
     <lastBuildDate>{{site.time|rfc822_date}}</lastBuildDate>
     {% for post in posts %}
     <item>
-      <title>{{post.title}}</title>
+      <title>{{post.metadata.title}}</title>
       <link>{{site.url}}{{ post.uri }}</link>
-      <pubDate>{{post.modified|rfc822_date}}</pubDate>
+      <pubDate>{{post.source.modified|rfc822_date}}</pubDate>
       <author>{{site.email}} ({{site.author}})</author>
       <guid isPermaLink="true">{{site.url}}{{ post.uri }}</guid>
       <description>{{post.content|xml_escape}}</description>

@@ -1,12 +1,12 @@
 (ns www.process
   (:require
+   [clojure.instant :refer [read-instant-date]]
+   [clojure.spec.alpha :as s]
    [clojure.string :as str]
    [www.config :refer [config]]
    [www.io :as io]
    [www.parser :as parser]
-   [www.render :as renderer])
-  (:import
-   (java.time LocalDate)))
+   [www.render :as renderer]))
 
 (defn add-modified
   "Lookup the filename and fetch the last modified timestamp according
@@ -18,12 +18,19 @@
               (assoc m :modified)))
        files))
 
-(defn metadata
-  [{:keys [content format] :as m}]
+(defn metadata-from-header
+  [{:keys [content] {:keys [format]} :source :as m}]
   (if ((:parseable config) format)
-    (->> content
-         parser/metadata
-         (merge m))
+    (let [{{:keys [layout uri] :as metadata} :metadata
+           content                           :content}
+          (->> content
+               parser/metadata)]
+      (s/assert :resource/metadata-header metadata)
+      (-> m
+          (assoc :content content)
+          (update :metadata #(merge % (dissoc metadata :layout :uri)))
+          (conj (when layout [:template {:layout layout}]))
+          (conj (when uri [:uri (io/slash uri)]))))
     m))
 
 ;; Jekyll-style filenaming conventions
@@ -37,38 +44,34 @@
 
 (defn metadata-from-filename
   "extracts metadata-like info from the filename"
-  [{:keys [filename relative-path format]}]
-  (let [post-name (or (get (re-find filename-regexp filename) 2)
-                      (get (re-matches #"(.+)(\.\w+)$" filename) 1))
-        relative-path (str/replace-first relative-path filename "")]
-    {:title  (some-> post-name title-ize)
-     :date   (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}" filename)
-     ;; by default, parse-able things have their uri normalized
-     ;; without an extension
-     :uri    (->> (or (when ((:parseable config) format)
-                        post-name)
-                      filename)
-                  (str relative-path))}))
-
-(defn file->resource
-  [{:keys [metadata] :as payload}]
-  (-> (merge-with #(some identity %&)
-                  payload
-                  metadata
-                  (metadata-from-filename payload)
-                  {:format :unknown})
-      (update :uri (comp io/trailing-slash io/leading-slash))
-      (update :date #(some-> % (subs 0 10) LocalDate/parse))
-      (dissoc :metadata)))
+  [{:keys [uri] {:keys [filename format]} :source :as m}]
+  (let [post-name     (or (get (re-find filename-regexp filename) 2)
+                          (get (re-matches #"(.+)(\.\w+)$" filename) 1))
+        ;; assumes that the relative path was dumped into the URI
+        relative-path (str/replace-first uri filename "")
+        metadata      {:title  (some-> post-name title-ize)
+                       :date   (some->> filename
+                                        (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}")
+                                        read-instant-date)}
+        ;; by default, parse-able things have their uri normalized
+        ;; without an extension
+        uri           (->> (or (when ((:parseable config) format)
+                                 post-name)
+                               filename)
+                           (str relative-path)
+                           io/slash)]
+    (-> m
+        (update :metadata #(merge % metadata))
+        (conj (when uri [:uri uri])))))
 
 (defn markdown
-  [{:keys [format] :as m}]
+  [{{:keys [format]} :source :as m}]
   (cond-> m
     ((:parseable config) format)
     (update :content parser/markdown)))
 
 (defn template
-  [{:keys [layout] :as payload}]
+  [{{:keys [layout]} :template :as payload}]
   (cond-> payload
     layout
     (->> (merge (select-keys config [:site]))
@@ -82,29 +85,20 @@
        (map (fn [{:keys [uri content]}] [uri content]))
        (into {})))
 
-(defn parse
-  [resources]
-  (map (comp file->resource metadata) resources))
-
-(defn render
-  [resources]
-  (map (comp template markdown) resources))
-
 (defn remove-drafts
   [resources]
-  (remove :draft? resources))
+  (remove (comp :draft? :metadata) resources))
 
 (defn explode-redirects
   [resources]
   (mapcat
-   (fn [{:keys [redirects uri] :as m}]
+   (fn [{:keys [uri] {:keys [redirects]} :metadata :as m}]
      (->> (or redirects [])
           (map (fn [redirect]
                  (-> m
                      (assoc :uri         redirect
-                            :layout      :redirect
-                            :destination uri
-                            :redirect?   true)
+                            :destination uri)
+                     (assoc-in [:template :layout] :redirect)
                      template)))
           (concat [m])))
    resources))
@@ -121,25 +115,44 @@
                      (str/join ", " <>)))))))
   resources)
 
-(defn run
-  ([files] (run files {}))
-  ([files context]
-   (->> files
-        parse
-        remove-drafts
-        (map (fn [m] (merge m context)))
-        render
-        explode-redirects)))
+(defn files->processed-resources
+  [files]
+  (->> files
+       (map (comp metadata-from-header metadata-from-filename))
+       remove-drafts
+       explode-redirects
+       (map markdown)))
+
+(defn sort-resources
+  [resources]
+  (assert (every? (comp :date :metadata) resources)
+          "Cannot sort with missing dates!")
+  (->> resources
+       (sort-by (comp :date :metadata))
+       reverse))
+
+;; Templating is separated because there's a number of cases where we
+;; want to get untemplated but otherwise completely processed
+;; resources to nest inside of higher-level pages.
+(defn files->templated-resources
+  [files]
+  (->> files
+       files->processed-resources
+       (map template)))
 
 (defn template-nested
   [layout context-key extra-context nested]
   (->> (hash-map context-key nested)
        (merge extra-context)
-       (merge (select-keys config [:site]))
-       (merge {:layout layout})
+       (merge {:template {:layout layout}})
        template))
 
 (defn template-nested-paginated
+  "Creates a paginated series of pages based on a set of
+  resoruces. Assumes that the nested resources are already sorted and
+  that each page will have n-per-page number of resources. Can specify
+  the uri-seq to control the URIs for the pages, defaults to a
+  Jekyll-style paginator with paginate_path: \"page:num\" configured."
   ([layout context-key n-per-page nested]
    ;; Sequence of /, page2, ... to mirror Jekyll's paginator
    (let [uri-seq (->> (range)
@@ -148,22 +161,19 @@
      (template-nested-paginated
       layout context-key n-per-page uri-seq nested)))
   ([layout context-key n-per-page uri-seq nested]
-   (let [nest-groups (->> nested
-                          (sort-by :date)
-                          reverse
-                          (partition-all n-per-page))]
-     (->> nest-groups
-          (map (fn [[prev-uri uri next-uri] nested]
-                 (->> (hash-map context-key nested)
-                      (merge {:layout   layout
-                              ;; TODO: abstract title generation
-                              :title    (subs uri 1)
-                              :uri      uri
-                              :next-uri next-uri
-                              :prev-uri prev-uri})
-                      template))
-               ;; Offset to give access to prev/next URIs
-               (as-> uri-seq <>
-                 (take (count nest-groups) <>)
-                 (concat [nil] <> [nil])
-                 (partition 3 1 <>)))))))
+   (let [nest-groups (partition-all n-per-page nested)]
+     (map (fn [[prev-uri uri next-uri] nested]
+            (->> (hash-map context-key nested)
+                 (merge {:template {:layout  layout}
+                         ;; TODO: abstract title generation
+                         :metadata {:title (subs uri 1)}
+                         :uri      uri
+                         :next-uri next-uri
+                         :prev-uri prev-uri})
+                 template))
+          ;; Offset to give access to prev/next URIs
+          (as-> uri-seq <>
+            (take (count nest-groups) <>)
+            (concat [nil] <> [nil])
+            (partition 3 1 <>))
+          nest-groups))))

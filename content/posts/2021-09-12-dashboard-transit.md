@@ -1,6 +1,6 @@
 {:layout :post
  :title "Building a Personal Dashboard in ClojureScript Part 3"
- :date "2021-09-12"
+ :date #inst "2021-09-12T00:00:00.00Z"
  :uri "/building-a-personal-dashboard-in-clojurescript-part-3/"}
 
 My raison d'être for creating the wall-mounted dashboard discussed in

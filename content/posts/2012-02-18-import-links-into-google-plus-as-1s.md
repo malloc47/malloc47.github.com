@@ -2,7 +2,7 @@
  :title "Import Links into Google Plus as +1s"
  :uri "/import-links-into-google-plus-as-1s/"
  :redirects ["/blog/import-links-into-google-plus-as-1s/"]
- :date "2012-02-18"}
+ :date #inst "2012-02-18T00:00:00.00Z"}
 
 I've been accumulating helpful and interesting articles for a number
 of years now. At first, they existed solely as starred articles in

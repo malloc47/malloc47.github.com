@@ -1,6 +1,6 @@
 {:layout :post
  :title "Google Completion in Emacs"
- :date "2012-05-19"}
+ :date #inst "2012-05-19T00:00:00.00Z"}
 
 While many an `emacs` include `dabbrev-expand` for within-buffer
 completion, I've always wanted (purely for reasons of amusement) to

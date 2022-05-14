@@ -1,6 +1,6 @@
 {:layout :post
  :title "LaTeX Snippet: (Literal) One Liners"
- :date "2013-04-03"}
+ :date #inst "2013-04-03T00:00:00.00Z"}
 
 There are some truly [impressive][1] LaTeX solutions for doing
 PowerPoint-style font-resizing to fit into a fixed width box.  I

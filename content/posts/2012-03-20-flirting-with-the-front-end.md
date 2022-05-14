@@ -1,6 +1,6 @@
 {:layout :post
  :title "Flirting with the Front End"
- :date "2012-03-20"}
+ :date #inst "2012-03-20T00:00:00.00Z"}
 
 Every few years, when I'm not teaching introductory web programming, I
 revisit front end development, oftentimes in the form of retooling my

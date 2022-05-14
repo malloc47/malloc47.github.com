@@ -22,12 +22,9 @@
 
 (defn processed-posts []
   (->> (posts)
-       process/add-modified
-       process/parse
-       process/remove-drafts
-       (map process/markdown)
-       (sort-by :date)
-       reverse))
+       (process/files->processed-resources)
+       (remove (comp #{:redirect} :layout :template))
+       (process/sort-resources)))
 
 (defn home+posts []
   (->> (processed-posts)
@@ -35,22 +32,27 @@
 
 (defn feed [layout]
   (let [posts           (processed-posts)
-        latest-modified (->> posts (map :modified) sort reverse first)]
+        latest-modified (->> posts
+                             (map (comp :modified :source))
+                             sort
+                             reverse
+                             first)]
     (process/template-nested layout :posts
                              {:latest-modified latest-modified
                               :uri (str "/" (name layout))}
                              posts)))
 
 (defn content []
-  (->> (concat (process/run (posts))
-               (process/run (pages))
+  (->> (concat (process/files->templated-resources (posts))
+               (process/files->templated-resources (pages))
                (home+posts)
                (mapcat (fn [regex]
                          (->> regex
                               (io/read-files (content-path "/"))
-                              process/run))
+                              process/files->templated-resources))
                        [#"\.ico" #"\.pdf" #"\.png" #"\.svg" #"\.jpg"])
-               (process/run (io/read-files (str "theme")  #"\.woff2"))
+               (process/files->templated-resources
+                (io/read-files (str "theme")  #"\.woff2"))
                [(feed :rss.xml)
                 (feed :atom.xml)])
        process/verify))
