@@ -24,11 +24,26 @@
 (def slash
   (comp trailing-slash leading-slash))
 
+(defn git-commit-selection-command
+  [path]
+  ;; You'd really think this could be done natively by git log, but
+  ;; the --follow + --grep + --invert-grep commands do not play nicely
+  ;; https://stackoverflow.com/a/64468571
+  ["/usr/bin/env" "bash" "-c"
+   (str "git log --follow -M --pretty='%f %ct' --  "
+        path
+        " | grep -v NONCONTENT | head -1 | awk '{print $2}'")])
+
 (defn most-recent-commit-timestamp
+  "Looks up a given path in git to find the latest commit, extracting
+  the timestamp representing when it was last modified. Skips over
+  commits that have \"NOCONTENT\" in the subject line of the commit
+  message."
   [path]
   (let [git-timestamp
         (->> path
-             (sh "git" "log" "-1" "--pretty=%ct")
+             (git-commit-selection-command)
+             (apply sh)
              :out
              str/trim)]
     (try
