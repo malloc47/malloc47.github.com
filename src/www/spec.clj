@@ -7,6 +7,8 @@
   (:import
    (java.io File)))
 
+;;; Fields
+
 (s/def :general/date inst?)
 
 (s/def :file/path string?)
@@ -29,13 +31,17 @@
                                  :multiple (s/coll-of string?)))
 (s/def :resource/uri string?)
 (s/def :resource/content (s/or :string string?
-                               :file (partial instance? File)))
+                               :file (partial instance? File)
+                               :nested coll?))
+
 (s/def :site/title string?)
 (s/def :site/url string?)
 (s/def :site/author string?)
 (s/def :site/email string?)
 (s/def :site/description string?)
 (s/def :site/time inst?)
+
+;;; Entities
 
 (s/def :resource/source
   (s/keys :req-un [:file/path
@@ -115,6 +121,41 @@
 
 (s/fdef process/verify
   :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/uri])))
+  :ret (s/coll-of :resource/payload))
+
+;;; High-level source->resource and source->templated functions
+
+(s/fdef process/processed-resources
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/source])))
+  :ret (s/coll-of :resource/payload))
+
+(s/fdef process/reverse-chronological-sort
+  :args (s/cat :input (s/coll-of :resource/payload))
+  :ret (s/coll-of :resource/payload))
+
+(s/fdef process/standalone-resources
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/source])))
+  :ret (s/coll-of :resource/payload))
+
+(s/fdef process/copy
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/source])))
+  :ret (s/coll-of :resource/payload))
+
+(s/fdef process/template-directly
+  :args (s/cat :layout :template/layout
+               :uri :resource/uri
+               :content :resource/content
+               :extra (s/* (s/cat :opt keyword? :val any?)))
+  :ret :resource/payload)
+
+(s/fdef process/template-paginated
+  :args (s/alt :no-uri (s/cat :layout :template/layout
+                              :n-per-page integer?
+                              :nested any?)
+               :uri    (s/cat :layout :template/layout
+                              :n-per-page integer?
+                              :uri-seq (s/every :resource/uri)
+                              :nested any?))
   :ret (s/coll-of :resource/payload))
 
 (s/fdef views/base

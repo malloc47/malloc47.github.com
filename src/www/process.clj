@@ -115,62 +115,75 @@
                      (str/join ", " <>)))))))
   resources)
 
-(defn files->processed-resources
-  [files]
-  (->> files
+;;; High-level functions for building collections of resources (pages)
+;;; from sources (files).
+
+(defn processed-resources
+  "Parse, and render a collection of file sources. Does not template,
+  so this helper function is useful for generating resources that are
+  passed along as a nested resources of another templated page. Does
+  not do redirect expansion."
+  [sources]
+  (->> sources
        (map (comp metadata-from-header metadata-from-filename))
        remove-drafts
-       explode-redirects
        (map markdown)))
 
-(defn sort-resources
+(defn reverse-chronological-sort
   [resources]
-  (assert (every? (comp :date :metadata) resources)
-          "Cannot sort with missing dates!")
   (->> resources
        (sort-by (comp :date :metadata))
        reverse))
 
-;; Templating is separated because there's a number of cases where we
-;; want to get untemplated but otherwise completely processed
-;; resources to nest inside of higher-level pages.
-(defn files->templated-resources
-  [files]
-  (->> files
-       files->processed-resources
-       (map template)))
+(defn standalone-resources
+  "Completely parse, render, and template a collection of file
+  sources. This processes file sources 1:1 with templated pages."
+  [sources]
+  (->> sources
+       (map (comp metadata-from-header metadata-from-filename))
+       remove-drafts
+       explode-redirects
+       (map (comp template markdown))))
 
-(defn template-nested
-  [layout context-key extra-context nested]
-  (->> (hash-map context-key nested)
-       (merge extra-context)
-       (merge {:template {:layout layout}})
-       template))
+(defn copy
+  "Asumes source is not parseable and do the minimal amount of work to
+  extract the URI from the filename; when exported later, the file
+  contents will be entirely untransformed (i.e. clojure.java.io/copy)."
+  [sources]
+  (map metadata-from-filename sources))
 
-(defn template-nested-paginated
-  "Creates a paginated series of pages based on a set of
-  resoruces. Assumes that the nested resources are already sorted and
-  that each page will have n-per-page number of resources. Can specify
-  the uri-seq to control the URIs for the pages, defaults to a
-  Jekyll-style paginator with paginate_path: \"page:num\" configured."
-  ([layout context-key n-per-page nested]
+(defn template-directly
+  "Create and template a new resource without having ingested the
+  content from a specific file source."
+  [layout uri content & {:as extra}]
+  (-> {:uri uri :content content :template {:layout layout}}
+      (merge extra)
+      template))
+
+(defn template-paginated
+  "Creates a paginated series of pages based on a set of 'nested'
+  resources. Assumes that the nested resources are already sorted and
+  that each resulting page will have n-per-page number of
+  resources. Can specify the uri-seq to control the URIs for the
+  pages, defaults to a Jekyll-style paginator with paginate_path:
+  \"page:num\" configured."
+  ([layout n-per-page nested]
    ;; Sequence of /, page2, ... to mirror Jekyll's paginator
    (let [uri-seq (->> (range)
                       (map (comp #(str "/page" % "/") inc))
                       (replace {"/page1/" "/"}))]
-     (template-nested-paginated
-      layout context-key n-per-page uri-seq nested)))
-  ([layout context-key n-per-page uri-seq nested]
+     (template-paginated layout n-per-page uri-seq nested)))
+  ([layout n-per-page uri-seq nested]
    (let [nest-groups (partition-all n-per-page nested)]
      (map (fn [[prev-uri uri next-uri] nested]
-            (->> (hash-map context-key nested)
-                 (merge {:template {:layout  layout}
-                         ;; TODO: abstract title generation
-                         :metadata {:title (subs uri 1)}
-                         :uri      uri
-                         :next-uri next-uri
-                         :prev-uri prev-uri})
-                 template))
+            (template
+             {:content  nested
+              :uri      uri
+              :next-uri next-uri
+              :prev-uri prev-uri
+              :template {:layout  layout}
+              ;; TODO: abstract title generation
+              :metadata {:title (subs uri 1)}}))
           ;; Offset to give access to prev/next URIs
           (as-> uri-seq <>
             (take (count nest-groups) <>)

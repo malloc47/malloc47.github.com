@@ -8,7 +8,7 @@
     <language>en-us</language>
     <pubDate>{{latest-modified|rfc822_date}}</pubDate>
     <lastBuildDate>{{site.time|rfc822_date}}</lastBuildDate>
-    {% for post in posts %}
+    {% for post in content %}
     <item>
       <title>{{post.metadata.title}}</title>
       <link>{{site.url}}{{ post.uri }}</link>

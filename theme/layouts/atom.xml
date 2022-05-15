@@ -9,7 +9,7 @@
     <name>{{site.author}}</name>
     <email>{{site.email}}</email>
   </author>
-  {% for post in posts %}
+  {% for post in content %}
   <entry>
     <id>{{site.url}}{{post.uri}}</id>
     <link type="text/html" rel="alternate" href="{{site.url}}{{post.uri}}"/>

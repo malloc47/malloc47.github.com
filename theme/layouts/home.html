@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {%block subtitle %}{{metadata.title}}{% endblock %}
 {% block content %}
-{% for post in posts %}
+{% for post in content %}
 <div class="content">
   <div class="content-wrap">
     <p class="date">{{post.metadata.date|date:"yyyy"}}<span class="date-dark">00</span>{{post.metadata.date|date:"MM"}} <span class="date-dark">00</span>{{post.metadata.date|date:"dd"}} </p>

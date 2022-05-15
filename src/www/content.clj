@@ -1,34 +1,32 @@
 (ns www.content
   (:require
+   [clojure.string :as str]
    [optimus.assets :refer [load-bundle]]
-   [www.config :refer [config]]
+   [www.config :refer [config content-path]]
    [www.io :as io]
    [www.process :as process]))
 
-(defn get-path-contents [path]
-  (->> (concat
-        (io/read-files path #"\.md")
-        (io/read-files path #"\.html"))))
-
-(defn content-path
-  [path]
-  (str (:content-root config) path))
+(def parseable-regex
+  (->> config
+       :parseable
+       (map #(str "\\." (name %) "$"))
+       (str/join "|")
+       re-pattern))
 
 (defn posts []
-  (->> "/posts/" content-path get-path-contents))
+  (-> "/posts/" content-path (io/read-files parseable-regex)))
 
 (defn pages []
-  (->> "/pages/" content-path get-path-contents))
+  (-> "/pages/" content-path (io/read-files parseable-regex)))
 
 (defn processed-posts []
   (->> (posts)
-       (process/files->processed-resources)
-       (remove (comp #{:redirect} :layout :template))
-       (process/sort-resources)))
+       (process/processed-resources)
+       (process/reverse-chronological-sort)))
 
 (defn home+posts []
   (->> (processed-posts)
-       (process/template-nested-paginated :home :posts 5)))
+       (process/template-paginated :home 5)))
 
 (defn feed [layout]
   (let [posts           (processed-posts)
@@ -37,22 +35,17 @@
                              sort
                              reverse
                              first)]
-    (process/template-nested layout :posts
-                             {:latest-modified latest-modified
-                              :uri (str "/" (name layout))}
-                             posts)))
+    (process/template-directly
+     layout (str "/" (name layout)) posts {:latest-modified latest-modified})))
 
 (defn content []
-  (->> (concat (process/files->templated-resources (posts))
-               (process/files->templated-resources (pages))
+  (->> (concat (process/standalone-resources (posts))
+               (process/standalone-resources (pages))
                (home+posts)
-               (mapcat (fn [regex]
-                         (->> regex
-                              (io/read-files (content-path "/"))
-                              process/files->templated-resources))
-                       [#"\.ico" #"\.pdf" #"\.png" #"\.svg" #"\.jpg"])
-               (process/files->templated-resources
-                (io/read-files (str "theme")  #"\.woff2"))
+               (-> (io/read-files (content-path "/")
+                                  #"\.ico$|\.pdf$|\.png$|\.svg$|\.jpg$")
+                   process/copy)
+               (-> (io/read-files (str "theme")  #"\.woff2") process/copy)
                [(feed :rss.xml)
                 (feed :atom.xml)])
        process/verify))

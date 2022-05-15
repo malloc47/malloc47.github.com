@@ -14,3 +14,7 @@
                   :time        (java.util.Date.)}
    :optimus      {:bundle-url-prefix "/assets"
                   :browsers          ["> 0.1%, not IE 11"]}})
+
+(defn content-path
+  [path]
+  (str (:content-root config) path))
