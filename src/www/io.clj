@@ -67,7 +67,7 @@
         relative-path (-> file-path
                           (str/replace-first path "")
                           leading-slash)]
-    {:source  {:path     file-path
+    {:source  {:file     f
                :filename filename
                :format   format
                :modified (-> file-path

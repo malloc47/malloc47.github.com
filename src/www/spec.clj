@@ -11,8 +11,7 @@
 
 (s/def :general/date inst?)
 
-(s/def :file/path string?)
-(s/def :file/relative-path string?)
+(s/def :file/file (partial instance? File))
 (s/def :file/filename string?)
 (s/def :file/format (s/nilable keyword?))
 (s/def :file/modified inst?)
@@ -44,7 +43,7 @@
 ;;; Entities
 
 (s/def :resource/source
-  (s/keys :req-un [:file/path
+  (s/keys :req-un [:file/file
                    :file/filename
                    :file/format
                    :file/modified]))
