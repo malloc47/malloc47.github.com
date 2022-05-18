@@ -60,7 +60,8 @@
                    :metadata/date]))
 
 (s/def :resource/template
-  (s/keys :req-un [:template/layout]))
+  (s/keys :req-un [:template/layout]
+          :opt-un [:file/file]))
 
 (s/def :resource/metadata-header
   (s/merge :resource/metadata

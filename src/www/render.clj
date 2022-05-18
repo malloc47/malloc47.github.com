@@ -32,12 +32,14 @@
                       (TimeZone/getTimeZone "UTC")))
                    (.format date))))
 
+(defn template-file
+  [layout]
+  (cond-> (str "layouts/" (name layout))
+    (-> (re-find #"\.(\w+)$" (name layout))
+        (get 1)
+        not)
+    (str ".html")))
+
 (defn template
   [layout content]
-  (selmer/render-file
-   (cond-> (str "layouts/" (name layout))
-     (-> (re-find #"\.(\w+)$" (name layout))
-         (get 1)
-         not)
-     (str ".html"))
-   content))
+  (selmer/render-file (template-file layout) content))

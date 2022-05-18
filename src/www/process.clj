@@ -63,14 +63,16 @@
 
 (defn template
   [{{:keys [layout]} :template :as payload}]
-  (cond-> payload
-    layout
-    (->> (merge (select-keys config [:site]))
-         ;; TODO attach a reference to the template file itself in the
-         ;; payload so we can detect changes
-         (renderer/template layout)
-         constantly
-         (update payload :content))))
+  (if layout
+    (let [rendered (->> payload
+                        (merge (select-keys config [:site]))
+                        (renderer/template layout))]
+      (-> payload
+          (assoc :content rendered)
+          (assoc-in [:template :file]
+                    (-> layout renderer/template-file io/file))))
+    ;; else do nothing
+    payload))
 
 (defn return
   [resources]
