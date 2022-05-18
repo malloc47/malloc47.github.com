@@ -66,11 +66,15 @@
   (s/merge :resource/metadata
            :resource/template))
 
+(s/def :resource/output
+  (s/keys :req-un [:file/file]))
+
 (s/def :resource/payload
   (s/merge :resource/base
            (s/keys :opt-un [:resource/source])
            (s/keys :opt-un [:resource/metadata])
-           (s/keys :opt-un [:resource/template])))
+           (s/keys :opt-un [:resource/template])
+           (s/keys :opt-un [:resource/output])))
 
 (s/def :resource/site
   (s/keys :req-un [:site/title
@@ -91,6 +95,14 @@
                :matcher (partial instance? java.util.regex.Pattern)
                :else (s/* any?))
   :ret (s/merge :resource/base (s/keys :req-un [:resource/source])))
+
+(s/fdef www.io/write-resources
+  :args (s/cat :input (s/coll-of
+                       (s/merge :resource/base
+                                (s/keys :req-un [:resource/output])))))
+
+(s/fdef www.io/write-file
+  :args (s/cat :file :file/file :content :resource/content))
 
 (s/fdef process/metadata-from-header
   :args (s/cat :input (s/merge :resource/base
@@ -121,6 +133,11 @@
 (s/fdef process/verify
   :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/uri])))
   :ret (s/coll-of :resource/payload))
+
+(s/fdef process/output-location
+  :args (s/cat :input (s/keys :req-un [:resource/uri]))
+  :ret (s/merge :resource/base
+                (s/keys :req-un [:resource/output])))
 
 ;;; High-level source->resource and source->templated functions
 

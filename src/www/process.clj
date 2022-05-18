@@ -1,10 +1,11 @@
 (ns www.process
   (:require
    [clojure.instant :refer [read-instant-date]]
+   [clojure.java.io :as io]
    [clojure.spec.alpha :as s]
    [clojure.string :as str]
    [www.config :refer [config]]
-   [www.io :as io]
+   [www.io :refer [slash]]
    [www.parser :as parser]
    [www.render :as renderer]))
 
@@ -20,7 +21,7 @@
           (assoc :content content)
           (update :metadata #(merge % (dissoc metadata :layout :uri)))
           (conj (when layout [:template {:layout layout}]))
-          (conj (when uri [:uri (io/slash uri)]))))
+          (conj (when uri [:uri (slash uri)]))))
     m))
 
 ;; Jekyll-style filenaming conventions
@@ -49,7 +50,7 @@
                                  post-name)
                                filename)
                            (str relative-path)
-                           io/slash)]
+                           slash)]
     (-> m
         (update :metadata #(merge % metadata))
         (conj (when uri [:uri uri])))))
@@ -65,6 +66,8 @@
   (cond-> payload
     layout
     (->> (merge (select-keys config [:site]))
+         ;; TODO attach a reference to the template file itself in the
+         ;; payload so we can detect changes
          (renderer/template layout)
          constantly
          (update payload :content))))
@@ -105,6 +108,15 @@
                      (str/join ", " <>)))))))
   resources)
 
+(defn output-location
+  [{:keys [uri] :as m}]
+  (let [path (str (:public-dest config) uri)
+        file (io/file
+              (cond-> path
+                (str/ends-with? path "/")
+                (str "index.html")))]
+    (assoc m :output {:file file})))
+
 ;;; High-level functions for building collections of resources (pages)
 ;;; from sources (files).
 
@@ -133,14 +145,14 @@
        (map (comp metadata-from-header metadata-from-filename))
        remove-drafts
        explode-redirects
-       (map (comp template markdown))))
+       (map (comp output-location template markdown))))
 
 (defn copy
   "Asumes source is not parseable and do the minimal amount of work to
   extract the URI from the filename; when exported later, the file
   contents will be entirely untransformed (i.e. clojure.java.io/copy)."
   [sources]
-  (map metadata-from-filename sources))
+  (map (comp output-location metadata-from-filename) sources))
 
 (defn template-directly
   "Create and template a new resource without having ingested the
@@ -148,7 +160,8 @@
   [layout uri content & {:as extra}]
   (-> {:uri uri :content content :template {:layout layout}}
       (merge extra)
-      template))
+      template
+      output-location))
 
 (defn template-paginated
   "Creates a paginated series of pages based on a set of 'nested'
@@ -166,14 +179,15 @@
   ([layout n-per-page uri-seq nested]
    (let [nest-groups (partition-all n-per-page nested)]
      (map (fn [[prev-uri uri next-uri] nested]
-            (template
-             {:content  nested
-              :uri      uri
-              :next-uri next-uri
-              :prev-uri prev-uri
-              :template {:layout  layout}
-              ;; TODO: abstract title generation
-              :metadata {:title (subs uri 1)}}))
+            (-> {:content  nested
+                 :uri      uri
+                 :next-uri next-uri
+                 :prev-uri prev-uri
+                 :template {:layout  layout}
+                 ;; TODO: abstract title generation
+                 :metadata {:title (subs uri 1)}}
+                template
+                output-location))
           ;; Offset to give access to prev/next URIs
           (as-> uri-seq <>
             (take (count nest-groups) <>)

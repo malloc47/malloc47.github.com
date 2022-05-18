@@ -92,24 +92,15 @@
   [path]
   (-> path io/file FileUtils/deleteDirectory))
 
-(defn write
-  [output-file content]
-  (cond
-    (string? content) (spit output-file content)
-    (instance? File content) (io/copy content output-file)))
-
 (defn write-file
-  [uri content]
-  (let [path (str (:public-dest config) uri)
-        file (io/file
-              (cond-> path
-                (str/ends-with? path "/")
-                (str "index.html")))]
-    (-> file .getParentFile .mkdirs)
-    (write file content)))
+  [file content]
+  (-> file .getParentFile .mkdirs)
+  (cond
+    (string? content) (spit file content)
+    (instance? File content) (io/copy content file)))
 
 (defn write-resources
   [resources]
   (delete-directory! (:public-dest config))
-  (doseq [{:keys [content uri]} resources]
-    (write-file uri content)))
+  (doseq [{:keys [content] {:keys [file]} :output} resources]
+    (write-file file content)))
