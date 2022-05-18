@@ -8,16 +8,6 @@
    [www.parser :as parser]
    [www.render :as renderer]))
 
-(defn add-modified
-  "Lookup the filename and fetch the last modified timestamp according
-  to git, attaching it to the payload."
-  [files]
-  (map (fn [{:keys [path] :as m}]
-         (->> path
-              io/most-recent-commit-timestamp
-              (assoc m :modified)))
-       files))
-
 (defn metadata-from-header
   [{:keys [content] {:keys [format]} :source :as m}]
   (if ((:parseable config) format)
