@@ -19,7 +19,13 @@
  :aliases {:build  {:main-opts ["-m" "www.core"]}
            :serve  {:exec-fn   www.core/serve
                     :exec-args {:port 4000}}
-           :lint   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.04.25"}}
+           :style  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.04.25"}}
                     :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
+           :lint   {:extra-deps {borkdude/carve
+                                 {:git/url "https://github.com/borkdude/carve"
+                                  :git/tag "v0.1.0"
+                                  :git/sha "15b010e6950cf917f026833d89b123be11284582"}}
+                    :main-opts ["-m" "carve.main" "--opts"]}
+
            :format {:extra-deps {cljfmt/cljfmt {:mvn/version "0.8.0"}}
                     :main-opts ["-m" "cljfmt.main" "fix"]}}}

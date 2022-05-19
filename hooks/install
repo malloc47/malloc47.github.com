@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -x
+SCRIPT_DIR=$(dirname "$0")
+cp ${SCRIPT_DIR}/pre-commit ${SCRIPT_DIR}/../.git/hooks/

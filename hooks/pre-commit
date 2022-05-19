@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+
+if command -v clj-kondo &> /dev/null ; then
+    clj-kondo --lint src
+else
+    clj -M:style
+fi
+
+if command -v cljfmt &> /dev/null ; then
+    cljfmt fix
+else
+    clj -M:format
+fi
+
+if command -v carve &> /dev/null ; then
+    carve --opts
+else
+    clj -M:lint
+fi

@@ -150,12 +150,12 @@
                  :content "<h1>HIIIIIIIIIIII</h1>"
                  :uri "https://www.whereever.com"}]
     [:html {:lang "en"}
-     [:head [:title title] (meta-tags payload) font-preload css
-      [:body (dark-mode-controls) icons
-       [:div#container header nav
-        [:div#contents {:role "main"}
-         (cond
-           (sequential? payload) ""
-           (= (:layout payload) :page) (page payload)
-           (= (:layout payload) :post) (single-post payload))]
-        footer]]]]))
+     [:head [:title title] (meta-tags payload) font-preload css js]
+     [:body (dark-mode-controls) icons
+      [:div#container header nav
+       [:div#contents {:role "main"}
+        (cond
+          (sequential? payload) ""
+          (= (:layout payload) :page) (page payload)
+          (= (:layout payload) :post) (single-post payload))]
+       footer]]]))
