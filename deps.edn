@@ -17,7 +17,7 @@
         org.clojure/tools.cli {:mvn/version "1.0.206"}}
  :paths ["src" "." "theme"]
  :aliases {:build  {:main-opts ["-m" "www.core"]}
-           :serve  {:exec-fn   www.core/serve
+           :serve  {:exec-fn   www.server/serve
                     :exec-args {:port 4000}}
            :style  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.04.25"}}
                     :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
