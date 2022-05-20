@@ -15,6 +15,7 @@
 (s/def :file/filename string?)
 (s/def :file/format (s/nilable keyword?))
 (s/def :file/modified inst?)
+(s/def :file/header? boolean?)
 
 (s/def :metadata/date (s/nilable :general/date))
 (s/def :template/layout
@@ -93,7 +94,6 @@
 
 (s/fdef www.io/read-files
   :args (s/cat :path string?
-               :matcher (partial instance? java.util.regex.Pattern)
                :else (s/* any?))
   :ret (s/merge :resource/base (s/keys :req-un [:resource/source])))
 
@@ -119,7 +119,7 @@
                 (s/keys :req-un [:resource/source])
                 (s/keys :req-un [:resource/metadata])))
 
-(s/fdef process/markdown
+(s/fdef process/parse
   :args (s/cat :input :resource/payload)
   :ret :resource/payload)
 

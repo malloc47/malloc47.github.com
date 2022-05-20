@@ -14,10 +14,10 @@
        re-pattern))
 
 (defn posts []
-  (-> "/posts/" content-path (io/read-files parseable-regex)))
+  (-> "/posts/" content-path (io/read-files :matcher parseable-regex)))
 
 (defn pages []
-  (-> "/pages/" content-path (io/read-files parseable-regex)))
+  (-> "/pages/" content-path (io/read-files :matcher parseable-regex)))
 
 (defn processed-posts []
   (->> (posts)
@@ -42,10 +42,11 @@
   (->> (concat (process/standalone-resources (posts))
                (process/standalone-resources (pages))
                (home+posts)
-               (-> (io/read-files (content-path "/")
+               (-> (content-path "/")
+                   (io/read-files :matcher
                                   #"\.ico$|\.pdf$|\.png$|\.svg$|\.jpg$")
                    process/copy)
-               (-> (io/read-files (str "theme")  #"\.woff2") process/copy)
+               (-> (io/read-files (str "theme") :matcher #"\.woff2") process/copy)
                [(feed :rss.xml)
                 (feed :atom.xml)])
        process/verify))

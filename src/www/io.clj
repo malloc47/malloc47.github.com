@@ -56,8 +56,26 @@
         ;; TODO: make the default selectable?
         (Date.)))))
 
+(defn maybe-bool-to-fn
+  [v]
+  (if (ifn? v)
+    v
+    (constantly (boolean v))))
+
 (defn file->source
-  [path opts f]
+  "Converts a root path and file to a source map. Optional args:
+
+  - header? : Determines whether the file is expected to have an EDN
+  header, can be either a function that takes the string content as an
+  argument and returns a boolean, or a plain boolean value. Defaults
+  to false.
+
+  - binary? : Specifies the file should be not slurped as a string,
+  can be either a function that takes file extension as a keyword and
+  returns a boolean, or a plain boolean value. Defaults to false.
+
+  All other args will be forwarded to slurp."
+  [path f & {:keys [header? binary?] :as opts}]
   (let [file-path     (str f)
         filename      (.getName f)
         format        (-> (re-find #"\.(\w+)$" filename)
@@ -66,27 +84,42 @@
                           keyword)
         relative-path (-> file-path
                           (str/replace-first path "")
-                          leading-slash)]
+                          leading-slash)
+        header?       (maybe-bool-to-fn header?)
+        binary?       (maybe-bool-to-fn binary?)
+        content       (if-not (binary? format)
+                        (->> (dissoc opts :header? :binary?)
+                             (apply concat)
+                             (apply slurp f))
+                        f)]
     {:source  {:file     f
                :filename filename
                :format   format
                :modified (-> file-path
-                             most-recent-commit-timestamp)}
-     :content (if ((:parseable config) format)
-                (apply slurp f opts)
-                f)
+                             most-recent-commit-timestamp)
+               :header? (header? content)}
+     :content content
      :uri     relative-path}))
 
+(def text-types
+  #{:md :html :yaml :xml})
+
+(def default-bulk-read-opts
+  {:header? (fn [content]
+              (and (string? content)
+                   (str/starts-with? content "{")))
+   :binary? (comp not text-types)})
+
 (defn read-files
-  ([path] (read-files path nil))
-  ([path matcher & opts]
-   (->> (io/file path)
-        file-seq
-        (filter (every-pred #(.isFile %)
-                            (fn [f] (if matcher
-                                      (->> f str (re-find matcher))
-                                      true))))
-        (map (partial file->source path opts)))))
+  [path & {:keys [matcher] :as opts}]
+  (let [opts (merge default-bulk-read-opts opts)]
+    (->> (io/file path)
+         file-seq
+         (filter (every-pred #(.isFile %)
+                             (fn [f] (if matcher
+                                       (->> f str (re-find matcher))
+                                       true))))
+         (map #(file->source path % (dissoc opts :matcher))))))
 
 (defn delete-directory!
   [path]

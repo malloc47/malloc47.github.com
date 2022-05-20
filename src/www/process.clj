@@ -10,12 +10,11 @@
    [www.render :as renderer]))
 
 (defn metadata-from-header
-  [{:keys [content] {:keys [format]} :source :as m}]
-  (if ((:parseable config) format)
+  [{:keys [content] {:keys [header?]} :source :as m}]
+  (if header?
     (let [{{:keys [layout uri] :as metadata} :metadata
            content                           :content}
-          (->> content
-               parser/metadata)]
+          (parser/metadata content)]
       (s/assert :resource/metadata-header metadata)
       (-> m
           (assoc :content content)
@@ -44,6 +43,7 @@
                        :date   (some->> filename
                                         (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}")
                                         read-instant-date)}
+        ;; TODO: decomplect this
         ;; by default, parse-able things have their uri normalized
         ;; without an extension
         uri           (->> (or (when ((:parseable config) format)
@@ -55,11 +55,12 @@
         (update :metadata #(merge % metadata))
         (conj (when uri [:uri uri])))))
 
-(defn markdown
-  [{{:keys [format]} :source :as m}]
-  (cond-> m
-    ((:parseable config) format)
-    (update :content parser/markdown)))
+(defmulti parse (comp :format :source))
+
+(defmethod parse :md [m]
+  (update m :content parser/markdown))
+
+(defmethod parse :default [m] m)
 
 (defn template
   [{{:keys [layout]} :template :as payload}]
@@ -131,7 +132,7 @@
   (->> sources
        (map (comp metadata-from-header metadata-from-filename))
        remove-drafts
-       (map markdown)))
+       (map parse)))
 
 (defn reverse-chronological-sort
   [resources]
@@ -147,7 +148,7 @@
        (map (comp metadata-from-header metadata-from-filename))
        remove-drafts
        explode-redirects
-       (map (comp output-location template markdown))))
+       (map (comp output-location template parse))))
 
 (defn copy
   "Asumes source is not parseable and do the minimal amount of work to
