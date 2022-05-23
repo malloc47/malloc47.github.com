@@ -5,7 +5,7 @@
    [clojure.spec.alpha :as s]
    [clojure.string :as str]
    [www.config :refer [config]]
-   [www.io :refer [slash]]
+   [www.io :refer [slash text-types]]
    [www.parser :as parser]
    [www.render :as renderer]))
 
@@ -34,7 +34,8 @@
 
 (defn metadata-from-filename
   "extracts metadata-like info from the filename"
-  [{:keys [uri] {:keys [filename format]} :source :as m}]
+  [{:keys [uri] {:keys [filename format]} :source :as m}
+   & {:keys [normalize-types] :or {normalize-types text-types}}]
   (let [post-name     (or (get (re-find filename-regexp filename) 2)
                           (get (re-matches #"(.+)(\.\w+)$" filename) 1))
         ;; assumes that the relative path was dumped into the URI
@@ -43,10 +44,8 @@
                        :date   (some->> filename
                                         (re-find #"^[0-9]{4}-[0-9]{2}-[0-9]{2}")
                                         read-instant-date)}
-        ;; TODO: decomplect this
-        ;; by default, parse-able things have their uri normalized
-        ;; without an extension
-        uri           (->> (or (when ((:parseable config) format)
+        ;; by default, text types get a uri without an extension
+        uri           (->> (or (when (normalize-types format)
                                  post-name)
                                filename)
                            (str relative-path)

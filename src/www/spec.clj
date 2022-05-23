@@ -98,7 +98,8 @@
   :ret (s/merge :resource/base (s/keys :req-un [:resource/source])))
 
 (s/fdef www.io/write-resources
-  :args (s/cat :input (s/coll-of
+  :args (s/cat :destination string?
+               :input (s/coll-of
                        (s/merge :resource/base
                                 (s/keys :req-un [:resource/output])))))
 

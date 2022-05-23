@@ -1,23 +1,15 @@
 (ns www.content
   (:require
-   [clojure.string :as str]
    [optimus.assets :refer [load-bundle]]
-   [www.config :refer [config content-path]]
+   [www.config :refer [content-path]]
    [www.io :as io]
    [www.process :as process]))
 
-(def parseable-regex
-  (->> config
-       :parseable
-       (map #(str "\\." (name %) "$"))
-       (str/join "|")
-       re-pattern))
-
 (defn posts []
-  (-> "/posts/" content-path (io/read-files :matcher parseable-regex)))
+  (-> "/posts/" content-path (io/read-files :matcher io/text-types-regex)))
 
 (defn pages []
-  (-> "/pages/" content-path (io/read-files :matcher parseable-regex)))
+  (-> "/pages/" content-path (io/read-files :matcher io/text-types-regex)))
 
 (defn processed-posts []
   (->> (posts)

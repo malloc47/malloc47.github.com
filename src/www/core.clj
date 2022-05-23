@@ -20,7 +20,7 @@
       (require '[www.spec])
       (spec/check-asserts true)
       (stest/instrument))
-    (io/write-resources (content))
+    (io/write-resources (:public-dest config) (content))
     (as-> (assets) <>
       (optimizations/all <> (:optimus config))
       (remove :bundled <>)

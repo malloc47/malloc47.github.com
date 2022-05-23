@@ -2,8 +2,7 @@
   (:require
    [clojure.java.io :as io]
    [clojure.java.shell :refer [sh]]
-   [clojure.string :as str]
-   [www.config :refer [config]])
+   [clojure.string :as str])
   (:import
    (java.util Date)
    (java.io File)
@@ -102,7 +101,13 @@
      :uri     relative-path}))
 
 (def text-types
-  #{:md :html :yaml :xml})
+  #{:md :html :yaml})
+
+(def text-types-regex
+  (->> text-types
+       (map #(str "\\." (name %) "$"))
+       (str/join "|")
+       re-pattern))
 
 (def default-bulk-read-opts
   {:header? (fn [content]
@@ -133,7 +138,7 @@
     (instance? File content) (io/copy content file)))
 
 (defn write-resources
-  [resources]
-  (delete-directory! (:public-dest config))
+  [destination resources]
+  (delete-directory! destination)
   (doseq [{:keys [content] {:keys [file]} :output} resources]
     (write-file file content)))
