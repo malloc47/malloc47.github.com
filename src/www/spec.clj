@@ -152,7 +152,8 @@
   :ret (s/coll-of :resource/payload))
 
 (s/fdef process/standalone-resources
-  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/source])))
+  :args (s/cat :input (s/coll-of (s/keys :req-un [:resource/source]))
+               :extra (s/* any?))
   :ret (s/coll-of :resource/payload))
 
 (s/fdef process/copy
@@ -169,10 +170,12 @@
 (s/fdef process/template-paginated
   :args (s/alt :no-uri (s/cat :layout :template/layout
                               :n-per-page integer?
+                              :context map?
                               :nested any?)
                :uri    (s/cat :layout :template/layout
                               :n-per-page integer?
                               :uri-seq (s/every :resource/uri)
+                              :context map?
                               :nested any?))
   :ret (s/coll-of :resource/payload))
 

@@ -64,13 +64,10 @@
 (defn template
   [{{:keys [layout]} :template :as payload}]
   (if layout
-    (let [rendered (->> payload
-                        (merge (select-keys config [:site]))
-                        (renderer/template layout))]
-      (-> payload
-          (assoc :content rendered)
-          (assoc-in [:template :file]
-                    (-> layout renderer/template-file io/file))))
+    (-> payload
+        (assoc :content (renderer/template layout payload))
+        (assoc-in [:template :file]
+                  (-> layout renderer/template-file io/file)))
     ;; else do nothing
     payload))
 
@@ -142,12 +139,15 @@
 (defn standalone-resources
   "Completely parse, render, and template a collection of file
   sources. This processes file sources 1:1 with templated pages."
-  [sources]
+  [sources & {:as context}]
   (->> sources
        (map (comp metadata-from-header metadata-from-filename))
        remove-drafts
        explode-redirects
-       (map (comp output-location template parse))))
+       (map (comp output-location
+                  template
+                  (partial merge context)
+                  parse))))
 
 (defn copy
   "Asumes source is not parseable and do the minimal amount of work to
@@ -172,13 +172,13 @@
   resources. Can specify the uri-seq to control the URIs for the
   pages, defaults to a Jekyll-style paginator with paginate_path:
   \"page:num\" configured."
-  ([layout n-per-page nested]
+  ([layout n-per-page context nested]
    ;; Sequence of /, page2, ... to mirror Jekyll's paginator
    (let [uri-seq (->> (range)
                       (map (comp #(str "/page" % "/") inc))
                       (replace {"/page1/" "/"}))]
-     (template-paginated layout n-per-page uri-seq nested)))
-  ([layout n-per-page uri-seq nested]
+     (template-paginated layout n-per-page uri-seq context nested)))
+  ([layout n-per-page uri-seq context nested]
    (let [nest-groups (partition-all n-per-page nested)]
      (map (fn [[prev-uri uri next-uri] nested]
             (-> {:content  nested
@@ -188,6 +188,7 @@
                  :template {:layout  layout}
                  ;; TODO: abstract title generation
                  :metadata {:title (subs uri 1)}}
+                (merge context)
                 template
                 output-location))
           ;; Offset to give access to prev/next URIs

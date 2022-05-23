@@ -1,9 +1,11 @@
 (ns www.content
   (:require
    [optimus.assets :refer [load-bundle]]
-   [www.config :refer [content-path]]
+   [www.config :refer [config content-path]]
    [www.io :as io]
    [www.process :as process]))
+
+(def site (select-keys config [:site]))
 
 (defn posts []
   (-> "/posts/" content-path (io/read-files :matcher io/text-types-regex)))
@@ -18,7 +20,7 @@
 
 (defn home+posts []
   (->> (processed-posts)
-       (process/template-paginated :home 5)))
+       (process/template-paginated :home 5 site)))
 
 (defn feed [layout]
   (let [posts           (processed-posts)
@@ -28,11 +30,12 @@
                              reverse
                              first)]
     (process/template-directly
-     layout (str "/" (name layout)) posts {:latest-modified latest-modified})))
+     layout (str "/" (name layout)) posts
+     (merge {:latest-modified latest-modified} site))))
 
 (defn content []
-  (->> (concat (process/standalone-resources (posts))
-               (process/standalone-resources (pages))
+  (->> (concat (process/standalone-resources (posts) site)
+               (process/standalone-resources (pages) site)
                (home+posts)
                (-> (content-path "/")
                    (io/read-files :matcher
