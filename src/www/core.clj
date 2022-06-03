@@ -10,17 +10,25 @@
    [www.optimizations :as optimizations]))
 
 (def cli-options
-  [["-s" "--spec"]])
+  [["-s" "--spec"]
+   ["-v" "--verbose"]])
+
+(defn print-resource
+  [{{input-file :file} :source {output-file :file} :output :as resource}]
+  (println (str input-file " -> " output-file))
+  resource)
 
 (defn -main [& args]
-  (let [{{spec? :spec} :options} (parse-opts args cli-options)
+  (let [{{spec? :spec verbose? :verbose} :options} (parse-opts args cli-options)
         {:keys [public-dest]} config]
     (when spec?
       (println "Instrumenting")
       (require '[www.spec])
       (spec/check-asserts true)
       (stest/instrument))
-    (io/write-resources (:public-dest config) (content))
+    (-> (content)
+        (cond->> verbose? (map print-resource))
+        (->> (io/write-resources (:public-dest config))))
     (as-> (assets) <>
       (optimizations/all <> (:optimus config))
       (remove :bundled <>)
