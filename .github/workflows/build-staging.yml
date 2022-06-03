@@ -1,0 +1,49 @@
+name: Build Staging Site
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Clojure Tools
+        uses: DeLaGuardo/setup-clojure@5.1
+        with:
+          cli: 1.11.1.1113
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: clojure -M:build -v
+
+      - name: Unindex
+        run: |
+          printf "User-agent: *\nDisallow: /" > public/robots.txt
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        with:
+          personal_token: ${{ secrets.PAT }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          external_repository: malloc47/www-staging
+          cname: staging.malloc47.com
+          enable_jekyll: false
