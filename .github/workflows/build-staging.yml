@@ -24,11 +24,21 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Install Clojure Tools
+      - name: Install Clojure tools
         uses: DeLaGuardo/setup-clojure@5.1
         with:
           cli: 1.11.1.1113
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Fetch dev dependencies
+        run: npm install
+
+      - name: Build dev dependencies
+        run: clojure -M:build.cljs -v
 
       - name: Build
         run: clojure -M:build -v

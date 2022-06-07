@@ -7,6 +7,8 @@
    [www.config :refer [config]]
    [www.io :refer [slash text-types]]
    [www.parser :as parser]
+   ;; [www.parser.flexmark :refer [markdown]]
+   [www.parser.remark :refer [markdown]]
    [www.render :as renderer]))
 
 (defn metadata-from-header
@@ -57,7 +59,7 @@
 (defmulti parse (comp :format :source))
 
 (defmethod parse :md [m]
-  (update m :content parser/markdown))
+  (update m :content markdown))
 
 (defmethod parse :default [m] m)
 

@@ -1,7 +1,6 @@
 (ns www.parser
   (:require
-   [clojure.java.io :refer [copy]]
-   [www.parser.flexmark :as flexmark])
+   [clojure.java.io :refer [copy]])
   (:import
    (java.io StringReader StringWriter PushbackReader)))
 
@@ -14,9 +13,3 @@
       (copy reader writer)
       {:metadata metadata
        :content  (.toString writer)})))
-
-(defn markdown
-  [markdown-string]
-  (->> markdown-string
-       (.parse flexmark/parser)
-       (.render flexmark/renderer)))

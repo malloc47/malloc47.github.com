@@ -9,3 +9,6 @@ pom.xml.asc
 /public/
 .cpcache/
 .clj-kondo/.cache
+node_modules
+.shadow-cljs
+/js/

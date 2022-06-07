@@ -1,0 +1,9 @@
+{:source-paths ["src"]
+ :dependencies []
+ :dev-http {8080 "target/"}
+ :builds {:markdown
+          {:target           :graaljs
+           :output-to        "js/markdown/lib.js"
+           :main             www.parser.remark/markdown
+           :entries          [www.parser.remark]
+           :compiler-options {:optimizations :advanced}}}}

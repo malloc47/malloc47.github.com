@@ -29,3 +29,9 @@
 
 (def renderer
   (.build (HtmlRenderer/builder options)))
+
+(defn markdown
+  [markdown-string]
+  (->> markdown-string
+       (.parse parser)
+       (.render renderer)))

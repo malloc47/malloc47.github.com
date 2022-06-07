@@ -34,6 +34,16 @@ jobs:
           cli: 1.11.1.1113
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Fetch dev dependencies
+        run: npm install
+
+      - name: Build dev dependencies
+        run: clojure -M:build.cljs -v
+
       - name: Build
         run: clojure -M:build -v
 
